@@ -1,0 +1,6 @@
+dashboard_host: http://localhost
+integration_host: http://localhost
+update_centre_host: http://localhost
+proxy_host: localhost
+header_type: http_email
+user_email: test@example.com
