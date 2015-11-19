@@ -44,7 +44,6 @@ class CustomWEBrickProxyServer < WEBrick::HTTPProxyServer
     perform_proxy_request(req, res) do |http, path, header|
       if path == "/SET_USER/user"
         $user='user'
-        $body = 'User user set'
       elsif path == "/SET_USER/admin"
         $user='admin'
       end
@@ -62,7 +61,6 @@ class CustomWEBrickProxyServer < WEBrick::HTTPProxyServer
     perform_proxy_request(req, res) do |http, path, header|
       if path == "/SET_USER/user"
         $user='user'
-        $body = 'User user set'
       elsif path == "/SET_USER/admin"
         $user='admin'
       end

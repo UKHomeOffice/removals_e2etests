@@ -4,7 +4,7 @@ Feature: Valid heart beat
 
     Given a heart beat is generated with the following information <centre_name>,<male>,<female>,<ooc_male>,<ooc_female>
     When I navigate to the bed management dashboard as a user
-    And number centre name is displayed correctly
+    And number centre name is displayed correctly on the dashboard page
     And number available beds have been reset to default
     And the information is successfully uploaded to the heart beat api
     When the number available beds are calculated

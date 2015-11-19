@@ -22,7 +22,7 @@ Before do
     end
 
 
-    $p = fork do
+    $proxy_pid = fork do
       $my_proxy_server.start
     end
 
@@ -38,22 +38,22 @@ Before do
 
     $port_num=$port_num.to_i
 
-    $pid = fork do
+    $backend_pid = fork do
       exec "cd\n cd Projects/removals/removals_integration\n PORT=8080 npm run start-with-fixtures"
     end
 
     system ('sleep 5')
 
-    $pid2 = fork do
+    $frontend_pid = fork do
       exec "cd\n cd Projects/removals/removals_dashboard\n npm start"
     end
 
     system ('sleep 5')
 
     # Separates background apps from tests
-    Process.detach($pid)
-    Process.detach($p)
-    Process.detach($pid2)
+    Process.detach($backend_pid)
+    Process.detach($proxy_pid)
+    Process.detach($frontend_pid)
 
 
   end
@@ -62,9 +62,9 @@ Before do
 
 
   # Checks apps are up and running
-  exist?($pid.to_i)
-  exist?($p.to_i)
-  exist?($pid2.to_i)
+  exist?($backend_pid.to_i)
+  exist?($proxy_pid.to_i)
+  exist?($frontend_pid.to_i)
 
   $proxy_address = 'http://'+"#{config('proxy_host')}"+':'+ "#{$proxy_port}"
 
@@ -98,19 +98,17 @@ at_exit do
 
 
 
-    Process.kill(0, $p)
-    Process.kill(0, $pid)
-    Process.kill(0, $pid2)
+    # Process.kill(0, $proxy_pid)
+    # Process.kill(0, $backend_pid)
+    # Process.kill(0, $frontend_pid)
 
 
 
     puts "####### Killing background apps #######"
-    system("pkill -INT -P'#{$pid}'")
-    system ('sleep 5')
-    system("pkill -INT -P'#{$p}'")
-    system ('sleep 5')
-    system("pkill -INT -P'#{$pid2}'")
 
+    system("pkill -TERM -P'#{$proxy_pid.to_i}'")
+    system("pkill -TERM -P '#{$backend_pid.to_i}'")
+    system("kill -TERM '#{$frontend_pid.to_i}'")
 
   rescue Errno::ESRCH
   end
@@ -143,49 +141,10 @@ def create_and_delete_centres
 
 end
 
-def delete_centres
-
-  # login
-  integration_api.get(DC_data::Config::Endpoints::SET_USER_USER, {}, {})
-
-
-  all_centres_clear = integration_api.get(DC_data::Config::Endpoints::CREATE_CENTRE).body['data']
-
-  if all_centres_clear!= []
-    i=1
-    while i <=3 do
-      integration_api.delete(DC_data::Config::Endpoints::DELETE_CENTRE + "#{i}", {}, {})
-      i+=1
-    end
-    all_centres_clear = integration_api.get(DC_data::Config::Endpoints::CREATE_CENTRE, {}, {}).body['data'].empty?
-    expect(all_centres_clear).to eq(true)
-  end
-
-end
-
-def create_centres
-  i=1
-  centres=Array.new
-  while i <= 3 do
-    centre_name='DC_data::Config::Centre_details::Centre_'+"#{i}"
-    centres.push(centre_name.constantize)
-    i+=1
-  end
-
-  centres.each do |centre|
-    @new_centre = DC_data::Centre_post.new(centre)
-    @new_centre.create_json(i)
-    expect(@new_centre.response.status).to eq(201)
-
-  end
-
-  all_centres_added = integration_api.get(DC_data::Config::Endpoints::CREATE_CENTRE, {}, {}).body['data'].empty?
-  expect(all_centres_added).to eq(false)
-end
-
-
 def reset_centres
-  integration_api.get(DC_data::Config::Endpoints::SET_USER_USER, {}, {})
+  # integration_api.get(DC_data::Config::Endpoints::SET_USER_USER, {}, {})
+  @user = DC_data::Auth_login.new('user')
+  @user.login
 
 
   all_centres_clear = integration_api.get(DC_data::Config::Endpoints::CREATE_CENTRE).body['data']

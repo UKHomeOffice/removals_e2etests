@@ -15,7 +15,7 @@ module DC_data
     end
 
     #
-    # def displayed_available_beds(centre_num)
+    # def disp_available_beds(centre_num)
     #   case centre_num
     #     when 1
     #       find(:id, 'tab-beds_1_available')
@@ -27,7 +27,7 @@ module DC_data
     # end
 
 
-    def displayed_booked_beds(centre_num)
+    def disp_booked_beds(centre_num)
       case centre_num
         when 1
           find(:id, 'tab-beds_1_booked')
@@ -39,7 +39,7 @@ module DC_data
       end
     end
 
-    def displayed_reserved_beds(centre_num)
+    def disp_reserved_beds(centre_num)
       case centre_num
         when 1
           find(:id, 'tab-beds_1_reserved')
@@ -50,7 +50,7 @@ module DC_data
       end
     end
 
-    def displayed_male_available_beds(centre_num)
+    def disp_male_available_beds(centre_num)
       case centre_num
         when 1
           find(:css, '#beds_1_available > ul > li > span.bed-count-figure')
@@ -61,7 +61,7 @@ module DC_data
       end
     end
 
-    def displayed_female_available_beds(centre_num)
+    def disp_female_available_beds(centre_num)
       case centre_num
         when 1
           0
@@ -105,7 +105,7 @@ module DC_data
       end
     end
 
-    def displayed_centre_name(centre_num)
+    def disp_centre_name(centre_num)
       case centre_num
         when 1
           find(:css, '#item0 > div > h2')

@@ -7,27 +7,75 @@ end
 
 
 And(/^occupancy has been reset to default$/) do
-  displayed_occupancy = @stats_page.occupancy_percentage(@new_post.get_centre_num)
-  expect(displayed_occupancy.text).to eq ('0%')
+  disp_m_capacity = @stats_page.disp_male_capacity(@new_post.get_centre_num)
+  disp_f_capacity = @stats_page.disp_female_capacity(@new_post.get_centre_num)
+  disp_m_occupied_beds = @stats_page.disp_male_occupied(@new_post.get_centre_num)
+  disp_f_occupied_beds = @stats_page.disp_female_occupied(@new_post.get_centre_num)
+  disp_m_occ_beds = @stats_page.disp_male_occ(@new_post.get_centre_num)
+  disp_f_occ_beds = @stats_page.disp_female_occ(@new_post.get_centre_num)
+  disp_available_m_beds = @stats_page.disp_male_available_beds(@new_post.get_centre_num)
+  disp_available_f_beds = @stats_page.disp_female_available_beds(@new_post.get_centre_num)
+
+  expect(disp_m_capacity.text).to eq("#{@dashboard_page.get_male_centre_capacity(@new_post.get_centre_num)}")
+
+  expect(disp_m_occupied_beds.text).to eq('0')
+
+  expect(disp_m_occ_beds.text).to eq('0')
+
+  expect(disp_available_m_beds.text).to eq("#{@dashboard_page.get_male_centre_capacity(@new_post.get_centre_num)}")
+
+  if @dashboard_page.get_female_centre_capacity(@new_post.get_centre_num) == 0
+  else
+    expect(disp_f_capacity.text).to eq("#{@dashboard_page.get_female_centre_capacity(@new_post.get_centre_num)}")
+    expect(disp_f_occupied_beds.text).to eq('0')
+    expect(disp_f_occ_beds.text).to eq('0')
+    expect(disp_available_f_beds.text).to eq("#{@dashboard_page.get_female_centre_capacity(@new_post.get_centre_num)}")
+  end
 end
 
-When(/^the occupancy percentage is calculated$/) do
-  @occupancy = (@new_post.calculate_male_unavailable_beds) + (@new_post.calculate_female_unavailable_beds)
-  @capacity = (@dashboard_page.get_male_centre_capacity(@new_post.get_centre_num)) + (@dashboard_page.get_female_centre_capacity(@new_post.get_centre_num))
-  @percentage = (@occupancy - @capacity) * 100
+And(/^the displayed number of male occupied beds is correct$/) do
+  disp_m_occupied_beds = @stats_page.disp_male_occupied(@new_post.get_centre_num)
+  expect(disp_m_occupied_beds.text).to eq ("#{@new_post.get_options_male}")
 end
 
-Then(/^the displayed occupancy percentage is correct$/) do
-  displayed_occupancy_percentage = @stats_page.occupancy_percentage(@new_post.get_centre_num)
-  expect(displayed_occupancy_percentage.text).to eq ("#{@percentage}"+'%')
+And(/^the displayed number of female occupied beds is correct$/) do
+  disp_f_occupied_beds = @stats_page.disp_female_occupied(@new_post.get_centre_num)
+  if disp_f_occupied_beds == 0
+  else
+    expect(disp_f_occupied_beds.text).to eq ("#{@new_post.get_options_female}")
+
+  end
 end
 
-And(/^the displayed number of (.*) occupied beds is correct$/) do |gender|
-  displayed_occupancy = @stats_page.num_occupied_beds(@new_post.get_centre_num,gender)
-  expect(displayed_occupancy).to eq (@new_post.get_options[("#{gender}" +'_occupied').to_sym])
+And(/^the displayed number of male out of commission beds is correct$/) do
+  disp_m_occ_beds = @stats_page.disp_male_occ(@new_post.get_centre_num)
+  expect(disp_m_occ_beds.text).to eq ("#{@new_post.get_options_ooc_male}")
 end
 
-And(/^the displayed number of (.*) out of commission beds is correct$/) do |gender|
-  displayed_ooc_beds = @stats_page.ooc_beds(@new_post.get_centre_num,gender)
-  expect(displayed_ooc_beds.text).to eq (@new_post.get_options[("#{gender}" +'_occ').to_sym])
+And(/^the displayed number of female out of commission beds is correct$/) do
+  disp_f_occ_beds = @stats_page.disp_female_occ(@new_post.get_centre_num)
+  if disp_f_occ_beds == 0
+  else
+    expect(disp_f_occ_beds.text).to eq ("#{@new_post.get_options_ooc_female}")
+  end
+end
+
+And(/^the displayed number of male available beds is correct$/) do
+  disp_available_m_beds = @stats_page.disp_male_available_beds(@new_post.get_centre_num)
+  available_male_beds = (@dashboard_page.get_male_centre_capacity(@new_post.get_centre_num)) - (@new_post.calculate_male_unavailable_beds)
+  expect(disp_available_m_beds.text).to eq ("#{available_male_beds}")
+end
+
+And(/^the displayed number of female available beds is correct$/) do
+  disp_available_f_beds = @stats_page.disp_female_available_beds(@new_post.get_centre_num)
+  available_female_beds = (@dashboard_page.get_female_centre_capacity(@new_post.get_centre_num)) - (@new_post.calculate_female_unavailable_beds)
+  if disp_available_f_beds == 0
+  else
+    expect(disp_available_f_beds.text).to eq ("#{available_female_beds}")
+  end
+end
+
+And(/^number centre name is displayed correctly on the stats page$/) do
+  disp_centre_name = @stats_page.disp_centre_name(@new_post.get_centre_num)
+  expect(disp_centre_name.text).to eq("#{@new_post.get_options_centre}")
 end
