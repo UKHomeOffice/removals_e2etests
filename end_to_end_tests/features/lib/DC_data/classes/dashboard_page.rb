@@ -121,22 +121,32 @@ module DC_data
       find(:css, '#proposition-links > li:nth-child(2) > a')
     end
 
-    def event_time(centre_num, id)
-      case [centre_num, id]
-        when [1, 1]
-          find(:css, '#beds_1_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
-        when [1, 2]
-          find(:css, '#beds_1_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
-        when [2, 1]
-          find(:css, '#beds_2_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
-        when [2, 2]
-          find(:css, '#beds_3_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
-        when [3, 1]
-          find(:css, '#beds_3_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
-        when [3, 2]
-          find(:css, '#beds_3_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
-      end
-    end
+    #
+    # def event_time(centre_num, id)
+    #   id=define_id(id)
+    #   case id
+    #     when 'first'
+    #       1
+    #     when 'second'
+    #       2
+    #     when 'third'
+    #       3
+    #   end
+    #   case [centre_num, id]
+    #     when [1, 1]
+    #       find(:css, '#beds_1_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
+    #     when [1, 2]
+    #       find(:css, '#beds_1_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
+    #     when [2, 1]
+    #       find(:css, '#beds_2_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
+    #     when [2, 2]
+    #       find(:css, '#beds_3_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
+    #     when [3, 1]
+    #       find(:css, '#beds_3_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
+    #     when [3, 2]
+    #       find(:css, '#beds_3_latest-enhanced > table > tbody > tr:nth-child(1) > td:nth-child(1)')
+    #   end
+    # end
 
 
     def person_id(id)

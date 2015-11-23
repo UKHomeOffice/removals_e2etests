@@ -4,18 +4,25 @@ module DC_data
   class Api_posts
 
 
-    attr_reader :options, :post, :option_values, :output_keys, :response, :header
+    attr_reader :options, :post, :option_values, :output_keys
 
-    def initialize(output_hash, options={})
-      @post = output_hash
+    def initialize(options={})
+      # @post = output_hash
       @options = options.symbolize_keys
       @option_values = options.values
-      @output_keys = output_hash.keys
+      # @output_keys = output_hash.keys
 
     end
 
 
     def create_heart_beat
+      _shellScript = DC_data::Config::Locations::GENERATE_HEART_BEAT
+
+      output = %x(sh #{_shellScript})
+
+      output_array= JSON.parse(output)
+      @post= output_array[0]
+      @output_keys = @post.keys
       if @options != {}
         i=0
         while i < @output_keys.size
@@ -23,9 +30,17 @@ module DC_data
           i +=1
         end
       end
+
     end
 
     def create_basic_event
+      _shellScript = DC_data::Config::Locations::GENERATE_EVENT
+
+      output = %x(sh #{_shellScript})
+
+      output_array= JSON.parse(output)
+      output_array[0]
+      @post= output_array[0]
       if @options != {}
         @options.each_key do |key|
           @post[key] = @options[key]
@@ -42,98 +57,18 @@ module DC_data
 
     end
 
-    #
-    #
-    #   @api_posts_data_hash ||= Hash.new
-    #
-    #   # tables need to be hashed
-    #   if @api_posts_data.class != Array
-    #     @api_posts_data= @api_posts_data.hashes
-    #   end
-    #
-    #   @api_posts_data.each do |hash|
-    #
-    #     @api_posts_data_hash=hash.symbolize_keys
-    #
-    #
-    #     Post_data.define_default_post(@operation.nil? ? @api_posts_data_hash[:operation] : @operation)
-    #
-    #
-    #     Post_data.get_post[:centre]= @centre.nil? ? @api_posts_data_hash[:centre] : @centre
-    #     Post_data.get_post[:operation]= @operation.nil? ? @api_posts_data_hash[:operation] : @operation
-    #     Post_data.get_post[:bed_counts][:male]=@api_posts_data_hash[:male].to_i
-    #     Post_data.get_post[:bed_counts][:female]=@api_posts_data_hash[:female].to_i
-    #     Post_data.get_post[:bed_counts][:out_of_commission][:ooc_male]=@api_posts_data_hash[:ooc_male].to_i
-    #     Post_data.get_post[:bed_counts][:out_of_commission][:ooc_female]=@api_posts_data_hash[:ooc_female].to_i
-    #
-    #     Post_data.get_post[:bed_counts][:out_of_commission][:details].clear
-    #
-    #     y=1
-    #     if @api_posts_data_hash[:ooc_male].to_i > 0
-    #       x=1
-    #       while x <= @api_posts_data_hash[:ooc_male].to_i
-    #         ooc = Hash.new
-    #         ooc[:ref] = "#{y}"
-    #         ooc[:reason] = 'reason' + "#{y}"
-    #         ooc[:gender] = 'm'
-    #         Post_data.get_post[:bed_counts][:out_of_commission][:details].push(ooc)
-    #         x=x+1
-    #         y=y+1
-    #       end
-    #     end
-    #
-    #     if @api_posts_data_hash[:ooc_female].to_i > 0
-    #       x=1
-    #       while x <= @api_posts_data_hash[:ooc_female].to_i
-    #         ooc = Hash.new
-    #         ooc[:ref] = "#{y}"
-    #         ooc[:reason] = 'reason' + "#{y}"
-    #         ooc[:gender] = 'f'
-    #         Post_data.get_post[:bed_counts][:out_of_commission][:details].push(ooc)
-    #         x=x+1
-    #         y=y+1
-    #       end
-    #     end
-    #
-    #
-    #     if @upload_type == 'csv'
-    #       Post_data.get_post[:cid_id]=@api_posts_data_hash[:cid_id].to_i
-    #       Post_data.get_post[:gender]=@api_posts_data_hash[:gender]
-    #       Post_data.get_post[:nationality]=@api_posts_data_hash[:nationality]
-    #       Post_data.get_post[:date]=@api_posts_data_hash[:date]
-    #       Post_data.get_post[:time]=@api_posts_data_hash[:time]
-    #       if @api_posts_data_hash[:operation] == 'tra'
-    #         Post_data.get_post[:centre_to]=@api_posts_data_hash[:centre_to]
-    #       end
-    #
-    #       create_json
-    #
-    #     else
-    #
-    #       Post_data.get_post[:date]= @date.nil? ? Date.today : @date
-    #       Post_data.get_post[:time]= @time.nil? ? Time.now.utc.strftime("%H:%M:%S") : @time
-    #
-    #       if @operation != 'bic' && @operation != 'ooc'
-    #         Post_data.get_post[:cid_id]=@api_posts_data_hash[:cid_id].nil? ? Post_data.get_post[:cid_id] : @api_posts_data_hash[:cid_id].to_i
-    #         Post_data.get_post[:gender]=@api_posts_data_hash[:gender].nil? ? Post_data.get_post[:gender] : @api_posts_data_hash[:gender]
-    #         Post_data.get_post[:nationality]=@api_posts_data_hash[:nationality].nil? ? Post_data.get_post[:nationality] : @api_posts_data_hash[:nationality]
-    #       else
-    #         Post_data.get_post[:cid_id]=0
-    #         Post_data.get_post[:gender]='na'
-    #         Post_data.get_post[:nationality]='na'
-    #       end
-    #
-    #       if @operation == 'tra'
-    #         Post_data.get_post[:centre_to]=@centre_to
-    #       end
-    #     end
-    #   end
-    # end
-
     def create_json(api)
-      json= @post.to_json
+      api=case api
+            when 'heart beat'
+              DC_data::Config::Endpoints::IRC_HEART_BEAT
+            when 'events'
+              DC_data::Config::Endpoints::IRC_EVENT
+          end
+
+      json=@post.to_json
       # puts json
-      @response = irc_api.post(api, json, {'Content-Type' => 'application/json'})
+      irc_api.post(api, json, {'Content-Type' => 'application/json'})
+
     end
 
     def assign_ooc_reason
@@ -224,20 +159,6 @@ module DC_data
       end
     end
 
-  end
-
-
-  class Centre_post < Api_posts
-
-    attr_reader :response
-
-    def create_json(i)
-      json= @post.to_json
-      url = DC_data::Config::Endpoints::AMEND_CENTRE+"#{i}"
-
-      @response = integration_api.post(url, json, {'Content-Type' => 'application/json'})
-      # puts @response.body
-    end
   end
 
 end

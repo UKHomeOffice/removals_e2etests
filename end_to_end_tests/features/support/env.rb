@@ -10,28 +10,39 @@ require 'selenium-webdriver'
 require 'csv_hasher'
 require 'require_all'
 require 'time'
-require 'browsermob/proxy'
+require 'csv'
 
 require_all 'features/lib/DC_data/classes'
 
 
-  proxy = 'localhost:9000'
+PROXY = "localhost:9000"
+
+proxy = Selenium::WebDriver::Proxy.new(
+    :http     => PROXY,
+    :ftp      => PROXY,
+    :ssl      => PROXY
+)
+
+caps = Selenium::WebDriver::Remote::Capabilities.ie(:proxy => proxy, "chromeOptions" => {"args" => ["--js-flags=--expose-gc","--enable-precise-memory-info"]})
+
+Capybara.default_driver = :selenium
+puts "\n ####### RUNNING IN BROWSER #######"
+Capybara.register_driver :selenium do |app|
+  profile = Selenium::WebDriver::Chrome::Profile.new
+  # profile.proxy = Selenium::WebDriver::Proxy.new(:http => proxy, :ftp => proxy, :ssl => proxy)
+  profile['browser.helperApps.alwaysAsk.force'] = false
+  profile['browser.cache.disk.enable'] = false
+  profile['browser.cache.memory.enable'] = false
+  profile['manage.timeouts.implicit_wait'] = 5
+
+  # caps = Selenium::WebDriver::Remote::Capabilities.chrome(:proxy => WebDriver::Proxy.new(:http => "localhost:9000"), "chromeOptions" => {"args" => ["--enable-memory-info"]})
+  Capybara::Selenium::Driver.new(app, :browser => :chrome,:desired_capabilities => caps)
+
+end
+
+# Selenium::WebDriver::Chrome::Service.executable_path = '/usr/local/bin/chromedriver'
 
 
-
-  Capybara.default_driver = :selenium
-  puts "\n ####### RUNNING IN BROWSER #######"
-  Capybara.register_driver :selenium do |app|
-    profile = Selenium::WebDriver::Firefox::Profile.new
-    # profile.proxy = $proxy.selenium_proxy
-    profile.proxy = Selenium::WebDriver::Proxy.new(:http => proxy, :ftp => proxy, :ssl => proxy)
-    profile['browser.helperApps.alwaysAsk.force'] = false
-    profile['browser.cache.disk.enable'] = false
-    profile['browser.cache.memory.enable'] = false
-    profile['manage.timeouts.implicit_wait'] = 5
-    Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => profile)
-
-  end
 
 # if ENV['IN_BROWSER']
 #   # On demand: non-headless tests via Selenium/WebDriver
