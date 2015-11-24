@@ -21,6 +21,8 @@ group :test do
   gem 'csv_hasher', '0.1.0'
   gem 'require_all'
   # gem 'browsermob-proxy'
+  gem 'csv', '2.7.3'
+  gem 'json' , '1.8.3'
 
 end
 

@@ -6,40 +6,43 @@ Before do
     puts e
   end
 
-  $performance_info ||= Array.new
-
-  $app_started ||= false
-  unless $app_started # do this if app_started does not eql TRUE
+  # $app_started ||= false
+  # unless $app_started # do this if app_started does not eql TRUE
 
 
-    $proxy_server=DC_data::Hooks_setup.new
-    $proxy_server.create_proxy
-    @proxy_pid = $proxy_server.start_proxy
-    Process.detach(@proxy_pid)
+    # $proxy_server=DC_data::Hooks_setup.new
+    # $proxy_server.create_proxy
+    # @proxy_pid = $proxy_server.start_proxy
+    # Process.detach(@proxy_pid)
 
-    $backend_app=DC_data::Hooks_setup.new
-    @backend_pid=$backend_app.start_backend_app
-    Process.detach(@backend_pid)
+    # $integration_app=DC_data::Hooks_setup.new
+    # @integration_pid=$integration_app.start_integration_app
+    # Process.detach(@integration_pid)
 
-    $frontend_app=DC_data::Hooks_setup.new
-    @frontend_pid=$frontend_app.start_frontend_app
-    Process.detach(@frontend_pid)
+    # $dashboard_app=DC_data::Hooks_setup.new
+    # @dashboard_pid=$dashboard_app.start_dashboard_app
+    # Process.detach(@dashboard_pid)
 
-    $proxy_server.exists?
-    $backend_app.exists?
-    $frontend_app.exists?
+    # $proxy_server.exists?
+    # $integration_app.exists?
+    # $dashboard_app.exists?
 
-  end
+  # end
 
-  $app_started = true # don't do it again.
-
-  $proxy_address = 'http://'+"#{config('proxy_host')}"+':'+ "#{$proxy_server.port_num}"
+  # $app_started = true # don't do it again.
 
   @user = DC_data::Auth_login.new('user')
   @user.login
 
-  DC_data::Hooks_setup.new.create_centres
+ @created_centre_ids = DC_data::Env_setup.new.reset_centres
+end
 
+
+AfterStep do
+  @performance_info ||= Array.new
+  @performance_stats=DC_data::Performance_stats.new
+  @performance_stats.collect_garbage
+  @performance_info.push(@performance_stats.return_stats)
 end
 
 
@@ -62,19 +65,10 @@ After do |scenario|
   begin
     time = Time.now.iso8601
     File.open("performance_info/#{time}_#{scenario.name.downcase.tr(" /+<>,.:;|-", "_")[0..64]}_performance_info.csv", 'w') do |file|
-      file.puts $performance_info
+      file.puts @performance_info
     end
   end
 
-end
-
-at_exit do
-  puts "####### Killing frontend app #######"
-  $frontend_app.kill_frontend_app
-  puts "####### Killing background app #######"
-  $backend_app.kill_backend_app
-  puts "####### Killing proxy apps #######"
-  $proxy_server.kill_proxy_app
 end
 
 def wait_for_ajax

@@ -37,24 +37,19 @@ module DC_data
 
     module Centre_details
       Centre_1 = {
-          # :type =>'centre',
           :name => 'one',
           :male_capacity => DC_data::Config::Capacities::Male::ONE,
           :female_capacity => DC_data::Config::Capacities::Female::ONE,
-          # :centre_id => 1
       }
-
       Centre_2 = {
           :name => 'two',
           :male_capacity => DC_data::Config::Capacities::Male::TWO,
           :female_capacity => DC_data::Config::Capacities::Female::TWO,
-          # :id => 2
       }
       Centre_3 = {
           :name => 'three',
           :male_capacity => DC_data::Config::Capacities::Male::THREE,
           :female_capacity => DC_data::Config::Capacities::Female::THREE,
-          # :id => 3
       }
 
     end

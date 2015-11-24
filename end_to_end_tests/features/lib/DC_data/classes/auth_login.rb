@@ -9,9 +9,9 @@ module DC_data
     def login
       case @user
         when 'user'
-          integration_api.get(DC_data::Config::Endpoints::SET_USER_USER, {}, {})
+        internal_api.get(DC_data::Config::Endpoints::SET_USER_USER, {}, {"#{config('header_type')}" => "#{config('user_email')}"})
         when 'admin'
-          integration_api.get(DC_data::Config::Endpoints::SET_USER_ADMIN, {}, {})
+          internal_api.get(DC_data::Config::Endpoints::SET_USER_ADMIN, {}, {"#{config('header_type')}" => "#{config('user_email')}"})
       end
 
     end

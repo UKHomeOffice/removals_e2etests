@@ -78,9 +78,6 @@ And(/^the displayed number of male available beds is correct$/) do
 end
 
 And(/^the displayed number of female available beds is correct$/) do
-  @performance_stats.collect_garbage
-  $performance_info.push(@performance_stats.return_stats)
-
   @new_post.each do |post|
     disp_available_f_beds = @stats_page.disp_female_available_beds(post.get_centre_num)
     available_female_beds = (@dashboard_page.get_female_centre_capacity(post.get_centre_num)) - (post.calculate_female_unavailable_beds)

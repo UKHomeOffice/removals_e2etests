@@ -4,3 +4,5 @@ update_centre_host: http://localhost
 proxy_host: localhost
 header_type: http_email
 user_email: test@example.com
+integration_port_num: 8080
+dashboard_port_num: 8000

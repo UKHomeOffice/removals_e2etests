@@ -4,13 +4,12 @@ module DC_data
   class Api_posts
 
 
-    attr_reader :options, :post, :option_values, :output_keys
+    attr_reader :options, :post, :option_values, :output_keys, :centre_id
 
-    def initialize(options={})
-      # @post = output_hash
+    def initialize(centre_id,options={})
+      @centre_id = centre_id
       @options = options.symbolize_keys
       @option_values = options.values
-      # @output_keys = output_hash.keys
 
     end
 
@@ -67,8 +66,7 @@ module DC_data
 
       json=@post.to_json
       # puts json
-      irc_api.post(api, json, {'Content-Type' => 'application/json'})
-
+     irc_api.post(api, json, {'Content-Type' => 'application/json'})
     end
 
     def assign_ooc_reason

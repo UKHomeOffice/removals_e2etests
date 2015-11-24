@@ -7,7 +7,7 @@ module DC_data
     attr_reader :url
 
     def initialize
-      @url = "#{config('dashboard_host')}"+':8000'+ DC_data::Config::Endpoints::STATS
+      @url = "#{config('dashboard_host')}"+":#{$dashboard_port_num}"+ DC_data::Config::Endpoints::STATS
     end
 
     def stats_title
