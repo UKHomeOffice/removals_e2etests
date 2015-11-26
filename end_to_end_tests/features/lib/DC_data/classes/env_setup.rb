@@ -52,7 +52,7 @@ module DC_data
     end
 
     def create_proxy
-      @my_proxy_server= CustomWEBrickProxyServer.new(:Port => @port_num)
+      @my_proxy_server= Proxy::CustomWEBrickProxyServer.new(:Port => @port_num)
 
       trap 'INT' do
         @my_proxy_server.shutdown

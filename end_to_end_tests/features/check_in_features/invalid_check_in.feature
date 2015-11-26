@@ -1,3 +1,4 @@
+@wip
 Feature: Invalid event
 
   Scenario: A check in submitted with an uppercase centre name is rejected
