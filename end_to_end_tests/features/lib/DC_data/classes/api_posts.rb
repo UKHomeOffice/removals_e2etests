@@ -4,12 +4,13 @@ module DC_data
   class Api_posts
 
 
-    attr_reader :options, :post, :option_values, :output_keys, :centre_id
+    attr_reader :options, :post, :option_values, :output_keys, :centre_id,:centre_num
 
     def initialize(centre_id,options={})
       @centre_id = centre_id
       @options = options.symbolize_keys
       @option_values = options.values
+      @centre_num = get_centre_num
 
     end
 

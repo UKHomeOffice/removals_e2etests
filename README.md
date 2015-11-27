@@ -20,5 +20,5 @@ $ bundle install
 ```
 ### To run the tests with the integration app and dashboard app on start-up:
 ```
-$ INTEGRATION_APP=true DASHBOARD_APP=true cucumber -r features --tags ~wip
+$ INTEGRATION_APP=true DASHBOARD_APP=true cucumber -r features --tags ~@wip
 ```
