@@ -7,8 +7,8 @@ module DC_data
       IRC_HEART_BEAT = '/irc_entry/heartbeat'
       IRC_EVENT = '/irc_entry/event'
       CREATE_CENTRE = '/centre'
-      DELETE_CENTRE = '/centre/'
-      AMEND_CENTRE =  '/centre/'
+      DELETE_CENTRE = '/centre'
+      AMEND_CENTRE =  '/centre'
       SET_USER_USER = '/SET_USER/user'
       SET_USER_ADMIN = '/SET_USER/admin'
 
@@ -55,7 +55,7 @@ module DC_data
     end
 
     module Displayed_text
-      DASHBOARD_PAGE_TITLE = 'IRC bed availability'
+      DASHBOARD_PAGE_TITLE = 'Wall Board'
       STATS_PAGE_TITLE = 'IRC bed stats'
       DEFAULT_BOOKED = '0 booked'
       DEFAULT_RESERVED = '0 ring-fenced'

@@ -1,9 +1,11 @@
 When(/^a heart beat is generated with the following information (.*),(.*),(.*),(.*),(.*)$/) do |centre, male, female, ooc_male, ooc_female|
   @new_post ||=Array.new
-  @new_post.push(DC_data::Api_posts.new(centre_id=@created_centre_ids[centre], {:centre => centre, :male_occupied => male.to_i, :female_occupied => female.to_i, :male_ooc => ooc_male.to_i, :female_ooc => ooc_female.to_i}))
-  @new_post.each do |post|
-    post.create_heart_beat
-  end
+  post=DC_data::Api_posts.new(centre_id=@created_centre_ids[centre], {:centre => centre, :male_occupied => male.to_i, :female_occupied => female.to_i, :male_ooc => ooc_male.to_i, :female_ooc => ooc_female.to_i})
+  post.create_heart_beat
+  @new_post.push(post)
+  # @new_post.each do |post|
+  #   post.create_heart_beat
+  # end
 end
 
 Given(/^a check (?:in|out) has been generated for centre (\D+)$/) do |centre|

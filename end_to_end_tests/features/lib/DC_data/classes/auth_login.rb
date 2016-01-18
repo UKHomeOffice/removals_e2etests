@@ -2,18 +2,35 @@ module DC_data
 
   class Auth_login
 
-    def initialize(user)
-      @user = user
-    end
+    include Capybara::DSL, ShowMeTheCookies
 
-    def login
+    def login(user)
+      @user = user
       case @user
         when 'user'
-        internal_api.get(DC_data::Config::Endpoints::SET_USER_USER, {}, {"#{config('header_type')}" => "#{config('user_email')}"})
+
         when 'admin'
-          internal_api.get(DC_data::Config::Endpoints::SET_USER_ADMIN, {}, {"#{config('header_type')}" => "#{config('user_email')}"})
+          page.fill_in 'username', :with => "#{config('admin_user')}"
+          page.fill_in 'password', :with => "#{config('admin_password')}"
+          click_button('kc-login')
       end
 
+    end
+
+    def get_cookie
+
+      if $config_file.exclude?('config.yml')
+
+        visit("#{config('integration_host')}"+"#{$integration_port_num}"+DC_data::Config::Endpoints::CREATE_CENTRE)
+
+        login('admin')
+        ShowMeTheCookies.register_adapter(:chrome, ShowMeTheCookies::SeleniumChrome)
+        @keycloak_key=get_me_the_cookie('keycloak-access')
+
+        $app_config['keycloak_key'] = "#{@keycloak_key[:name]}"+'='+"#{@keycloak_key[:value]}"
+        File.open($config_file, 'w') { |f| f.write $app_config.to_yaml }
+
+      end
     end
 
 

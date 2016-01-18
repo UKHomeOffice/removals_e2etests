@@ -10,13 +10,15 @@ require 'selenium-webdriver'
 require 'require_all'
 require 'time'
 require 'csv'
+require 'show_me_the_cookies'
+require 'yaml'
 
 require_all 'features/lib/DC_data/classes'
 require_all 'features/lib/Proxy/classes'
 
 
-config_file = ENV['CONFIG_FILE'] || "#{File.dirname(__FILE__)}/config.yml"
-$app_config = YAML.load_file(config_file)
+$config_file = ENV['CONFIG_FILE'] || "#{File.dirname(__FILE__)}/config.yml"
+$app_config = YAML.load_file($config_file)
 
 def config(key)
   $app_config[key]
@@ -105,8 +107,8 @@ unless $app_started # do this if app_started does not eql TRUE
 
   puts "\n ####### RUNNING IN BROWSER #######"
 
-  Capybara.default_driver = :chrome
-  Capybara.register_driver :chrome do |app|
+  Capybara.default_driver = :selenium_chrome
+  Capybara.register_driver :selenium_chrome do |app|
     caps = Selenium::WebDriver::Remote::Capabilities.ie(:proxy => proxy, "chromeOptions" => {"args" => ["--js-flags=--expose-gc", "--enable-precise-memory-info"]})
 
     Capybara::Selenium::Driver.new(app, :browser => :chrome, :desired_capabilities => caps)
@@ -123,7 +125,7 @@ Capybara.default_max_wait_time = 5
 
 
 def internal_api
-  @integration_api = Faraday.new(:url => "#{config('integration_host')}"+":#{$integration_port_num}") do |faraday|
+  @integration_api = Faraday.new(:url => "#{config('integration_host')}"+"#{$integration_port_num}", :ssl => {:verify => false}) do |faraday|
     # faraday.response :logger
     faraday.response :json, :content_type => /\bjson$/
     faraday.use Faraday::Adapter::NetHttp
@@ -134,7 +136,7 @@ def internal_api
 end
 
 def irc_api
-  @integration_api = Faraday.new(:url => "#{config('integration_host')}"+":#{$integration_port_num}") do |faraday|
+  @integration_api = Faraday.new(:url => "#{config('integration_host')}"+"#{$integration_port_num}", :ssl => {:verify => false}) do |faraday|
     # faraday.response :logger
     faraday.response :json, :content_type => /\bjson$/
     faraday.use Faraday::Adapter::NetHttp

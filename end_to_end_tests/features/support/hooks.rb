@@ -6,9 +6,7 @@ Before do
     puts e
   end
 
-  @user = DC_data::Auth_login.new('user')
-  @user.login
-
+  DC_data::Auth_login.new.get_cookie
   @created_centre_ids = DC_data::Env_setup.new.reset_centres
 end
 

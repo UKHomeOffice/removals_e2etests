@@ -1,7 +1,9 @@
 module DC_data
+
   class Env_setup
 
-    include RSpec::Matchers
+    include RSpec::Matchers, Capybara::DSL
+
 
     attr_reader :port_num
 
@@ -17,18 +19,24 @@ module DC_data
       @port_num=@port_num.to_i
     end
 
+
     def reset_centres
 
+      response=internal_api.get(DC_data::Config::Endpoints::CREATE_CENTRE, {}, {'Cookie' => "#{config('keycloak_key')}"})
+      expect(response.status).to eq(200)
 
-      response=internal_api.get(DC_data::Config::Endpoints::CREATE_CENTRE, {}, {"#{config('header_type')}" => "#{config('user_email')}"}).body
-      @delete_centre_ids ||=Array.new
-      response['data'].each do |centres|
-        @delete_centre_ids.push(centres['centre_id'])
-      end
 
-      @delete_centre_ids.each do |id|
-        response=internal_api.delete(DC_data::Config::Endpoints::DELETE_CENTRE+"/#{id}", {}, {"#{config('header_type')}" => "#{config('user_email')}"})
-        expect(response.status).to eq(200)
+      unless response['data']==[]
+
+        @delete_centre_ids ||=Array.new
+        response.body['data'].each do |centres|
+          @delete_centre_ids.push(centres['centre_id'])
+        end
+
+        @delete_centre_ids.each do |id|
+          response=internal_api.delete(DC_data::Config::Endpoints::DELETE_CENTRE+"/#{id}", {}, {'Cookie' => "#{config('keycloak_key')}"})
+          expect(response.status).to eq(200)
+        end
       end
 
       @centres ||=Array.new
@@ -42,10 +50,11 @@ module DC_data
 
       @centres.each do |centre|
         json= centre.to_json
-        response=internal_api.post(DC_data::Config::Endpoints::CREATE_CENTRE, json, {'Content-Type' => 'application/json', "#{config('header_type')}" => "#{config('user_email')}"})
+        response=internal_api.post(DC_data::Config::Endpoints::CREATE_CENTRE, json, {'Content-Type' => 'application/json', 'Cookie' => "#{config('keycloak_key')}"})
         @centre_ids[centre[:name]]=response.body['centre_id']
         expect(response.status).to eq(201)
       end
+
 
       return @centre_ids
 

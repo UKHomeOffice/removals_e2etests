@@ -27,4 +27,6 @@ group :test do
   gem 'json', '1.8.3'
   # ruby core extension
   gem 'activesupport', '4.2.4'
+  # cookie extraction
+  gem 'show_me_the_cookies', '3.1.0'
 end

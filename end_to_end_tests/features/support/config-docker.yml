@@ -1,2 +1,8 @@
-dashboard_host: http://192.168.99.100:3000
-update_centre_host: http://192.168.99.100:3000
+dashboard_host: http://192.168.99.100
+integration_host: http://192.168.99.100
+update_centre_host: http://192.168.99.100
+proxy_host: localhost
+header_type: http_email
+user_email: test@example.com
+integration_port_num: 8080
+dashboard_port_num: 8000
