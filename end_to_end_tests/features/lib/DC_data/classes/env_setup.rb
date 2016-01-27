@@ -22,7 +22,7 @@ module DC_data
 
     def reset_centres
 
-      response=internal_api.get(DC_data::Config::Endpoints::CREATE_CENTRE, {}, {'Cookie' => "#{config('keycloak_key')}"})
+      response=internal_api.get(DC_data::Config::Endpoints::CREATE_CENTRE)
       expect(response.status).to eq(200)
 
 
@@ -30,11 +30,11 @@ module DC_data
 
         @delete_centre_ids ||=Array.new
         response.body['data'].each do |centres|
-          @delete_centre_ids.push(centres['centre_id'])
+          @delete_centre_ids.push(centres['id'])
         end
 
         @delete_centre_ids.each do |id|
-          response=internal_api.delete(DC_data::Config::Endpoints::DELETE_CENTRE+"/#{id}", {}, {'Cookie' => "#{config('keycloak_key')}"})
+          response=internal_api.delete(DC_data::Config::Endpoints::DELETE_CENTRE+"/#{id}")
           expect(response.status).to eq(200)
         end
       end
@@ -50,7 +50,7 @@ module DC_data
 
       @centres.each do |centre|
         json= centre.to_json
-        response=internal_api.post(DC_data::Config::Endpoints::CREATE_CENTRE, json, {'Content-Type' => 'application/json', 'Cookie' => "#{config('keycloak_key')}"})
+        response=internal_api.post(DC_data::Config::Endpoints::CREATE_CENTRE, json, {'Content-Type' => 'application/json'})
         @centre_ids[centre[:name]]=response.body['centre_id']
         expect(response.status).to eq(201)
       end

@@ -125,7 +125,7 @@ Capybara.default_max_wait_time = 5
 
 
 def internal_api
-  @integration_api = Faraday.new(:url => "#{config('integration_host')}"+"#{$integration_port_num}", :ssl => {:verify => false}) do |faraday|
+  @integration_api = Faraday.new(:url => "#{config('integration_host')}"+"#{$integration_port_num}", :ssl => {:verify => false}, :headers => {'Cookie' => "#{config('keycloak_key')}"}) do |faraday|
     # faraday.response :logger
     faraday.response :json, :content_type => /\bjson$/
     faraday.use Faraday::Adapter::NetHttp

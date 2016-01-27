@@ -15,8 +15,7 @@ Then(/^the number of available beds displayed is correct$/) do
     centre_female_beds = @dashboard_page.disp_female_available_beds(post.centre_num)
 
     expect(centre_male_beds.text).to eq("#{@available_male_beds}")
-    if centre_female_beds == 0
-    else
+    unless centre_female_beds == 0
       expect(centre_female_beds.text).to eq("#{@available_female_beds}")
     end
   end
@@ -38,8 +37,7 @@ And(/^number available beds have been reset to default$/) do
     disp_available_m_beds = @dashboard_page.disp_male_available_beds(post.centre_num)
     disp_available_f_beds = @dashboard_page.disp_female_available_beds(post.centre_num)
     expect(disp_available_m_beds.text).to eq("#{@dashboard_page.get_male_centre_capacity(post.centre_num)}")
-    if disp_available_f_beds == 0
-    else
+    unless disp_available_f_beds == 0
       expect(disp_available_f_beds.text).to eq("#{@dashboard_page.get_female_centre_capacity(post.centre_num)}")
     end
   end
@@ -101,8 +99,7 @@ And(/^occupancy details have been reset to default$/) do
 
     expect(disp_available_m_beds.text).to eq("#{@dashboard_page.get_male_centre_capacity(post.centre_num)}")
 
-    if @dashboard_page.get_female_centre_capacity(post.centre_num) == 0
-    else
+    unless @dashboard_page.get_female_centre_capacity(post.centre_num) == 0
       expect(disp_f_capacity.text).to eq("#{@dashboard_page.get_female_centre_capacity(post.centre_num)}")
       expect(disp_f_occupied_beds.text).to eq('0')
       expect(disp_f_occ_beds.text).to eq('0')
@@ -121,8 +118,7 @@ end
 And(/^the displayed number of female occupied beds is correct$/) do
   @new_post.each do |post|
     disp_f_occupied_beds = @dashboard_page.disp_female_occupied(post.centre_num)
-    if disp_f_occupied_beds == 0
-    else
+    unless disp_f_occupied_beds == 0
       expect(disp_f_occupied_beds.text).to eq ("#{post.get_options_female}")
     end
   end
@@ -138,8 +134,7 @@ end
 And(/^the displayed number of female out of commission beds is correct$/) do
   @new_post.each do |post|
     disp_f_occ_beds = @dashboard_page.disp_female_occ(post.centre_num)
-    if disp_f_occ_beds == 0
-    else
+    unless disp_f_occ_beds == 0
       expect(disp_f_occ_beds.text).to eq ("#{post.get_options_ooc_female}")
     end
   end
@@ -157,8 +152,7 @@ And(/^the displayed number of female available beds is correct$/) do
   @new_post.each do |post|
     disp_available_f_beds = @dashboard_page.disp_female_available_beds(post.centre_num)
     available_female_beds = (@dashboard_page.get_female_centre_capacity(post.centre_num)) - (post.calculate_female_unavailable_beds)
-    if disp_available_f_beds == 0
-    else
+    unless disp_available_f_beds == 0
       expect(disp_available_f_beds.text).to eq ("#{available_female_beds}")
     end
   end
