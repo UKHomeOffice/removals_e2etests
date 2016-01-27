@@ -9,7 +9,6 @@ Feature: Valid heart beat
     And a heart beat is generated with the following information three,45,25,10,35
     And the centre name is displayed correctly on the dashboard page
     And number available beds have been reset to default
-    When I click the stats link
     And occupancy details have been reset to default
     When the information is successfully uploaded to the heart beat api
     Then the number of available beds displayed is correct

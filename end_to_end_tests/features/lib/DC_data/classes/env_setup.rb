@@ -92,7 +92,7 @@ module DC_data
     def start_dashboard_app
       @port_num = 8000
       @pid = fork do
-        exec "cd\n cd Projects/removals/removals_dashboard\n npm start"
+        exec "cd\n cd Projects/removals/removals_dashboard\n ember server"
       end
       system ('sleep 5')
       return @pid

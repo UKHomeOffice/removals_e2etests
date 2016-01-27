@@ -55,7 +55,7 @@ module DC_data
     end
 
     module Displayed_text
-      DASHBOARD_PAGE_TITLE = 'Wall Board'
+      DASHBOARD_PAGE_TITLE = 'IRC Bed Management'
       STATS_PAGE_TITLE = 'IRC bed stats'
       DEFAULT_BOOKED = '0 booked'
       DEFAULT_RESERVED = '0 ring-fenced'

@@ -11,17 +11,17 @@ module DC_data
      end
 
     def dashboard_title
-      page.title
+      find(:css, 'body > header > div.banner > h1')
     end
 
     def disp_male_available_beds(centre_num)
       case centre_num
         when 1
-          find(:css, 'body > div > div > div:nth-child(1) > div.stats-container > div > div > div > div.row.available > div > span')
+          find(:css, '#ember450 > div > div:nth-child(1) > span.header-row-one')
         when 2
-          find(:css, 'body > div > div > div:nth-child(2) > div.stats-container > div > div:nth-child(1) > div > div.row.available > div > span')
+          find(:css, '#ember450 > div > div:nth-child(5) > span.header-row-one')
         when 3
-          find(:css, 'body > div > div > div:nth-child(3) > div.stats-container > div > div:nth-child(1) > div > div.row.available > div > span')
+          find(:css, '#ember450 > div > div:nth-child(9) > span.header-row-one')
       end
     end
 
@@ -30,9 +30,9 @@ module DC_data
         when 1
           0
         when 2
-          find(:css, 'body > div > div > div:nth-child(2) > div.stats-container > div > div:nth-child(2) > div > div.row.available > div > span')
+          find(:css, '#ember450 > div > div:nth-child(7) > span.header-row-one')
         when 3
-          find(:css, 'body > div > div > div:nth-child(3) > div.stats-container > div > div:nth-child(2) > div > div.row.available > div > span')
+          find(:css, '#ember450 > div > div:nth-child(11) > span.header-row-one')
       end
     end
 
@@ -61,11 +61,11 @@ module DC_data
     def disp_centre_name(centre_num)
       case centre_num
         when 1
-          find(:css, '#centre-30')
+          find(:css, '#ember450 > div > div:nth-child(1) > span.header-row-zero > span.title')
         when 2
-          find(:css, '#centre-31')
+          find(:css, '#ember450 > div > div:nth-child(5) > span.header-row-zero > span.title')
         when 3
-          find(:css, '#centre-32')
+          find(:css, '#ember450 > div > div:nth-child(9) > span.header-row-zero > span.title')
       end
     end
 
@@ -76,11 +76,11 @@ module DC_data
     def disp_male_capacity(centre_num)
       case centre_num
         when 1
-          find(:css, 'body > div > div > div:nth-child(1) > div.stats-container > div > div > div > div.stats > span.male-capacity > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(2) > span:nth-child(2) > span.right')
         when 2
-          find(:css, 'body > div > div > div:nth-child(2) > div.stats-container > div > div:nth-child(1) > div > div.stats > span.male-capacity > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(6) > span:nth-child(2) > span.right')
         when 3
-          find(:css, 'body > div > div > div:nth-child(3) > div.stats-container > div > div:nth-child(1) > div > div.stats > span.male-capacity > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(10) > span:nth-child(2) > span.right')
       end
     end
 
@@ -89,20 +89,20 @@ module DC_data
         when 1
           0
         when 2
-          find(:css, 'body > div > div > div:nth-child(2) > div.stats-container > div > div:nth-child(2) > div > div.stats > span.female-capacity > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(8) > span:nth-child(2) > span.right')
         when 3
-          find(:css, 'body > div > div > div:nth-child(3) > div.stats-container > div > div:nth-child(2) > div > div.stats > span.female-capacity > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(12) > span:nth-child(2) > span.right')
       end
     end
 
     def disp_male_occupied(centre_num)
       case centre_num
         when 1
-          find(:css, 'body > div > div > div:nth-child(1) > div.stats-container > div > div > div > div.stats > span.male-occupied > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(2) > span:nth-child(3) > span.right')
         when 2
-          find(:css, 'body > div > div > div:nth-child(1) > div.stats-container > div > div > div > div.stats > span.male-occupied > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(6) > span:nth-child(3) > span.right')
         when 3
-          find(:css, 'body > div > div > div:nth-child(3) > div.stats-container > div > div:nth-child(1) > div > div.stats > span.male-occupied > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(10) > span:nth-child(3) > span.right')
       end
     end
 
@@ -111,20 +111,20 @@ module DC_data
         when 1
           0
         when 2
-          find(:css, 'body > div > div > div:nth-child(2) > div.stats-container > div > div:nth-child(2) > div > div.stats > span.female-occupied > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(8) > span:nth-child(3) > span.right')
         when 3
-          find(:css, 'body > div > div > div:nth-child(3) > div.stats-container > div > div:nth-child(2) > div > div.stats > span.female-occupied > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(12) > span:nth-child(3) > span.right')
       end
     end
 
     def disp_male_occ(centre_num)
       case centre_num
         when 1
-          find(:css, 'body > div > div > div:nth-child(1) > div.stats-container > div > div > div > div.stats > span.male-ooc > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(2) > span:nth-child(4) > span.right')
         when 2
-          find(:css, 'body > div > div > div:nth-child(2) > div.stats-container > div > div:nth-child(1) > div > div.stats > span.male-ooc > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(6) > span:nth-child(4) > span.right')
         when 3
-          find(:css, 'body > div > div > div:nth-child(3) > div.stats-container > div > div:nth-child(1) > div > div.stats > span.male-ooc > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(10) > span:nth-child(4) > span.right')
       end
     end
 
@@ -133,9 +133,9 @@ module DC_data
         when 1
           0
         when 2
-          find(:css, 'body > div > div > div:nth-child(2) > div.stats-container > div > div:nth-child(2) > div > div.stats > span.female-ooc > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(8) > span:nth-child(4) > span.right')
         when 3
-          find(:css, 'body > div > div > div:nth-child(3) > div.stats-container > div > div:nth-child(2) > div > div.stats > span.female-ooc > strong > span')
+          find(:css, '#ember450 > div > div:nth-child(12) > span:nth-child(4) > span.right')
       end
     end
 

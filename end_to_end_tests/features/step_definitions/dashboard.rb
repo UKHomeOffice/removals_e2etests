@@ -3,7 +3,7 @@ When(/^I navigate to the bed management dashboard/) do
 
   visit(@dashboard_page.url)
 
-  expect(@dashboard_page.dashboard_title).to eq (DC_data::Config::Displayed_text::DASHBOARD_PAGE_TITLE)
+  expect(@dashboard_page.dashboard_title.text).to eq (DC_data::Config::Displayed_text::DASHBOARD_PAGE_TITLE)
 end
 
 Then(/^the number of available beds displayed is correct$/) do
