@@ -8,13 +8,14 @@ module DC_data
       @user = user
       case @user
         when 'user'
-
+          page.fill_in 'username', :with => "test"
+          page.fill_in 'password', :with => "test"
+          click_button('kc-login')
         when 'admin'
           page.fill_in 'username', :with => "#{config('admin_user')}"
           page.fill_in 'password', :with => "#{config('admin_password')}"
           click_button('kc-login')
       end
-
     end
 
     def get_cookie

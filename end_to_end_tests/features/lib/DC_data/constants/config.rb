@@ -59,6 +59,8 @@ module DC_data
       STATS_PAGE_TITLE = 'IRC bed stats'
       DEFAULT_BOOKED = '0 booked'
       DEFAULT_RESERVED = '0 ring-fenced'
+      FULL_CAPACITY = 'FULL'
+      UNSUCCESSFUL_LOGIN='Invalid username or password'
     end
 
     module Cookie_data
