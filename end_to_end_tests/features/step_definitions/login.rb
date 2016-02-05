@@ -5,7 +5,7 @@ When(/^my authentication is (.*)$/) do |outcome|
     when 'unsuccessful'
       user='user'
   end
-  DC_data::Auth_login.new.login(user)
+  DC_data::Login_page.new.login(user)
 end
 
 Then(/^I am presented with a log in unsuccessful message$/) do

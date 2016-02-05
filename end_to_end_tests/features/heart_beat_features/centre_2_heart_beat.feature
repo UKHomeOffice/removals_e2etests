@@ -17,4 +17,4 @@ Feature: Centre 2 heart beat
     And the displayed number of female out of commission beds is correct
     And the displayed number of male available beds within the breakdown states FULL
     And the displayed number of female available beds within the breakdown states FULL
-
+    And I condense to see only the available beds

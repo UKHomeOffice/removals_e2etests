@@ -69,15 +69,13 @@ unless $app_started # do this if app_started does not eql TRUE
     @integration_app.exists?
 
 
-    $integration_port_num=@integration_app.port_num
+    $app_config['integration_port_num'] = @integration_app.port_num
+    File.open($config_file, 'w') { |f| f.write $app_config.to_yaml }
 
     at_exit do
       puts "####### Killing integration app #######"
       @integration_app.kill_integration_app
     end
-
-  else
-    $integration_port_num="#{config('integration_port_num')}"
 
   end
 
@@ -90,17 +88,13 @@ unless $app_started # do this if app_started does not eql TRUE
     Process.detach(@dashboard_pid)
     @dashboard_app.exists?
 
-    $dashboard_port_num=@dashboard_app.port_num
+    $app_config['dashboard_port_num'] = @dashboard_app.port_num
+    File.open($config_file, 'w') { |f| f.write $app_config.to_yaml }
 
     at_exit do
       puts "####### Killing dashboard app #######"
       @dashboard_app.kill_dashboard_app
     end
-
-
-  else
-
-    $dashboard_port_num="#{config('dashboard_port_num')}"
 
   end
 
@@ -119,17 +113,5 @@ end
 
 $app_started = true # don't do it again.
 
-ENV['TEST_ENV_NUMBER'] ='3'
-
 Capybara.default_selector = :css
 Capybara.default_max_wait_time = 5
-
-
-def irc_api
-  @irc_api = Faraday.new(:url => "#{config('integration_host')}"+"#{$integration_port_num}", :ssl => {:verify => false}) do |faraday|
-    # faraday.response :logger
-    faraday.response :json, :content_type => /\bjson$/
-    faraday.use Faraday::Adapter::NetHttp
-    faraday.use FaradayMiddleware::ParseJson
-  end
-end

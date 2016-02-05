@@ -22,3 +22,6 @@ $ bundle install
 ```
 $ INTEGRATION_APP=true DASHBOARD_APP=true cucumber -r features --tags ~@wip
 ```
+
+
+<!--parallel_test -t cucumber --serialize-stdout features/heart_beat_features/-->

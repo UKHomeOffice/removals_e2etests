@@ -1,6 +1,6 @@
 module DC_data
 
-  class Auth_login
+  class Login_page
 
     include Capybara::DSL, ShowMeTheCookies
 
@@ -22,7 +22,7 @@ module DC_data
 
       if $config_file.exclude?('config.yml')
 
-        visit("#{config('integration_host')}"+"#{$integration_port_num}"+DC_data::Config::Endpoints::CREATE_CENTRE)
+        visit("#{config('integration_host')}"+"#{config('integration_port_num')}"+DC_data::Config::Endpoints::CREATE_CENTRE)
         login('admin')
         ShowMeTheCookies.register_adapter(:chrome, ShowMeTheCookies::SeleniumChrome)
         @keycloak_cookie=get_me_the_cookie(DC_data::Config::Cookie_data::KEYCLOAK_ACCESS)

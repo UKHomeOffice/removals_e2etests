@@ -14,8 +14,7 @@ Feature: Centre 1 heart beat
     And the displayed number of male occupied beds is correct
     And the displayed number of male out of commission beds is correct
     And the displayed number of male available beds within the breakdown is correct
-    And I condense to see only the available beds
-
+    And I can when the data was last updated
 
 
   Scenario: A bed placed out of commission and then recommissioned
