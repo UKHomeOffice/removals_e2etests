@@ -9,9 +9,11 @@ module DC_data
       AMEND_CENTRE =  '/centres'
     end
 
-    module Locations
+    module Paths
       GENERATE_HEART_BEAT ="#{File.dirname(__FILE__)}/../../../../data/generate_heart_beat.sh"
       GENERATE_EVENT ="#{File.dirname(__FILE__)}/../../../../data/generate_event.sh"
+      PERFORMANCE_INFO="#{File.dirname(__FILE__)}/../../../../performance_info"
+      TMP="#{File.dirname(__FILE__)}/../../../../tmp"
     end
 
     module Capacities

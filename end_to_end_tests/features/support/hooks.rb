@@ -40,6 +40,9 @@ After do |scenario|
 
   begin
     puts "\n ####### SAVING PERFORMANCE INFO #######"
+    unless File.exists?(DC_data::Config::Paths::PERFORMANCE_INFO)
+      Dir.mkdir(DC_data::Config::Paths::PERFORMANCE_INFO)
+    end
     time = Time.now.iso8601
     File.open("performance_info/#{time}_#{scenario.name.downcase.tr(" /+<>,.:;|-", "_")[0..64]}_performance_info.csv", 'w') do |file|
       file.puts @performance_info

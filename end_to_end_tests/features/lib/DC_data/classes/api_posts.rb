@@ -16,7 +16,7 @@ module DC_data
 
 
     def create_heart_beat
-      _shellScript = DC_data::Config::Locations::GENERATE_HEART_BEAT
+      _shellScript = DC_data::Config::Paths::GENERATE_HEART_BEAT
 
       output = %x(sh #{_shellScript})
 
@@ -34,7 +34,7 @@ module DC_data
     end
 
     def create_basic_event
-      _shellScript = DC_data::Config::Locations::GENERATE_EVENT
+      _shellScript = DC_data::Config::Paths::GENERATE_EVENT
 
       output = %x(sh #{_shellScript})
 
