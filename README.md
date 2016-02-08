@@ -13,15 +13,20 @@ $ rvm use 2.1.7
 ```
 $ gem install bundler
 ```
+### Clone repository
+
 ### Bundle install
 ```
 $ cd removals_e2e_tests/end_to_end_tests
 $ bundle install
 ```
-### To run the tests with the integration app and dashboard app on start-up:
+### Setup test env
 ```
-$ INTEGRATION_APP=true DASHBOARD_APP=true cucumber -r features --tags ~@wip
+Ensure Dashboard and Integration app are running
+$ ./pre-hook.rb
+This setups up centres to be used for testing
 ```
-
-
-<!--parallel_test -t cucumber --serialize-stdout features/heart_beat_features/-->
+### To run tests in parallel. For more information see https://github.com/grosser/parallel_tests
+```
+$ parallel_test -t cucumber --serialize-stdout --combine-stderr -o '-r features -t ~@wip' features/
+```

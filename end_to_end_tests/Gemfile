@@ -30,5 +30,5 @@ group :test do
   # cookie extraction
   gem 'show_me_the_cookies', '3.1.0'
   # parallel test runner
-  gem 'parallel_test', '2.3.0'
+  gem 'parallel_tests', '2.3.0'
 end
