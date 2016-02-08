@@ -25,7 +25,7 @@ DC_data::Login_page.new.get_cookie
 @created_centre_ids = DC_data::Env_setup.new.reset_centres
 
 
-File.open("./features/support/centre_ids.txt", 'w') do |file|
+File.open("tmp/centre_ids.txt", 'w') do |file|
   file.puts @created_centre_ids
 end
 

@@ -2,24 +2,16 @@ module DC_data
   module Config
 
     module Endpoints
-      DASHBOARD = '/#availability'
-      STATS = '/#statistics'
       IRC_HEART_BEAT = '/irc_entry/heartbeat'
       IRC_EVENT = '/irc_entry/event'
       CREATE_CENTRE = '/centres'
       DELETE_CENTRE = '/centres'
       AMEND_CENTRE =  '/centres'
-      SET_USER_USER = '/SET_USER/user'
-      SET_USER_ADMIN = '/SET_USER/admin'
-
-
     end
 
     module Locations
-      TOTALS_CSV = 'features/data/totals.csv'
-      GENERATE_HEART_BEAT ='features/data/generate_heart_beat.sh'
-      GENERATE_EVENT ='features/data/generate_event.sh'
-      TEST = 'features/data/start_int_port.sh'
+      GENERATE_HEART_BEAT ="#{File.dirname(__FILE__)}/../../../../data/generate_heart_beat.sh"
+      GENERATE_EVENT ="#{File.dirname(__FILE__)}/../../../../data/generate_event.sh"
     end
 
     module Capacities

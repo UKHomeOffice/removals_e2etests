@@ -1,6 +1,6 @@
 Feature: Centre 3 heart beat
 
-  Scenario: Submission of valid heart beat via the web service to centre 3
+  Scenario: A heart beat sent to centre 3 introducing a negative availability
 
 
     Given a heart beat is generated with the following information centre name three,45,25,10,35 introducing a negative availability
@@ -17,4 +17,4 @@ Feature: Centre 3 heart beat
     And the displayed number of female out of commission beds is correct
     And the displayed number of male available beds within the breakdown is a negative value
     And the displayed number of female available beds within the breakdown is a negative value
-
+    And I can see the data was last updated 30 seconds ago

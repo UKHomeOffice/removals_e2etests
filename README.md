@@ -28,5 +28,5 @@ This setups up centres to be used for testing
 ```
 ### To run tests in parallel. For more information see https://github.com/grosser/parallel_tests
 ```
-$ parallel_test -t cucumber --serialize-stdout --combine-stderr -o '-r features -t ~@wip' features/
+$ parallel_test -t cucumber --combine-stderr --serialize-stdout -o '-r features -f pretty -f html -o tmp/report${TEST_ENV_NUMBER}.html -t ~@wip' features/
 ```

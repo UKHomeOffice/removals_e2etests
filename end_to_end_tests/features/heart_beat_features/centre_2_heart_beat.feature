@@ -1,6 +1,6 @@
 Feature: Centre 2 heart beat
 
-  Scenario: Submission of valid heart beat via the web service to centre 2
+  Scenario: A heart beat sent to centre 2 taking the availability to full
 
 
     Given a heart beat is generated with the following information centre name two,80,90,20,10 taking availability to full
@@ -17,4 +17,5 @@ Feature: Centre 2 heart beat
     And the displayed number of female out of commission beds is correct
     And the displayed number of male available beds within the breakdown states FULL
     And the displayed number of female available beds within the breakdown states FULL
+    And I can see the data was last updated 30 seconds ago
     And I condense to see only the available beds

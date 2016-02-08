@@ -8,7 +8,7 @@ Before do
 
   # DC_data::Login_page.new.get_cookie
   # @centre_ids = DC_data::Env_setup.new.reset_centres
-  @centre_ids_file="#{File.dirname(__FILE__)}/centre_ids.txt"
+  @centre_ids_file="#{File.dirname(__FILE__)}/../../tmp/centre_ids.txt"
   @centre_ids= File.read(@centre_ids_file)
   @centre_ids=JSON.parse @centre_ids.gsub('=>', ':')
 end

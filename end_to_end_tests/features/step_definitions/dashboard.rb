@@ -261,11 +261,11 @@ Then(/^the dashboard should display (\d+) out of commission beds number on the d
 end
 
 
-And(/^I can when the data was last updated$/) do
+And(/^I can see the data was last updated (\d+) seconds ago$/) do |seconds|
   @new_post.each do |post|
     time_submitted = @dashboard_page.time_stamp(post.centre_id)
     time_submitted= Time.parse(time_submitted.text.split(" ").last)
     time_diff = (Time.now - time_submitted)
-    expect(time_diff).to be < 30
+    expect(time_diff).to be < seconds.to_i
   end
 end
