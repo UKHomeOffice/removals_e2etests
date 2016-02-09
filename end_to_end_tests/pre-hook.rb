@@ -6,6 +6,8 @@ require 'show_me_the_cookies'
 require 'rspec'
 require 'yaml'
 require 'faraday_middleware'
+require 'selenium-webdriver'
+
 require_relative '../end_to_end_tests/features/lib/DC_data/classes/login_page'
 require_relative '../end_to_end_tests/features/lib/DC_data/constants/config'
 require_relative '../end_to_end_tests/features/lib/DC_data/classes/env_setup'
@@ -20,6 +22,13 @@ def config(key)
   $app_config[key]
 end
 
+Capybara.default_driver = :selenium_chrome
+Capybara.register_driver :selenium_chrome do |app|
+  caps = Selenium::WebDriver::Remote::Capabilities.ie("chromeOptions" => {"args" => ["--js-flags=--expose-gc", "--enable-precise-memory-info"]})
+
+  Capybara::Selenium::Driver.new(app, :browser => :chrome, :desired_capabilities => caps)
+
+end
 
 DC_data::Login_page.new.get_cookie
 @created_centre_ids = DC_data::Env_setup.new.reset_centres
