@@ -11,7 +11,7 @@ module DC_data
     end
 
     def dashboard_title
-      find(:css, 'body > header > div.banner > h1')
+         find(:css, 'body > div > header > div.banner > h1')
     end
 
     # def set_centre_data(centre_id)
@@ -45,15 +45,15 @@ module DC_data
     end
 
     def disp_male_available_beds(centre_id)
-      find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Male > div.summary > span.availability')
+      find(:css, '#centre-'+"#{centre_id}" + '> centre-gender-directive:nth-child(3) > div > span.availability.ng-binding')
     end
 
     def disp_female_available_beds(centre_id)
-      find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Female > div.summary > span.availability')
+      find(:css, '#centre-'+"#{centre_id}" + '> centre-gender-directive:nth-child(4) > div > span.availability.ng-binding')
     end
 
     def disp_male_capacity(centre_id)
-      find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Male > div.details > table > tbody > tr.capacity > td')
+      find(:css, '#centre-'+"#{centre_id}" + ' > centre-gender-directive > div.details.ng-scope > table > tbody > tr:nth-child(1) > td.ng-binding')
     end
 
     def disp_female_capacity(centre_id)
@@ -61,7 +61,7 @@ module DC_data
     end
 
     def disp_male_occupied(centre_id)
-      find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Male > div.details > table > tbody > tr.occupied > td')
+      find(:css, '#centre-'+"#{centre_id}" + '> centre-gender-directive > div.details.ng-scope > table > tbody > tr:nth-child(2) > td:nth-child(3)')
     end
 
     def disp_female_occupied(centre_id)
@@ -69,7 +69,8 @@ module DC_data
     end
 
     def disp_male_occ(centre_id)
-      find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Male > div.details > table > tbody > tr.outofcommission > td')
+      find(:css, '#centre-'+"#{centre_id}" + '> centre-gender-directive > div.details.ng-scope > table > tbody > tr:nth-child(3) > td:nth-child(3)')
+   
     end
 
     def disp_female_occ(centre_id)
@@ -77,7 +78,7 @@ module DC_data
     end
 
     def breakdown_male_available_beds(centre_id)
-      find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Male > div.details > table > tfoot > tr.availability > td')
+      find(:css, '#centre-'+"#{centre_id}" + ' > centre-gender-directive > div.details.ng-scope > table > tbody > tr.availability > td.ng-binding')
     end
 
     def breakdown_female_available_beds(centre_id)
@@ -85,11 +86,14 @@ module DC_data
     end
 
     def expand_button_male(centre_id)
-      find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Male > div.summary > a.detail-toggle')
+      # find(:css, '#centre-'+"#{centre_id}" + ' > centre-gender-directive > div.summary > a')
+      find(:css,'#centre-'+"#{centre_id}" + ' > centre-gender-directive:nth-child(3) > div > a')
     end
 
     def expand_button_female(centre_id)
-      find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Female > div.summary > a.detail-toggle')
+      # find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Female > div.summary > a.detail-toggle')
+      find(:css, '#centre-'+"#{centre_id}" + '> centre-gender-directive:nth-child(4) > div > a' )
+
     end
 
     def time_stamp(centre_id)

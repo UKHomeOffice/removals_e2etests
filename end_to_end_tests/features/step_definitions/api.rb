@@ -14,11 +14,12 @@ Given(/^a check (?:in|out) has been generated for centre (\D+)$/) do |centre|
   end
 end
 
-And(/^the information is uploaded to the (\D+) api$/) do |api|
+And(/^the invalid information is uploaded to the (\D+) api$/) do |api|
   @new_post.each do |post|
     @response=post.create_json(api)
   end
 end
+
 
 And(/^the information is successfully uploaded to the (\D+) api$/) do |api|
   @new_post.each do |post|
@@ -33,7 +34,7 @@ Then(/^I should receive a 400 error$/) do
 end
 
 And(/^I should receive errors regarding the failed submission$/) do
-  expect(@response.body).to include('errors')
+  expect(@response.body).to include('Error')
 end
 
 Given(/^(\d+) (?:bed|beds) (?:has|have) been put out of commission for centre (.*)$/) do |ooc, centre|

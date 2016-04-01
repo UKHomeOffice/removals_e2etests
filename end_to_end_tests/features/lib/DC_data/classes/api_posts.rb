@@ -4,9 +4,9 @@ module DC_data
   class Api_posts
 
 
-    attr_reader :options, :post, :option_values, :output_keys, :centre_id,:centre_num
+    attr_reader :options, :post, :option_values, :output_keys, :centre_id, :centre_num
 
-    def initialize(centre_id,options={})
+    def initialize(centre_id, options={})
       @centre_id = centre_id
       @options = options.symbolize_keys
       @option_values = options.values
@@ -66,9 +66,9 @@ module DC_data
           end
 
       json=@post.to_json
-      # puts json
-     irc_api.post(api, json, {'Content-Type' => 'application/json'})
+      irc_api.post(api, json, {'Content-Type' => 'application/json'})
     end
+
 
     def assign_ooc_reason
       @api_posts_data= @api_posts_data.hashes
@@ -160,10 +160,9 @@ module DC_data
 
     def irc_api
       @irc_api = Faraday.new(:url => "#{config('integration_host')}"+"#{config('integration_port_num')}", :ssl => {:verify => false}) do |faraday|
-        # faraday.response :logger
-        faraday.response :json, :content_type => /\bjson$/
+        # faraday.response :json, :content_type => /\bjson$/
         faraday.use Faraday::Adapter::NetHttp
-        faraday.use FaradayMiddleware::ParseJson
+        # faraday.use FaradayMiddleware::ParseJson
       end
     end
 
