@@ -68,7 +68,8 @@ end
 And(/^the centre name is displayed correctly on the dashboard page$/) do
   @new_post.each do |post|
     disp_centre_name = @dashboard_page.disp_centre_name(post.centre_id)
-    expect(disp_centre_name.text).to eq(post.get_options_centre)
+    expect(disp_centre_name.text.downcase).to eq(post.get_options_centre)
+    puts disp_centre_name.text
   end
 end
 
@@ -259,7 +260,6 @@ Then(/^the dashboard should display (\d+) out of commission beds number on the d
     expect(disp_m_occ_beds.text).to eq (ooc)
   end
 end
-
 
 And(/^I can see the data was last updated (\d+) seconds ago$/) do |seconds|
   @new_post.each do |post|

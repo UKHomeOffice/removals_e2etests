@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'capybara'
+require 'capybara/dsl'
 require 'active_support/all'
 require 'show_me_the_cookies'
 require 'rspec'
@@ -11,8 +12,6 @@ require 'selenium-webdriver'
 require_relative '../end_to_end_tests/features/lib/DC_data/classes/login_page'
 require_relative '../end_to_end_tests/features/lib/DC_data/constants/config'
 require_relative '../end_to_end_tests/features/lib/DC_data/classes/env_setup'
-
-
 
 
 $config_file = ENV['CONFIG_FILE'] || "#{File.dirname(__FILE__)}/features/support/config.yml"
