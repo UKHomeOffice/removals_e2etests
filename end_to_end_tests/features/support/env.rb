@@ -14,7 +14,6 @@ require 'show_me_the_cookies'
 require 'yaml'
 
 require_all 'features/lib/DC_data/classes'
-require_all 'features/lib/Proxy/classes'
 
 
 $config_file = ENV['CONFIG_FILE'] || "#{File.dirname(__FILE__)}/config.yml"
@@ -27,37 +26,6 @@ end
 
 $app_started ||= false
 unless $app_started # do this if app_started does not eql TRUE
-
-  if ENV['PROXY']
-    puts "\n ####### RUNNING PROXY #######"
-
-    @proxy_server=DC_data::Env_setup.new
-    @proxy_server.create_proxy
-    @proxy_pid = @proxy_server.start_proxy
-    Process.detach(@proxy_pid)
-    @proxy_server.exists?
-
-
-    $proxy_address = 'http://'+"#{config('proxy_host')}"+":#{@proxy_server.port_num}"
-
-
-    PROXY = "#{config('proxy_host')}"+":#{@proxy_server.port_num}"
-
-
-    proxy = Selenium::WebDriver::Proxy.new(
-        :http => PROXY,
-        :ftp => PROXY,
-        :ssl => PROXY
-    )
-
-    at_exit do
-      puts "\n ####### Killing proxy apps #######"
-      @proxy_server.kill_proxy_app
-    end
-  else
-    proxy = nil
-    $proxy_address = nil
-  end
 
   if ENV['INTEGRATION_APP']
     puts "\n ####### RUNNING INTEGRATION APP #######"
@@ -103,7 +71,7 @@ unless $app_started # do this if app_started does not eql TRUE
 
   Capybara.default_driver = :selenium_chrome
   Capybara.register_driver :selenium_chrome do |app|
-    caps = Selenium::WebDriver::Remote::Capabilities.ie(:proxy => proxy, "chromeOptions" => {"args" => ["--js-flags=--expose-gc", "--enable-precise-memory-info"]})
+    caps = Selenium::WebDriver::Remote::Capabilities.ie("chromeOptions" => {"args" => ["--js-flags=--expose-gc", "--enable-precise-memory-info"]})
 
     Capybara::Selenium::Driver.new(app, :browser => :chrome, :desired_capabilities => caps)
 

@@ -60,26 +60,6 @@ module DC_data
 
     end
 
-    def create_proxy
-      @my_proxy_server= Proxy::CustomWEBrickProxyServer.new(:Port => @port_num)
-
-      trap 'INT' do
-        @my_proxy_server.shutdown
-      end
-      trap 'TERM' do
-        @my_proxy_server.shutdown
-      end
-
-    end
-
-    def start_proxy
-      @pid = fork do
-        @my_proxy_server.start
-        system ('sleep 5')
-        return @pid
-      end
-    end
-
     def start_integration_app
       @port_num = 8080
       @pid = fork do
@@ -106,14 +86,6 @@ module DC_data
       exit
     end
 
-    def kill_proxy_app
-      exec "kill -INT '#{@pid}'"
-      system ('sleep 5')
-    rescue Exception => e
-      puts e
-    end
-
-
     def kill_integration_app
       %x(pkill -TERM -P '#{@pid}')
       system ('sleep 5')
@@ -135,7 +107,6 @@ module DC_data
         faraday.response :json, :content_type => /\bjson$/
         faraday.use Faraday::Adapter::NetHttp
         faraday.use FaradayMiddleware::ParseJson
-        faraday.proxy "#{$proxy_address}"
 
       end
     end
