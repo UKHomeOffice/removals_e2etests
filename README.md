@@ -26,7 +26,33 @@ Ensure Dashboard and Integration app are running
 $ ./pre-hook.rb
 This setups up centres to be used for testing
 ```
-### To run tests in parallel. For more information see https://github.com/grosser/parallel_tests
+
+# local testing
+
+### get the backend up and running
+
+```shell
+cd backend_codebase
+docker build -t be
+docker run -ti --rm --net host --name be -e "NODE_ENV=development" -e "PORT=8080" be
 ```
-$ parallel_test -t cucumber --combine-stderr --serialize-stdout -o '-r features -f pretty -f html -o tmp/report${TEST_ENV_NUMBER}.html -t ~@wip' features/
+
+### get the front end up and running
+
+```shell
+cd frontend_codebase
+docker build -t fe
+docker run -ti --rm --net host --name fe -e "BACKEND=http://`docker-machine ip`:8080" -e "KEYCLOAKURL=http://`docker-machine ip`:8000" fe
 ```
+
+```shell
+docker build -t e2e-test . && \
+docker run \
+    --rm -ti \
+    -v `pwd -P`/end_to_end_tests/performance_info:/code/end_to_end_tests/performance_info \
+    -v `pwd -P`/end_to_end_tests/tmp:/code/end_to_end_tests/tmp \
+    -v `pwd -P`/end_to_end_tests/screenshots:/code/end_to_end_tests/screenshots \
+    e2e-test
+```
+
+
