@@ -1,5 +1,5 @@
 ---
-dashboard_host: https://dashboard-ircbd-dev.notprod.homeoffice.gov.uk
+dashboard_host: https://wallboard-ircbd-dev.notprod.homeoffice.gov.uk
 integration_host: https://api-ircbd-dev.notprod.homeoffice.gov.uk
 proxy_host: 
 admin_user: ircbdtestuser1
