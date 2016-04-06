@@ -7,11 +7,11 @@ module DC_data
     attr_reader :url
 
     def initialize
-      @url = "#{config('dashboard_host')}"+"#{"#{config('dashboard_port_num')}"}"
+      @url = "#{config('dashboard_host')}:#{"#{config('dashboard_port_num')}"}"
     end
 
     def dashboard_title
-         find(:css, 'body > div > header > div.banner > h1')
+      find(:css, 'body > div > header > div.banner > h1')
     end
 
     # def set_centre_data(centre_id)
@@ -70,7 +70,7 @@ module DC_data
 
     def disp_male_occ(centre_id)
       find(:css, '#centre-'+"#{centre_id}" + '> centre-gender-directive > div.details.ng-scope > table > tbody > tr:nth-child(3) > td:nth-child(3)')
-   
+
     end
 
     def disp_female_occ(centre_id)
@@ -87,12 +87,12 @@ module DC_data
 
     def expand_button_male(centre_id)
       # find(:css, '#centre-'+"#{centre_id}" + ' > centre-gender-directive > div.summary > a')
-      find(:css,'#centre-'+"#{centre_id}" + ' > centre-gender-directive:nth-child(3) > div > a')
+      find(:css, '#centre-'+"#{centre_id}" + ' > centre-gender-directive:nth-child(3) > div > a')
     end
 
     def expand_button_female(centre_id)
       # find(:css, '#centre-'+"#{centre_id}" + ' > div > div.Female > div.summary > a.detail-toggle')
-      find(:css, '#centre-'+"#{centre_id}" + '> centre-gender-directive:nth-child(4) > div > a' )
+      find(:css, '#centre-'+"#{centre_id}" + '> centre-gender-directive:nth-child(4) > div > a')
 
     end
 
