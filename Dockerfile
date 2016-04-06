@@ -39,5 +39,4 @@ RUN bundle install --binstubs ./bin
 COPY end_to_end_tests/ ./
 #
 
-CMD Xvfb $DISPLAY -screen 0 1280x1024x24 & ./pre-hook.rb;
-#./bin/cucumber -r features -f pretty -f html -o tmp/report${TEST_ENV_NUMBER}.html -t ~@wip
+CMD Xvfb $DISPLAY -screen 0 1280x1024x24 & ./pre-hook.rb ;./bin/cucumber -r features -f pretty -f html -o tmp/report${TEST_ENV_NUMBER}.html -t ~@wip
