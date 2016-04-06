@@ -1,6 +1,10 @@
 @heart_beat
 Feature: Centre 1 heart beat
 
+  Background:
+    Given I attempt to log into the Bed Dashboard
+    When my authentication is successful
+
   Scenario: Submission of valid heart beat via the web service to centre 1
     Given a heart beat is generated with the following information centre name one,10,0,2,0
     When I navigate to the bed management dashboard

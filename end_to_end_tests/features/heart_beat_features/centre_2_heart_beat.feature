@@ -1,6 +1,10 @@
 @heart_beat
 Feature: Centre 2 heart beat
 
+  Background:
+    Given I attempt to log into the Bed Dashboard
+    When my authentication is successful
+
   Scenario: A heart beat sent to centre 2 taking the availability to full
     Given a heart beat is generated with the following information centre name two,80,90,20,10 taking availability to full
     When I navigate to the bed management dashboard

@@ -1,6 +1,10 @@
 @heart_beat
 Feature: Centre 3 heart beat
 
+  Background:
+    Given I attempt to log into the Bed Dashboard
+    When my authentication is successful
+
   Scenario: A heart beat sent to centre 3 introducing a negative availability
     Given a heart beat is generated with the following information centre name three,45,25,10,35 introducing a negative availability
     When I navigate to the bed management dashboard
