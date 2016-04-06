@@ -1,6 +1,7 @@
 FROM quay.io/ukhomeofficedigital/selenium-standalone-server:v0.1.2
 
 USER root
+RUN rpm --rebuilddb && yum update -y
 RUN yum install -y \
         gcc \
         zlib \
@@ -18,6 +19,7 @@ RUN update-ca-trust force-enable
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 RUN curl -sSL https://get.rvm.io | bash -s stable --ruby=$RUBY_VERSION
 ENV PATH=${PATH}:/usr/local/rvm/rubies/ruby-$RUBY_VERSION/bin:/opt/nodejs/bin
+RUN rpm --rebuilddb && yum update -y
 RUN gem install bundler
 
 
