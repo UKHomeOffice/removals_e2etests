@@ -33,7 +33,7 @@ This setups up centres to be used for testing
 
 ```shell
 cd backend_codebase
-docker build -t be
+docker build -t be .
 docker run -ti --rm --net host --name be -e "NODE_ENV=development" -e "PORT=8080" be
 ```
 
@@ -41,7 +41,7 @@ docker run -ti --rm --net host --name be -e "NODE_ENV=development" -e "PORT=8080
 
 ```shell
 cd frontend_codebase
-docker build -t fe
+docker build -t fe .
 docker run -ti --rm --net host --name fe -e "BACKEND=http://`docker-machine ip`:8080" -e "KEYCLOAKURL=http://`docker-machine ip`:8000" fe
 ```
 
@@ -49,6 +49,7 @@ docker run -ti --rm --net host --name fe -e "BACKEND=http://`docker-machine ip`:
 docker build -t e2e-test . && \
 docker run \
     --rm -ti \
+    --net host \
     -v `pwd -P`/end_to_end_tests/performance_info:/code/end_to_end_tests/performance_info \
     -v `pwd -P`/end_to_end_tests/tmp:/code/end_to_end_tests/tmp \
     -v `pwd -P`/end_to_end_tests/screenshots:/code/end_to_end_tests/screenshots \
@@ -56,3 +57,15 @@ docker run \
 ```
 
 
+# testing dev
+
+```shell
+docker build -t e2e-test . && \
+docker run \
+    --rm -ti \
+    -e "CONFIG_FILE=features/support/config-dev.yml" \
+    -v `pwd -P`/end_to_end_tests/performance_info:/code/end_to_end_tests/performance_info \
+    -v `pwd -P`/end_to_end_tests/tmp:/code/end_to_end_tests/tmp \
+    -v `pwd -P`/end_to_end_tests/screenshots:/code/end_to_end_tests/screenshots \
+    e2e-test
+```
