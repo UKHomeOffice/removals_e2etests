@@ -1,8 +1,7 @@
 FROM quay.io/ukhomeofficedigital/selenium-standalone-server:v0.1.2
 
 USER root
-RUN rpm --rebuilddb && yum update -y
-RUN yum install -y \
+RUN rpm --rebuilddb && yum update -y && yum install -y \
         gcc \
         zlib \
         zlib-devel \
