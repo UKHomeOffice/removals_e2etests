@@ -12,4 +12,3 @@ Feature: Successful and unsuccessful login
     Given I attempt to log into the Bed Dashboard
     When my authentication is unsuccessful
     Then I am presented with a log in unsuccessful message
-    And I am not able to access the Bed Dashboard tool

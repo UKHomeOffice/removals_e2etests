@@ -233,10 +233,6 @@ Given(/^I attempt to log into the Bed Dashboard$/) do
   visit(@dashboard_page.url)
 end
 
-And(/^I am not able to access the Bed Dashboard tool$/) do
-  !expect(@dashboard_page.dashboard_title.text).to eq (DC_data::Config::Displayed_text::DASHBOARD_PAGE_TITLE)
-end
-
 Then(/^I am directed to the Bed Dashboard web page$/) do
   expect(@dashboard_page.dashboard_title.text).to eq (DC_data::Config::Displayed_text::DASHBOARD_PAGE_TITLE)
 end
