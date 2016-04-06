@@ -22,11 +22,15 @@ module DC_data
 
       if $config_file.exclude?('config.yml')
 
-        visit("#{config('integration_host')}"+"#{config('integration_port_num')}"+DC_data::Config::Endpoints::CREATE_CENTRE)
+        visit("#{config('integration_host')}:#{config('integration_port_num')}")
         login('admin')
+
+        while config('integration_host') != page.current_host do
+          puts "waiting for login to complete"
+        end
+
         ShowMeTheCookies.register_adapter(:chrome, ShowMeTheCookies::SeleniumChrome)
         @keycloak_cookie=get_me_the_cookie(DC_data::Config::Cookie_data::KEYCLOAK_ACCESS)
-
         $app_config['keycloak_key'] = "#{@keycloak_cookie[:name]}"+'='+"#{@keycloak_cookie[:value]}"
         File.open($config_file, 'w') { |f| f.write $app_config.to_yaml }
 
