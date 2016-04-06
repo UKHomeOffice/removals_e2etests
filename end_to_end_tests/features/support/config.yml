@@ -1,5 +1,5 @@
-dashboard_host: 'http://localhost:'
-integration_host: 'http://localhost:'
+dashboard_host: 'http://localhost'
+integration_host: 'http://localhost'
 proxy_host: 'http://localhost'
 keycloak_key: 'test=1234'
 integration_port_num: '8080'

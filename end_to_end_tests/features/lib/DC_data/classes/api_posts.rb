@@ -159,7 +159,7 @@ module DC_data
     end
 
     def irc_api
-      @irc_api = Faraday.new(:url => "#{config('integration_host')}"+"#{config('integration_port_num')}", :ssl => {:verify => false}) do |faraday|
+      @irc_api = Faraday.new(:url => "#{config('integration_host')}:#{config('integration_port_num')}", :ssl => {:verify => false}) do |faraday|
         # faraday.response :json, :content_type => /\bjson$/
         faraday.use Faraday::Adapter::NetHttp
         # faraday.use FaradayMiddleware::ParseJson
