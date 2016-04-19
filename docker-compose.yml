@@ -1,0 +1,16 @@
+version: '2'
+services:
+  test:
+    build: .
+    volumes:
+     - ./nightwatch/reports:/home/app/reports
+     - ./nightwatch/screenshots:/home/app/screenshots
+
+  selenium:
+    image: selenium/standalone-chrome:2.49.1
+    ports:
+      - "4444"
+    environment:
+      - SCREEN_WIDTH=1024
+      - SCREEN_HEIGHT=768
+      - SCREEN_DEPTH=24

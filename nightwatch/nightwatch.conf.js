@@ -1,6 +1,6 @@
-var seleniumServer = require('selenium-server')
-var phantomjs = require('phantomjs-prebuilt')
-var chromedriver = require('chromedriver')
+// var seleniumServer = require('selenium-server')
+// var phantomjs = require('phantomjs-prebuilt')
+// var chromedriver = require('chromedriver')
 
 module.exports = {
   src_folders: [require('nightwatch-cucumber')()],
@@ -16,52 +16,37 @@ module.exports = {
   // },
 
   selenium: {
-    start_process: true,
-    server_path: seleniumServer.path,
+    start_process: false,
+    // server_path: seleniumServer.path,
     log_path: 'reports',
-    host: '127.0.0.1',
-    port: 4444
+    host: 'selenium',
+    port: 4444,
+    // cli_args: {
+    //   'webdriver.chrome.driver': chromedriver.path
+    // }
   },
 
   test_settings: {
     default: {
       launch_url: 'http://localhost',
       selenium_port: 4444,
-      selenium_host: 'localhost',
+      selenium_host: 'selenium',
       silent: true,
       screenshots: {
         enabled: true,
         on_failure: true,
-        on_error: false,
+        on_error: true,
         path: 'screenshots/default'
       },
       desiredCapabilities: {
-        browserName: 'phantomjs',
-        javascriptEnabled: true,
-        acceptSslCerts: true,
-        'phantomjs.binary.path': phantomjs.path
-      }
-    },
-
-    chrome: {
-      desiredCapabilities: {
         browserName: 'chrome',
         javascriptEnabled: true,
-        acceptSslCerts: true
-      },
-      selenium: {
-        cli_args: {
-          'webdriver.chrome.driver': chromedriver.path
+        acceptSslCerts: true,
+        chromeOptions : {
+          "args" : ["--no-sandbox"]
         }
-      }
+      },
     },
 
-    firefox: {
-      desiredCapabilities: {
-        browserName: 'firefox',
-        javascriptEnabled: true,
-        acceptSslCerts: true
-      }
-    }
   }
 }
