@@ -11,5 +11,9 @@
     "nightwatch": "^0.8.18",
     "nightwatch-cucumber": "^2.1.7",
     "selenium-server": "^2.53.0"
+  },
+  "dependencies": {
+    "lodash": "^4.11.1",
+    "request-promise": "^3.0.0"
   }
 }

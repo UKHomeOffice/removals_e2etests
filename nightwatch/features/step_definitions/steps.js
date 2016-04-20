@@ -1,10 +1,15 @@
+const _ = require("lodash");
+const request = require('request-promise');
+const cookie_jar = request.jar();
+const rp = request.defaults({jar: cookie_jar, json: true});
+
 module.exports = function () {
   this.Given(/^I open the wallboard$/, function () {
     this
       .init()
       .waitForElementVisible('body', 1000)
   })
-
+  var browser = this;
   this.Given(/^I am an unauthenticated user$/, function () {
     this.deleteCookies();
   });
@@ -19,7 +24,7 @@ module.exports = function () {
       .setValue('#password', 'IRCBDBedManagement')
       .click("#kc-login");
     this.expect.element("h1").text.to.equal("IRC Bed Management").before(1000);
-    this.expect.element("#username").to.not.present;
+
   });
 
   this.Then(/^I should be connected$/, function () {
@@ -29,11 +34,71 @@ module.exports = function () {
 
   this.Then(/^I show numbers of centre with id "([^"]*)"$/, function (centreId) {
     this.click('#centre-' + centreId + ' .detail-toggle');
-  })
+  });
 
   this.Then(/^the centre with id "([^"]*)" has heading "([^"]*)"$/, function (centreId, centreName) {
     const headingSelector = `#centre-${centreId}>h3`;
     this.expect.element(headingSelector).text.to.equal(centreName).before(1000);
-  })
+  });
+
+  this.Given(/^I have authenticated$/, function (callback) {
+      this
+        .url(this.globals.backend_url)
+        .getCookies(result => {
+          cookie_jar.setCookie(rp.cookie(`kc-access=${result.value[0].value}`), this.globals.backend_url);
+          this.globals["kc-access"] = result.value[0].value;
+        });
+    }
+  );
+
+  this.Then(/^There are no existing centres$/, function () {
+    this.perform(function (client, done) {
+      rp(`${client.globals.backend_url}/centres`)
+        .then(body => body.data)
+        .map(centre => rp({
+          method: 'DELETE',
+          uri: `${client.globals.backend_url}/centres/${centre.id}`,
+        }))
+        .finally(() => done());
+    });
+  });
+
+  this.Then(/^The following centres exist:$/, function (table) {
+    this.perform(function (client, done) {
+      return _.map(table.hashes(), (row) =>
+        rp({
+          method: 'POST',
+          uri: `${client.globals.backend_url}/centres`,
+          body: {
+            name: row.name,
+            male_capacity: parseInt(row.male_capacity),
+            female_capacity: parseInt(row.female_capacity)
+          },
+          json: true
+        })
+          .then(() => done())
+      )
+    });
+  });
+
+  this.Given(/^I submit a heartbeat with:$/, function (table) {
+    this.perform(function (client, done) {
+      return _.map(table.hashes(), (row) =>
+        rp({
+          method: 'POST',
+          uri: `${client.globals.backend_url}/irc_entry/heartbeat`,
+          body: {
+            centre: row.centre,
+            male_occupied: parseInt(row.male_occupied),
+            female_occupied: parseInt(row.female_occupied),
+            male_outofcommission: parseInt(row.male_outofcommission),
+            female_outofcommission: parseInt(row.female_outofcommission)
+          },
+          json: true
+        })
+          .then(() => done())
+      );
+    });
+  });
 
 };
