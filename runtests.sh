@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+echo $@
 
 docker-compose build
 docker-compose up -d
@@ -15,8 +16,7 @@ while ! docker-compose run test curl -s -o /dev/null selenium:4444; do
     fi
 done
 
-#docker-compose run test bash
-docker-compose run test npm test
+docker-compose run test nightwatch $@
 exitcode=$?
 
 docker-compose down
