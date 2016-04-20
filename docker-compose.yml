@@ -5,7 +5,8 @@ services:
     volumes:
      - ./nightwatch/reports:/home/app/reports
      - ./nightwatch/screenshots:/home/app/screenshots
-
+    environment:
+    - SELENIUM_HOST=selenium
   selenium:
     image: selenium/standalone-chrome:2.49.1
     ports:
