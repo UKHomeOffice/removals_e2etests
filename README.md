@@ -1,30 +1,19 @@
 # End to End tests 
 
-## Install rvm:
+## Install nvm:
 ```
-$ \curl -sSL https://get.rvm.io | bash -s stable
+$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 ```
-#### Install Ruby 2.1.7
-```
-$ rvm install 2.1.7
-$ rvm use 2.1.7
-```
-### Install bundler
-```
-$ gem install bundler
-```
-### Clone repository
 
-### Bundle install
+#### Install Node
 ```
-$ cd removals_e2e_tests/end_to_end_tests
-$ bundle install
+$ nvm install 4.2
+$ nvm use 4.2
 ```
-### Setup test env
+
+### NPM install
 ```
-Ensure Dashboard and Integration app are running
-$ ./pre-hook.rb
-This setups up centres to be used for testing
+$ npm install
 ```
 
 # local testing
@@ -46,26 +35,24 @@ docker run -ti --rm --net host --name fe -e "BACKEND=http://`docker-machine ip`:
 ```
 
 ```shell
-docker build -t e2e-test . && \
-docker run \
-    --rm -ti \
-    --net host \
-    -v `pwd -P`/end_to_end_tests/performance_info:/code/end_to_end_tests/performance_info \
-    -v `pwd -P`/end_to_end_tests/tmp:/code/end_to_end_tests/tmp \
-    -v `pwd -P`/end_to_end_tests/screenshots:/code/end_to_end_tests/screenshots \
-    e2e-test
+$ node_modules/.bin/nightwatch
 ```
 
 
 # testing dev
 
 ```shell
-docker build -t e2e-test . && \
-docker run \
-    --rm -ti \
-    -e "CONFIG_FILE=features/support/config-dev.yml" \
-    -v `pwd -P`/end_to_end_tests/performance_info:/code/end_to_end_tests/performance_info \
-    -v `pwd -P`/end_to_end_tests/tmp:/code/end_to_end_tests/tmp \
-    -v `pwd -P`/end_to_end_tests/screenshots:/code/end_to_end_tests/screenshots \
-    e2e-test
+$ ./runtests.sh --env dev
+```
+
+# testing int
+
+```shell
+$ ./runtests.sh --env int
+```
+
+# testing dev
+
+```shell
+$ ./runtests.sh --env uat
 ```
