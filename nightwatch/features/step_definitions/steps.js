@@ -1,7 +1,7 @@
 module.exports = function () {
   this.Given(/^I open the wallboard$/, function () {
     this
-      .url('http://localhost:8000/')
+      .url(this.launch_url)
       .waitForElementVisible('body', 1000)
   })
 
