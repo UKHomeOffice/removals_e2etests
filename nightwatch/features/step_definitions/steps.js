@@ -1,3 +1,4 @@
+"use strict";
 const _ = require("lodash");
 const request = require('request-promise');
 const cookie_jar = request.jar();
@@ -81,23 +82,35 @@ module.exports = function () {
     });
   });
 
+  this.Then(/^The Centre "([^"]*)" should show the following under "([^"]*)":$/, function (centre_name, gender, table) {
+    let centreToggle = `//h3/text()[contains(., "${centre_name}")]/ancestor::div[contains(@class, "centre")]/centre-gender-directive[@gender="'${gender}'"]//a[contains(@class, "detail-toggle")]`;
+    this.useXpath();
+    this.expect.element(centreToggle).to.be.present.after(1000);
+    this.click(centreToggle);
+
+    _.map(table.rowsHash(), (v, k) =>
+      this.expect.element(`//h3/text()[contains(., "${centre_name}")]/ancestor::div[contains(@class, "centre")]/centre-gender-directive[@gender="'${gender}'"]//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).after(1000)
+    );
+    this.click(centreToggle);
+    this.useCss();
+  });
+
   this.Given(/^I submit a heartbeat with:$/, function (table) {
     this.perform(function (client, done) {
-      return _.map(table.hashes(), (row) =>
-        rp({
-          method: 'POST',
-          uri: `${client.globals.backend_url}/irc_entry/heartbeat`,
-          body: {
-            centre: row.centre,
-            male_occupied: parseInt(row.male_occupied),
-            female_occupied: parseInt(row.female_occupied),
-            male_outofcommission: parseInt(row.male_outofcommission),
-            female_outofcommission: parseInt(row.female_outofcommission)
-          },
-          json: true
-        })
-          .then(() => done())
-      );
+      let row = table.rowsHash();
+      rp({
+        method: 'POST',
+        uri: `${client.globals.backend_url}/irc_entry/heartbeat`,
+        body: {
+          centre: row.centre,
+          male_occupied: parseInt(row.male_occupied),
+          female_occupied: parseInt(row.female_occupied),
+          male_outofcommission: parseInt(row.male_outofcommission),
+          female_outofcommission: parseInt(row.female_outofcommission)
+        },
+        json: true
+      })
+        .then(() => done())
     });
   });
 
