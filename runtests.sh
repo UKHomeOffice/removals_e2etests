@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 echo $@
 
-docker-compose build
-docker-compose up -d
+#cleanup
+rm -r nightwatch/reports/* nightwatch/screenshots/default
+
+#docker-compose build
+docker-compose up -d --build
 
 # wait for selenium to come up
 WAIT=0
