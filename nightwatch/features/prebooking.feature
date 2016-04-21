@@ -1,4 +1,3 @@
-@focus
 Feature: Prebooking
 
   Background:
@@ -38,10 +37,10 @@ Feature: Prebooking
     Given I am on the wallboard
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111     | now     | Removal | 1             |
-    And I submit the following prebookings:
+      | In           | oneman   | 991     | now     | Removal | 1399          |
+    When I submit the following prebookings:
       | task_force | location | cid_id |
-      | foo        | oneman   | 1      |
+      | foo        | oneman   | 1399   |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
@@ -55,10 +54,10 @@ Feature: Prebooking
     Given I am on the wallboard
     When I submit the following prebookings:
       | task_force | location | cid_id |
-      | foo        | oneman   | 1      |
-    And I submit the following movements:
+      | foo        | oneman   | 1299   |
+    When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111     | now     | Removal | 1             |
+      | In           | oneman   | 111     | now     | Removal | 1299          |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
