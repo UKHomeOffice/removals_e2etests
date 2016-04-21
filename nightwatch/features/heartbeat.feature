@@ -1,11 +1,7 @@
 Feature: Heartbeat
 
   Background:
-    Given I open the wallboard
-    Then I should be redirected to login via keycloak
-    When I login
-    Then I should be connected
-    And I have authenticated
+    Given I am a logged in user
     And There are no existing centres
     And The following centres exist:
       | name | male_capacity | female_capacity |
@@ -13,7 +9,7 @@ Feature: Heartbeat
       | two  | 2000          | 20000           |
 
   Scenario: Heartbeat updates the wallboard
-    Given I open the wallboard
+    Given I am on the wallboard
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
