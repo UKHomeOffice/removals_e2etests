@@ -9,6 +9,9 @@ moment.tz.setDefault("Europe/London");
 module.exports = function () {
 
   this.Given(/^I am a logged in user$/, function () {
+    if (this.globals.auth_required === false) {
+      return true
+    }
     this
       .deleteCookies()
       .url(this.globals.backend_url)
@@ -28,10 +31,16 @@ module.exports = function () {
   });
 
   this.Then(/^I should be redirected to login via keycloak$/, function () {
+    if (this.globals.auth_required === false) {
+      return true
+    }
     this.expect.element("#username").to.be.visible.before(3000);
   });
 
   this.Then(/^I login$/, function () {
+    if (this.globals.auth_required === false) {
+      return true
+    }
     this
       .setValue('#username', 'ircbdtestuser1')
       .setValue('#password', 'IRCBDBedManagement')
@@ -41,6 +50,9 @@ module.exports = function () {
   });
 
   this.Given(/^I have authenticated$/, function (callback) {
+      if (this.globals.auth_required === false) {
+        return true
+      }
       this
         .url(this.globals.backend_url)
         .getCookies(result => {
@@ -117,7 +129,7 @@ module.exports = function () {
 
   this.When(/^I submit the following prebookings:$/, function (table) {
     let payload = _.map(table.hashes(), (row) => {
-      row.timestamp = moment().set({hour: 7, minute: 0, second: 0}).format();
+      row.timestamp = moment().set({hour: 10, minute: 0, second: 0}).format();
       return row;
     });
     this.perform((client, done) =>

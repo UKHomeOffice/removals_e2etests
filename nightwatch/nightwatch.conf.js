@@ -29,29 +29,34 @@ module.exports = {
       launch_url: 'https://wallboard-ircbd-dev.notprod.homeoffice.gov.uk',
       globals: {
         backend_url: 'https://api-ircbd-dev.notprod.homeoffice.gov.uk',
+        auth_required: true
       }
     },
     int: {
       launch_url: 'https://wallboard-ircbd-int.notprod.homeoffice.gov.uk',
       globals: {
         backend_url: 'https://api-ircbd-int.notprod.homeoffice.gov.uk',
+        auth_required: true
       }
     },
     uat: {
       launch_url: 'https://wallboard-ircbd-uat.notprod.homeoffice.gov.uk',
       globals: {
         backend_url: 'https://api-ircbd-uat.notprod.homeoffice.gov.uk',
-      }
+        auth_required: true
+      },
     },
 
     default: {
-      launch_url: 'http://localhost:8080',
+      launch_url: 'http://localhost:8000',
       globals: {
-        backend_url: 'http://localhost:8000',
+        auth_required: false,
+        backend_url: 'http://localhost:8080',
       },
       selenium_port: 4444,
       selenium_host: selenium_host,
       silent: true,
+      // skip_testcases_on_fail: false,
       screenshots: {
         enabled: true,
         on_failure: true,
