@@ -4,6 +4,10 @@ const chromedriver = require('chromedriver')
 const in_docker = process.env.SELENIUM_HOST !== undefined;
 const selenium_host = process.env.SELENIUM_HOST || "localhost"
 
+global.request = require('request-promise');
+global.cookie_jar = request.jar();
+global.rp = request.defaults({jar: cookie_jar, json: true});
+
 module.exports = {
   src_folders: [require('nightwatch-cucumber')()],
   output_folder: 'reports',
