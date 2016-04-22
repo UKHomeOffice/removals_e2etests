@@ -6,4 +6,3 @@ Feature: Wallboard login redirect
     Then I should be redirected to login via keycloak
     When I login
     Then I should be connected
-    When I have authenticated

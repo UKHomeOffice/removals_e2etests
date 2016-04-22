@@ -14,7 +14,7 @@ module.exports = {
   output_folder: 'reports',
   custom_commands_path: '',
   custom_assertions_path: '',
-  page_objects_path: '',
+  page_objects_path: 'page_objects',
   live_output: false,
   disable_colors: false,
 
@@ -61,12 +61,12 @@ module.exports = {
       selenium_port: 4444,
       selenium_host: selenium_host,
       silent: true,
-      // skip_testcases_on_fail: false,
+      skip_testcases_on_fail: false,
       screenshots: {
         enabled: true,
         on_failure: true,
         on_error: true,
-        path: 'screenshots/default'
+        path: 'screenshots'
       },
       desiredCapabilities: {
         browserName: 'chrome',
@@ -75,8 +75,8 @@ module.exports = {
         chromeOptions: {
           "args": ["--no-sandbox"]
         }
-      },
-    },
+      }
+    }
 
   }
 }

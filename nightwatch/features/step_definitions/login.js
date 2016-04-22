@@ -8,14 +8,13 @@ module.exports = function () {
     this
       .deleteCookies()
       .url(this.globals.backend_url)
-      .waitForElementVisible('#username', 1000)
-      .setValue('#username', 'ircbdtestuser1')
-      .setValue('#password', 'IRCBDBedManagement')
-      .click("#kc-login")
+
+    this.page.login().dologin("ircbdtestuser1", "IRCBDBedManagement");
+
+    this
       .url(this.globals.backend_url)
       .getCookies(result => {
         cookie_jar.setCookie(rp.cookie(`kc-access=${result.value[0].value}`), this.globals.backend_url);
-        this.globals["kc-access"] = result.value[0].value;
       });
   });
 
@@ -27,31 +26,16 @@ module.exports = function () {
     if (this.globals.auth_required === false) {
       return true
     }
-    this.expect.element("#username").to.be.visible.before(3000);
+    this.page.login().expect.element("@username").to.be.visible.before(3000);
   });
+
   this.Then(/^I login$/, function () {
     if (this.globals.auth_required === false) {
       return true
     }
-    this
-      .setValue('#username', 'ircbdtestuser1')
-      .setValue('#password', 'IRCBDBedManagement')
-      .click("#kc-login");
-    this.expect.element("h1").text.to.equal("IRC Bed Management").before(1000);
+    this.page.login().dologin("ircbdtestuser1", "IRCBDBedManagement");
 
+    this.page.wallboard().expect.element("@title").text.to.equal("IRC Bed Management").before(1000);
   });
-
-  this.Given(/^I have authenticated$/, function (callback) {
-      if (this.globals.auth_required === false) {
-        return true
-      }
-      this
-        .url(this.globals.backend_url)
-        .getCookies(result => {
-          cookie_jar.setCookie(rp.cookie(`kc-access=${result.value[0].value}`), this.globals.backend_url);
-          this.globals["kc-access"] = result.value[0].value;
-        });
-    }
-  );
 
 }
