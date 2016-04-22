@@ -1,9 +1,11 @@
 "use strict";
 
+const getCentreGenderScope = (centre_name, gender) => `//h3/text()[contains(., "${centre_name}")]/ancestor::div[contains(@class, "centre")]/centre-gender-directive[@gender="'${gender}'"]`;
+
 module.exports = {
   commands: [{
     toggleCentreDetails: function (centre_name, gender) {
-      let centreToggle = `//h3/text()[contains(., "${centre_name}")]/ancestor::div[contains(@class, "centre")]/centre-gender-directive[@gender="'${gender}'"]//a[contains(@class, "detail-toggle")]`;
+      let centreToggle = `${getCentreGenderScope(centre_name, gender)}//a[contains(@class, "detail-toggle")]`;
       this.api.useXpath();
       this.expect.element(centreToggle).to.be.present.after(1000);
       this.click(centreToggle);
@@ -11,7 +13,7 @@ module.exports = {
     },
     expectCentreDetail: function (centre_name, gender, k, v) {
       this.api.useXpath();
-      this.expect.element(`//h3/text()[contains(., "${centre_name}")]/ancestor::div[contains(@class, "centre")]/centre-gender-directive[@gender="'${gender}'"]//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).before(1000);
+      this.expect.element(`${getCentreGenderScope(centre_name, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).before(1000);
       this.api.useCss();
     }
   }],
