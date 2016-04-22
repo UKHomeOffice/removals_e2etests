@@ -7,6 +7,7 @@ const selenium_host = process.env.SELENIUM_HOST || "localhost"
 global.request = require('request-promise');
 global.cookie_jar = request.jar();
 global.rp = request.defaults({jar: cookie_jar, json: true});
+global._ = require("lodash");
 
 module.exports = {
   src_folders: [require('nightwatch-cucumber')()],

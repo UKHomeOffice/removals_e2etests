@@ -1,5 +1,4 @@
 "use strict";
-const _ = require("lodash");
 
 module.exports = function () {
   this.Given(/^I am a logged in user$/, function () {
