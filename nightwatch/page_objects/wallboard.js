@@ -6,10 +6,12 @@ module.exports = {
   commands: [{
     toggleCentreDetails: function (centre_name, gender) {
       let centreToggle = `${getCentreGenderScope(centre_name, gender)}//a[contains(@class, "detail-toggle")]`;
-      this.api.useXpath();
-      this.expect.element(centreToggle).to.be.present.after(1000);
-      this.click(centreToggle);
-      this.api.useCss();
+      this.api
+        .useXpath()
+        .expect.element(centreToggle).to.be.present.after(1000);
+      this.api
+        .click(centreToggle)
+        .useCss();
     },
     expectCentreDetail: function (centre_name, gender, k, v) {
       this.api.useXpath();
