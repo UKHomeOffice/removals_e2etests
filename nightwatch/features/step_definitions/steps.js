@@ -3,14 +3,11 @@
 module.exports = function () {
 
   this.Given(/^I am on the wallboard$/, function () {
-    this
-      .init()
-      .waitForElementVisible('body', 1000)
+    this.init()
   })
 
   this.Then(/^I should be connected$/, function () {
     this.page.wallboard().expect.element("@disconnected_message").to.not.present.after(2000);
-
   });
 
   this.Then(/^The Centre "([^"]*)" should show the following under "([^"]*)":$/, function (centre_name, gender, table) {
