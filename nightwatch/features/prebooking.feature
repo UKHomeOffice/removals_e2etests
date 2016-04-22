@@ -32,7 +32,6 @@ Feature: Prebooking
       | Scheduled outgoing     | 0     |
       | Scheduled incoming     | 0     |
 
-
   Scenario: Prebooking is reconciled with a movement with movement first
     Given I am on the wallboard
     When I submit the following movements:
