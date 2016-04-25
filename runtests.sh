@@ -4,23 +4,22 @@ if [[ $@ == *"docker"* ]]
 then
 COMPOSE_FILE=docker-compose.yml:docker-compose.locale2e.yml
     export COMPOSE_FILE=docker-compose.yml:docker-compose.locale2e.yml
-#  DOCKERARGS="-f docker-compose.yml -f docker-compose.locale2e.yml"
 fi
 
 trap tidyup EXIT
 function tidyup {
-    docker-compose $DOCKERARGS down
-    docker-compose $DOCKERARGS rm --all
+    docker-compose down
+    docker-compose rm --all
 }
 
 #cleanup
 rm -fr nightwatch/reports/* nightwatch/screenshots/default
 
-docker-compose $DOCKERARGS up -d --build
+docker-compose up -d --build
 
 # wait for selenium to come up
 WAIT=0
-while ! docker-compose $DOCKERARGS run test curl -s -o /dev/null selenium:4444; do
+while ! docker-compose run test curl -s -o /dev/null selenium:4444; do
     echo "waiting for selenium to start"
     sleep 0.5;
     WAIT=$(($WAIT + 1))
@@ -30,8 +29,8 @@ while ! docker-compose $DOCKERARGS run test curl -s -o /dev/null selenium:4444; 
     fi
 done
 
-docker-compose $DOCKERARGS run test nightwatch $@
+docker-compose run test nightwatch $@
 exitcode=$?
-docker-compose $DOCKERARGS run nightwatch-html-reporter -d reports -t cover -b false
+docker-compose run nightwatch-html-reporter -d reports -t cover -b false
 
 exit $exitcodeec
