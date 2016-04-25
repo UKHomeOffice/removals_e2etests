@@ -8,3 +8,4 @@ nightwatch/screenshots
 nightwatch/reports
 nightwatch/*.log
 /mycredentials
+npm-debug.log
