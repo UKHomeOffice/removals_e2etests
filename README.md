@@ -1,58 +1,63 @@
 # End to End tests 
 
-## Install nvm:
-```
-$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
-```
+There are two ways to run the tests, if you want to just get started quickly then use docker, if you want to integrate this into your IDE for example for example you might prefer to run the code on your machine.
 
-#### Install Node
-```
-$ nvm install 4.2
-$ nvm use 4.2
-```
 
-### NPM install
-```
-$ npm install
-```
-
-# local testing
-
-### get the backend up and running
-
+## Running the code on your machine:
 ```shell
+# Install nvm
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
+source ~/.nvm/nvm.sh
+
+# Install Node
+nvm install 4.2
+nvm use 4.2
+npm install
+
+# Run tests against localhost
+node_modules/.bin/nightwatch --env default
+```
+
+
+## Running the code against a remote environment with docker-compose
+```shell
+./run-tests.sh --env dev
+```
+
+
+## Running the code against a local environment with docker-compose
+```shell
+# Build the backend
 cd backend_codebase
-docker build -t be .
-docker run -ti --rm --net host --name be -e "NODE_ENV=development" -e "PORT=8080" be
-```
+docker build -t ibm-backend .
 
-### get the front end up and running
-
-```shell
+# Build the frontend
 cd frontend_codebase
-docker build -t fe .
-docker run -ti --rm --net host --name fe -e "BACKEND=http://`docker-machine ip`:8080" -e "KEYCLOAKURL=http://`docker-machine ip`:8000" fe
+docker build -t ibm-frontend .
+
+# Run tests
+./run-tests.sh --env docker
 ```
 
+
+| env | backend | frontend |
+| --- | ------- | -------- |
+| default | http://localhost:8080 | http://localhost:8000 |
+| docker | http://backend | http://frontend |
+| dev | https://api-ircbd-dev.notprod.homeoffice.gov.uk | https://wallboard-ircbd-dev.notprod.homeoffice.gov.uk |
+| int | https://api-ircbd-int.notprod.homeoffice.gov.uk | https://wallboard-ircbd-int.notprod.homeoffice.gov.uk |
+| uat | https://api-ircbd-uat.notprod.homeoffice.gov.uk | https://wallboard-ircbd-uat.notprod.homeoffice.gov.uk |
+
+
+## When testing against remote environments
+Its important to define the following environment variables
+| Environment variable | Meaning |
+| -------------------- | ------- |
+| KEYCLOAK_USER | username to use when authenticating with keycloak |
+| KEYCLOAK_PASS | password to use when authenticating with keycloak |
+When using docker you can add a `mycredentials` file to the route e.g.:
+
 ```shell
-$ node_modules/.bin/nightwatch
-```
-
-
-# testing dev
-
-```shell
-$ ./runtests.sh --env dev
-```
-
-# testing int
-
-```shell
-$ ./runtests.sh --env int
-```
-
-# testing dev
-
-```shell
-$ ./runtests.sh --env uat
+echo "KEYCLOAK_USER=myusername
+KEYCLOAK_PASS=mypassword" > mycredentials
 ```
