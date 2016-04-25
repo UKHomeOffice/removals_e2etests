@@ -39,12 +39,13 @@ Feature: Prebooking
     When I submit the following prebookings:
       | task_force | location | cid_id |
       | foo        | oneman   | 1399   |
+      | foo        | oneman   |        |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
       | Beds out of commission | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 1000 |
+      | Prebookings            | 1    |
+      | Availability           | 999  |
       | Scheduled outgoing     | 0    |
       | Scheduled incoming     | 1    |
 
