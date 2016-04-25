@@ -6,9 +6,9 @@ Feature: Prebooking
     And The following centres exist:
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
       | one  | 1000          | 10000           | oneman,onebman | onewoman        |
+    Given I am on the wallboard
 
   Scenario: Prebooking updates the wallboard
-    Given I am on the wallboard
     When I submit the following prebookings:
       | task_force | location | cid_id |
       | john       | oneman   |        |
@@ -33,7 +33,6 @@ Feature: Prebooking
       | Scheduled incoming     | 0     |
 
   Scenario: Prebooking is reconciled with a movement with movement first
-    Given I am on the wallboard
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | In           | oneman   | 991     | now     | Removal | 1399          |
@@ -50,7 +49,6 @@ Feature: Prebooking
       | Scheduled incoming     | 1    |
 
   Scenario: Prebooking is reconciled with a movement with prebooking first
-    Given I am on the wallboard
     When I submit the following prebookings:
       | task_force | location | cid_id |
       | foo        | oneman   | 1299   |
