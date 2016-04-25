@@ -9,7 +9,22 @@ module.exports = function () {
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/cid_entry/movement`,
-        body: {Output: table.hashes()},
+        body: {Output: table.hashes()}
+      })
+        .finally(done)
+    );
+  });
+
+  this.When(/^I submit the following "([^"]*)" event:$/, function (operation, table, callback) {
+    let tablehashes = table.hashes();
+    tablehashes.operation = operation;
+    tablehashes.timestamp = moment().set({hour: 10, minute: 0, second: 0}).format();
+    this.perform((client, done) =>
+      rp({
+        method: 'POST',
+        uri: `${client.globals.backend_url}/irc_entry/event`,
+        body: tablehashes,
+        jar: false
       })
         .finally(done)
     );
@@ -24,7 +39,7 @@ module.exports = function () {
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/depmu_entry/prebooking`,
-        body: {Output: payload},
+        body: {Output: payload}
       })
         .finally(done)
     );
