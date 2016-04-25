@@ -4,7 +4,7 @@ moment.tz.setDefault("Europe/London");
 
 module.exports = function () {
 
-  this.When(/^I submit the following movements:$/, function (table, callback) {
+  this.When(/^I submit the following movements:$/, function (table) {
     this.perform((client, done) =>
       rp({
         method: 'POST',
@@ -15,7 +15,7 @@ module.exports = function () {
     );
   });
 
-  this.When(/^I submit the following "([^"]*)" event:$/, function (operation, table, callback) {
+  this.When(/^I submit the following "([^"]*)" event:$/, function (operation, table) {
     let tablehashes = table.hashes();
     tablehashes.operation = operation;
     tablehashes.timestamp = moment().set({hour: 10, minute: 0, second: 0}).format();
