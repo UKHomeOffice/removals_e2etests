@@ -30,6 +30,12 @@ module.exports = {
   },
 
   test_settings: {
+    docker: {
+      launch_url: 'http://frontend',
+      globals: {
+        backend_url: 'http://backend'
+      }
+    },
     dev: {
       launch_url: 'https://wallboard-ircbd-dev.notprod.homeoffice.gov.uk',
       globals: {

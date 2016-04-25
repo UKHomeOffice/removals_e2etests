@@ -1,0 +1,12 @@
+version: '2'
+services:
+  backend:
+    image: "ibm-backend"
+    environment:
+     - NODE_ENV=development
+     - PORT=80
+  frontend:
+    image: "ibm-frontend"
+    environment:
+     - BACKEND=backend
+     - PORT=80
