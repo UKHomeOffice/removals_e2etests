@@ -14,9 +14,8 @@ function tidyup {
 }
 
 #cleanup
-rm -r nightwatch/reports/* nightwatch/screenshots/default
+rm -fr nightwatch/reports/* nightwatch/screenshots/default
 
-set -e
 docker-compose $DOCKERARGS up -d --build
 
 # wait for selenium to come up
@@ -33,5 +32,6 @@ done
 
 docker-compose $DOCKERARGS run test nightwatch $@
 exitcode=$?
+docker-compose $DOCKERARGS run nightwatch-html-reporter -d reports -t cover -b false
 
 exit $exitcodeec
