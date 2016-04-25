@@ -51,10 +51,12 @@ docker build -t ibm-frontend .
 
 ## When testing against remote environments
 Its important to define the following environment variables
+
 | Environment variable | Meaning |
 | -------------------- | ------- |
 | KEYCLOAK_USER | username to use when authenticating with keycloak |
 | KEYCLOAK_PASS | password to use when authenticating with keycloak |
+
 When using docker you can add a `mycredentials` file to the route e.g.:
 
 ```shell
