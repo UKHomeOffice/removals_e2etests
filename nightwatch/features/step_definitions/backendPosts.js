@@ -11,7 +11,7 @@ module.exports = function () {
         uri: `${client.globals.backend_url}/cid_entry/movement`,
         body: {Output: table.hashes()}
       })
-        .finally(done)
+        .finally(() => done())
     );
   });
 
@@ -26,7 +26,7 @@ module.exports = function () {
         body: tablehashes,
         jar: false
       })
-        .finally(done)
+        .finally(() => done())
     );
   });
 
@@ -41,7 +41,7 @@ module.exports = function () {
         uri: `${client.globals.backend_url}/depmu_entry/prebooking`,
         body: {Output: payload}
       })
-        .finally(done)
+        .finally(() => done())
     );
   });
 
@@ -60,7 +60,7 @@ module.exports = function () {
         },
         jar: false
       })
-        .then(done)
+        .finally(() => done())
     );
   });
 
@@ -72,7 +72,7 @@ module.exports = function () {
           method: 'DELETE',
           uri: `${client.globals.backend_url}/centres/${centre.id}`,
         }))
-        .finally(done)
+        .finally(() => done())
     );
   });
 
@@ -90,7 +90,7 @@ module.exports = function () {
             male_cid_name: row.male_cid_name ? row.male_cid_name.split(',') : []
           }
         })
-          .finally(done)
+          .finally(() => done())
       )
     );
   });
