@@ -33,7 +33,7 @@ module.exports = {
     docker: {
       launch_url: 'http://frontend',
       globals: {
-        backend_url: 'http://backend'
+        backend_url: 'http://backend:8080'
       }
     },
     dev: {

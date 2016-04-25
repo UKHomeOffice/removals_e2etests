@@ -1,5 +1,7 @@
 version: '2'
 services:
+  waiter:
+    image: martin/wait
   test:
     build: .
     volumes:
@@ -10,8 +12,8 @@ services:
       - SELENIUM_HOST=selenium
   selenium:
     image: selenium/standalone-chrome:2.49.1
-    ports:
-      - "4444"
+    expose:
+      - 4444
     environment:
       - SCREEN_WIDTH=1024
       - SCREEN_HEIGHT=768

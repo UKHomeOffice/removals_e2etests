@@ -1,12 +1,20 @@
 version: '2'
 services:
+  test:
+    depends_on:
+     - backend
+     - frontend
   backend:
     image: "ibm-backend"
+    expose:
+      - 8080
     environment:
      - NODE_ENV=development
-     - PORT=80
+     - PORT=8080
   frontend:
     image: "ibm-frontend"
+    expose:
+     - 80
     environment:
-     - BACKEND=backend
+     - BACKEND=http://backend:8080
      - PORT=80
