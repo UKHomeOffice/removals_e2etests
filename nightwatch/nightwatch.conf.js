@@ -53,6 +53,7 @@ module.exports = {
     },
 
     default: {
+      skiptags: "wip",
       launch_url: 'http://localhost:8000',
       globals: {
         auth_required: false,
