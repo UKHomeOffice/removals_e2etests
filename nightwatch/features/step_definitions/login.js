@@ -6,16 +6,16 @@ module.exports = function () {
       return true
     }
     this
-      .deleteCookies()
       .url(this.globals.backend_url)
+      .deleteCookies();
 
-    this.page.login().dologin("ircbdtestuser1", "IRCBDBedManagement");
+    this.page.login().dologin(process.env.KEYCLOAK_USER, process.env.KEYCLOAK_PASS);
 
     this
       .url(this.globals.backend_url)
-      .getCookies(result => {
-        cookie_jar.setCookie(rp.cookie(`kc-access=${result.value[0].value}`), this.globals.backend_url);
-      });
+      .getCookie("kc-access", result =>
+        cookie_jar.setCookie(rp.cookie(`kc-access=${result.value}`), this.globals.backend_url)
+      );
   });
 
   this.Given(/^I am an unauthenticated user$/, function () {
@@ -26,7 +26,7 @@ module.exports = function () {
     if (this.globals.auth_required === false) {
       return true
     }
-    this.page.login().expect.element("@username").to.be.visible.before(3000);
+    this.page.login().expect.element("@username").to.be.visible.before(5000);
   });
 
   this.Then(/^I login$/, function () {

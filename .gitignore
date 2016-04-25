@@ -7,3 +7,4 @@ nightwatch/node_modules
 nightwatch/screenshots
 nightwatch/reports
 nightwatch/*.log
+/mycredentials
