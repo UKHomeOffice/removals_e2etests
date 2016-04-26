@@ -25,4 +25,4 @@ exitcode=$?
 
 docker-compose run test nightwatch-html-reporter -d reports -t cover -b false
 
-exit $exitcodeec
+exit $exitcode
