@@ -33,7 +33,7 @@ module.exports = function () {
 
   this.When(/^I submit the following prebookings:$/, function (table) {
     let payload = _.map(table.hashes(), (row) => {
-      row.timestamp = moment().set({hour: 10, minute: 0, second: 0}).format();
+      row.timestamp = Date.create(row.timestamp || "now").toISOString();
       return row;
     });
     this.perform((client, done) =>
