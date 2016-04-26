@@ -19,7 +19,7 @@ Feature: Event
       | nationality | abc |
 
   Scenario: Update individual
-    When I submit the following "check in" event:
+    When I submit the following "update individual" event:
       | centre      | one |
       | cid_id      | 123 |
       | person_id   | 12  |
