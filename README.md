@@ -1,6 +1,6 @@
 # End to End tests 
 
-There are two ways to run the tests, if you want to just get started quickly then use docker, if you want to integrate this into your IDE for example for example you might prefer to run the code on your machine.
+There are two ways to run the tests, if you want to just get started quickly then use docker, if you want to integrate this into your IDE for example you might prefer to run the code on your machine.
 
 
 ## Running the code on your machine:
@@ -15,7 +15,10 @@ nvm use 4.2
 npm install
 
 # Run tests against localhost
-node_modules/.bin/nightwatch --env default
+./test.sh
+
+# Once you've setup the keycloak credentials file (see bottom)
+# ./test.sh [docker|dev|int|uat] will also work
 ```
 
 
