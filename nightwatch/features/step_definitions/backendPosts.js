@@ -1,6 +1,7 @@
 "use strict";
 const moment = require('moment-timezone');
 moment.tz.setDefault("Europe/London");
+require('sugar-date');
 
 module.exports = function () {
 
@@ -16,9 +17,9 @@ module.exports = function () {
   });
 
   this.When(/^I submit the following "([^"]*)" event:$/, function (operation, table) {
-    let tablehashes = table.hashes();
+    let tablehashes = table.rowsHash();
     tablehashes.operation = operation;
-    tablehashes.timestamp = moment().set({hour: 10, minute: 0, second: 0}).format();
+    tablehashes.timestamp = Date.create(tablehashes.timestamp || "now").toISOString();
     this.perform((client, done) =>
       rp({
         method: 'POST',

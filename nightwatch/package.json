@@ -16,6 +16,7 @@
     "lodash": "^4.11.1",
     "moment-timezone": "^0.5.3",
     "nightwatch-html-reporter": "^1.0.4",
-    "request-promise": "^3.0.0"
+    "request-promise": "^3.0.0",
+    "sugar-date": "^1.5.1"
   }
 }

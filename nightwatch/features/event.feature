@@ -12,11 +12,12 @@ Feature: Event
 
   Scenario: Check in
     When I submit the following "check in" event:
-      | centre      | one |
-      | cid_id      | 123 |
-      | person_id   | 12  |
-      | gender      | m   |
-      | nationality | abc |
+      | centre      | one        |
+      | timestamp   | 2 days ago |
+      | cid_id      | 123        |
+      | person_id   | 12         |
+      | gender      | m          |
+      | nationality | abc        |
 
   Scenario: Update individual
     When I submit the following "update individual" event:
