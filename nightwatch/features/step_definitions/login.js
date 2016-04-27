@@ -14,9 +14,14 @@ module.exports = function () {
 
     this
       .url(this.globals.backend_url)
-      .getCookie('kc-access', result =>
+      .getCookie('kc-access', result => {
+        this.kcaccesscookie = result.value
         cookie_jar.setCookie(rp.cookie(`kc-access=${result.value}`), this.globals.backend_url)
-      )
+      })
+      .getCookie('route', result => {
+        this.routecookie = result.value
+        cookie_jar.setCookie(rp.cookie(`route=${result.value}`), this.globals.backend_url)
+      })
   })
 
   this.Given(/^I am an unauthenticated user$/, function () {
