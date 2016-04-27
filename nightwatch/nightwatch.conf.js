@@ -60,7 +60,7 @@ module.exports = {
     },
 
     default: {
-      skiptags: 'wip',
+      skiptags: ['wip', 'performance'],
       launch_url: 'http://localhost:8000',
       globals: {
         auth_required: false,
@@ -81,7 +81,7 @@ module.exports = {
         javascriptEnabled: true,
         acceptSslCerts: true,
         chromeOptions: {
-          'args': ['--no-sandbox']
+          'args': ['--no-sandbox', '--js-flags=--expose-gc', '--enable-precise-memory-info']
         }
       }
     }

@@ -18,11 +18,15 @@
     "selenium-server": "^2.53.0"
   },
   "dependencies": {
+    "bluebird": "^3.3.5",
     "eslint": "^2.8.0",
+    "json-schema-faker": "^0.3.1",
     "lodash": "^4.11.1",
     "moment-timezone": "^0.5.3",
     "nightwatch-html-reporter": "^1.0.4",
     "request-promise": "^3.0.0",
+    "sails.io.js": "^0.13.6",
+    "socket.io-client": "^1.4.5",
     "sugar-date": "^1.5.1"
   },
   "precommit": {

@@ -78,6 +78,7 @@ module.exports = function () {
   })
 
   this.Then(/^The following centres exist:$/, function (table) {
+    this.centres = table.hashes()
     _.map(table.hashes(), (row) =>
       this.perform((client, done) =>
         rp({
