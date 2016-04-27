@@ -2,7 +2,9 @@
   "name": "removals_e2e",
   "version": "1.0.0",
   "scripts": {
-    "test": "nightwatch"
+    "test": "nightwatch",
+    "postinstall": "precommit install",
+    "lint": "eslint ."
   },
   "license": "MIT",
   "devDependencies": {
@@ -22,5 +24,12 @@
     "nightwatch-html-reporter": "^1.0.4",
     "request-promise": "^3.0.0",
     "sugar-date": "^1.5.1"
+  },
+  "precommit": {
+    "tasks": [
+      "npm run lint"
+    ],
+    "onDirtyState": "ask",
+    "coloredOutput": true
   }
 }
