@@ -1,12 +1,16 @@
 #!/bin/bash
 
-ENV=$1
-[ -z "$ENV" ] && ENV='default'
+cd $(dirname $0)
 
-if [ "$ENV" != "default" ] ; then
+ARGS="$@"
+[ -z "$ARGS" ] && ARGS='--env default'
+
+if [[ "$ARGS" != *"--env default"* ]] ; then
     CRED="../mycredentials"
     [ ! -f $CRED ] && echo "Could not find credentials file: $CRED" && exit 1
-    CRED="env `cat $CRED`"
+    set -o allexport
+    source $CRED
+    set +o allexport
 fi
 
-$CRED ./node_modules/.bin/nightwatch --env $ENV
+./node_modules/.bin/nightwatch $ARGS
