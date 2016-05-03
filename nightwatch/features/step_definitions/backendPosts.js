@@ -10,7 +10,7 @@ module.exports = function () {
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/cid_entry/movement`,
-        body: {Output: table.hashes()}
+        body: { Output: table.hashes() }
       })
         .finally(() => done())
     );
@@ -20,6 +20,15 @@ module.exports = function () {
     let tablehashes = table.rowsHash();
     tablehashes.operation = operation;
     tablehashes.timestamp = Date.create(tablehashes.timestamp || "now").toISOString();
+
+    if (tablehashes.cid_id) {
+      tablehashes.cid_id = parseInt(tablehashes.cid_id);
+    }
+    
+    if (tablehashes.person_id) {
+      tablehashes.person_id = parseInt(tablehashes.person_id);
+    }
+
     this.perform((client, done) =>
       rp({
         method: 'POST',
@@ -40,7 +49,7 @@ module.exports = function () {
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/depmu_entry/prebooking`,
-        body: {Output: payload}
+        body: { Output: payload }
       })
         .finally(() => done())
     );
