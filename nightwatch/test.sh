@@ -7,10 +7,14 @@ ARGS="$@"
 
 if [[ "$ARGS" != *"--env default"* ]] ; then
     CRED="../mycredentials"
-    [ ! -f $CRED ] && echo "Could not find credentials file: $CRED" && exit 1
-    set -o allexport
-    source $CRED
-    set +o allexport
+    if [ -f $CRED ] ; then
+        set -o allexport
+        source $CRED
+        set +o allexport
+    else
+        echo "WARNING: No KeyCloak credentials found, creating blank file: $CRED"
+        printf "KEYCLOAK_USER=\nKEYCLOAK_PASS=" > $CRED
+    fi
 fi
 
 ./node_modules/.bin/nightwatch $ARGS
