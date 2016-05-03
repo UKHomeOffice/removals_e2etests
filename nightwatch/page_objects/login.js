@@ -4,19 +4,19 @@ module.exports = {
       return this.waitForElementVisible('@username', 1000)
         .setValue('@username', username)
         .setValue('@password', password)
-        .click("@login")
-        .waitForElementNotPresent('@username', 1000);
+        .click('@login')
+        .waitForElementNotPresent('@username', 1000)
     }
   }],
   elements: {
     username: {
-      selector: "#username"
+      selector: '#username'
     },
     password: {
-      selector: "#password"
+      selector: '#password'
     },
     login: {
-      selector: "#kc-login"
+      selector: '#kc-login'
     }
   }
-};
+}

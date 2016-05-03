@@ -5,6 +5,11 @@ then
     export COMPOSE_FILE=docker-compose.yml:docker-compose.locale2e.yml
 fi
 
+
+if [ ! -e mycredentials ] ; then
+    touch mycredentials
+fi
+
 trap tidyup EXIT
 function tidyup {
     docker-compose down

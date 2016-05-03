@@ -1,13 +1,14 @@
+/* global request cookie_jar */
 const seleniumServer = require('selenium-server')
 const chromedriver = require('chromedriver')
 
-const in_docker = process.env.SELENIUM_HOST !== undefined;
-const selenium_host = process.env.SELENIUM_HOST || "localhost"
+const inDocker = process.env.SELENIUM_HOST !== undefined
+const seleniumHost = process.env.SELENIUM_HOST || 'localhost'
 
-global.request = require('request-promise');
-global.cookie_jar = request.jar();
-global.rp = request.defaults({jar: cookie_jar, json: true});
-global._ = require("lodash");
+global.request = require('request-promise')
+global.cookie_jar = request.jar()
+global.rp = request.defaults({jar: cookie_jar, json: true})
+global._ = require('lodash')
 
 module.exports = {
   src_folders: [require('nightwatch-cucumber')()],
@@ -19,7 +20,7 @@ module.exports = {
   disable_colors: false,
 
   selenium: {
-    start_process: !in_docker,
+    start_process: !inDocker,
     server_path: seleniumServer.path,
     log_path: 'reports',
     host: 'selenium',
@@ -55,18 +56,18 @@ module.exports = {
       globals: {
         backend_url: 'https://api-ircbd-uat.notprod.homeoffice.gov.uk',
         auth_required: true
-      },
+      }
     },
 
     default: {
-      skiptags: "wip",
+      skiptags: ['wip', 'performance'],
       launch_url: 'http://localhost:8000',
       globals: {
         auth_required: false,
-        backend_url: 'http://localhost:8080',
+        backend_url: 'http://localhost:8080'
       },
       selenium_port: 4444,
-      selenium_host: selenium_host,
+      selenium_host: seleniumHost,
       silent: true,
       skip_testcases_on_fail: false,
       screenshots: {
@@ -80,7 +81,7 @@ module.exports = {
         javascriptEnabled: true,
         acceptSslCerts: true,
         chromeOptions: {
-          "args": ["--no-sandbox"]
+          'args': ['--no-sandbox', '--js-flags=--expose-gc', '--enable-precise-memory-info']
         }
       }
     }
