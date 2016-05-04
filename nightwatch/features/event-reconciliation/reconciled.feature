@@ -1,5 +1,5 @@
 @dev
-Feature: Reconciled
+Feature: Reconciled Check In/Out Events
 
   Background:
     Given I am a logged in user
