@@ -23,7 +23,7 @@ Feature: Movement
       | Occupied               | 0    |
       | Beds out of commission | 0    |
       | Prebookings            | 0    |
-      | Availability           | 1000 |
+      | Availability           | 998  |
       | Scheduled outgoing     | 0    |
       | Scheduled incoming     | 2    |
     Then The Centre "one" should show the following under "Female":

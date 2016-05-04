@@ -1,4 +1,3 @@
-@dev
 Feature: Unreconciled Events
 
   Background:
@@ -8,8 +7,6 @@ Feature: Unreconciled Events
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
       | one  | 1000          | 10000           | oneman,onebman | onewoman        |
     Given I am on the wallboard
-
-  Scenario: Unreconciled Check In Event shows as Unexpected Incoming and does not affect Availability
     Given The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
@@ -21,6 +18,8 @@ Feature: Unreconciled Events
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
       | Unexpected outgoing    | 0    |
+
+  Scenario: Unreconciled Check In Event shows as Unexpected Incoming and does not affect Availability
     And I submit the following "check in" event:
       | centre      | one    |
       | timestamp   | now    |
@@ -41,17 +40,6 @@ Feature: Unreconciled Events
       | Unexpected outgoing    | 0    |
 
   Scenario: Unreconciled Check Out Event shows as Unexpected Outgoing and does not affect Availability
-    Given The Centre "one" should show the following under "Male":
-      | Contractual Capacity   | 1000 |
-      | Occupied               | 0    |
-      | Beds out of commission | 0    |
-      | Contingency            | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
-      | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
     And I submit the following "check in" event:
       | centre      | one    |
       | timestamp   | now    |
@@ -76,17 +64,6 @@ Feature: Unreconciled Events
       | Unexpected outgoing    | 1    |
 
   Scenario: (Out Of Order) Unreconciled Check Out Event shows as Unexpected Outgoing and does not affect Availability
-    Given The Centre "one" should show the following under "Male":
-      | Contractual Capacity   | 1000 |
-      | Occupied               | 0    |
-      | Beds out of commission | 0    |
-      | Contingency            | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
-      | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
     And I submit the following "check out" event:
       | centre    | one |
       | timestamp | now |

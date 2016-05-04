@@ -20,7 +20,7 @@ module.exports = function () {
     let tablehashes = table.rowsHash()
     tablehashes.operation = operation
     tablehashes.timestamp = Date.create(tablehashes.timestamp || 'now').toISOString()
-    
+
     if (tablehashes.cid_id) {
       tablehashes.cid_id = parseInt(tablehashes.cid_id)
     }

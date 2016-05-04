@@ -7,8 +7,6 @@ Feature: Reinstatements
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
       | one  | 1000          | 10000           | oneman,onebman | onewoman        |
     Given I am on the wallboard
-
-  Scenario: Reconciled Reinstatement prevents Check Out from affecting Unexpected Out
     Given The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
@@ -20,6 +18,8 @@ Feature: Reinstatements
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
       | Unexpected outgoing    | 0    |
+
+  Scenario: Reconciled Reinstatement prevents Check Out from affecting Unexpected Out
     And I submit the following "check in" event:
       | centre      | one  |
       | timestamp   | now  |

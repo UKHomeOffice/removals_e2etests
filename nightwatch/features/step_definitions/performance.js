@@ -10,10 +10,10 @@ const sailsIOClient = require('sails.io.js')
 moment.tz.setDefault('Europe/London')
 
 const operation = {
-  heartbeat: {singular: true, url: 'irc_entry/heartbeat'},
-  event: {singular: true, url: 'irc_entry/event'},
-  movement: {singular: false, url: 'cid_entry/movement'},
-  prebooking: {singular: false, url: 'depmu_entry/prebooking'}
+  heartbeat: { singular: true, url: 'irc_entry/heartbeat' },
+  event: { singular: true, url: 'irc_entry/event' },
+  movement: { singular: false, url: 'cid_entry/movement' },
+  prebooking: { singular: false, url: 'depmu_entry/prebooking' }
 }
 
 const getMsSince = (startTime) => parseInt(new Date() - startTime)
@@ -117,66 +117,64 @@ module.exports = function () {
   })
 
   this.When(/^I submit "([^"]*)" random "([^"]*)s" every "([^"]*)" minute for "([^"]*)" minutes all taking less than "([^"]*)" milliseconds each$/, function (count, type, interval, duration, threshold) {
-      let urlEndpoint = operation[type].url
+    let urlEndpoint = operation[type].url
 
-      let quantityOfFakes = count * (interval * duration)
-      let MOcounter = 100
-      let fakes = {}
-      if (type === 'heartbeat') {
-        fakes = {
-          centre: () => _.sample(_.map(this.centres, 'name'))
-        }
+    let quantityOfFakes = count * (interval * duration)
+    let MOcounter = 100
+    let fakes = {}
+    if (type === 'heartbeat') {
+      fakes = {
+        centre: () => _.sample(_.map(this.centres, 'name'))
       }
-      if (type === 'movement') {
-        fakes = {
-          'Output.items.properties.Location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
-          'Output.items.properties.MO Date': () => '05/01/2016 00:01:00',
-          'Output.items.properties.MO In/MO Out': () => _.sample(['in', 'out']),
-          'Output.items.properties.MO Type': () => _.sample(['Occupancy', 'Non-Occupancy', 'Removal']),
-          'Output.items.properties.MO Ref': () => {
-            MOcounter++
-            return MOcounter.toString()
-          },
-          'Output.items.properties.CID Person ID': () => _.random(100, 1000000).toString()
-        }
-      }
-      if (type === 'prebooking') {
-        fakes = {
-          'Output.items.properties.location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
-          'Output.items.properties.timestamp': () => moment().set({hour: 7, minute: 0, second: 0}).format(),
-          'Output.items.properties.cid_id': () => _.random(100, 1000000).toString()
-        }
-      }
-
-      if (!operation[type].singular) {
-        quantityOfFakes = interval * duration
-      }
-      let delayBetweenPosts = ((duration * 60000) / interval) / quantityOfFakes
-
-      let i = 1
-      this.perform((client, done) => {
-          let startTime = new Date()
-          getSchema(this, urlEndpoint)
-            .tap(schema => this.assert.ok(schema !== false, `Got ${type} schema in ${getMsSince(startTime)} milliseconds`))
-            .then(schema => alterSchema(schema, type, count))
-            .then(schema => generateFakes(schema, fakes, quantityOfFakes))
-            .tap(fakes => this.assert.ok(!_.isEmpty(fakes), `Generated ${quantityOfFakes} fake ${type} payloads in ${getMsSince(startTime)} milliseconds`))
-            .each(payload => {
-              let startTime = new Date()
-              return rp({
-                method: 'POST',
-                uri: `${this.globals.backend_url}/${urlEndpoint}`,
-                timeout: 999999999,
-                body: payload
-              })
-                .then(() => getMsSince(startTime))
-                .tap((time) => this.assert.ok(time < threshold, `Backend ${type} request ${i} took ${time} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
-                .tap(() => i++)
-                .tap((time) => Promise.delay(delayBetweenPosts - time))
-            })
-            .then(done)
-        }
-      )
     }
-  )
+    if (type === 'movement') {
+      fakes = {
+        'Output.items.properties.Location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
+        'Output.items.properties.MO Date': () => '05/01/2016 00:01:00',
+        'Output.items.properties.MO In/MO Out': () => _.sample(['in', 'out']),
+        'Output.items.properties.MO Type': () => _.sample(['Occupancy', 'Non-Occupancy', 'Removal']),
+        'Output.items.properties.MO Ref': () => {
+          MOcounter++
+          return MOcounter.toString()
+        },
+        'Output.items.properties.CID Person ID': () => _.random(100, 1000000).toString()
+      }
+    }
+    if (type === 'prebooking') {
+      fakes = {
+        'Output.items.properties.location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
+        'Output.items.properties.timestamp': () => moment().set({ hour: 7, minute: 0, second: 0 }).format(),
+        'Output.items.properties.cid_id': () => _.random(100, 1000000).toString()
+      }
+    }
+
+    if (!operation[type].singular) {
+      quantityOfFakes = interval * duration
+    }
+    let delayBetweenPosts = ((duration * 60000) / interval) / quantityOfFakes
+
+    let i = 1
+    this.perform((client, done) => {
+      let startTime = new Date()
+      getSchema(this, urlEndpoint)
+        .tap(schema => this.assert.ok(schema !== false, `Got ${type} schema in ${getMsSince(startTime)} milliseconds`))
+        .then(schema => alterSchema(schema, type, count))
+        .then(schema => generateFakes(schema, fakes, quantityOfFakes))
+        .tap(fakes => this.assert.ok(!_.isEmpty(fakes), `Generated ${quantityOfFakes} fake ${type} payloads in ${getMsSince(startTime)} milliseconds`))
+        .each(payload => {
+          let startTime = new Date()
+          return rp({
+            method: 'POST',
+            uri: `${this.globals.backend_url}/${urlEndpoint}`,
+            timeout: 999999999,
+            body: payload
+          })
+            .then(() => getMsSince(startTime))
+            .tap((time) => this.assert.ok(time < threshold, `Backend ${type} request ${i} took ${time} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
+            .tap(() => i++)
+            .tap((time) => Promise.delay(delayBetweenPosts - time))
+        })
+        .then(done)
+    })
+  })
 }

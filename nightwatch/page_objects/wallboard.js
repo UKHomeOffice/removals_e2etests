@@ -15,7 +15,7 @@ module.exports = {
     },
     expectCentreDetail: function (centreName, gender, k, v) {
       this.api.useXpath()
-      this.expect.element(`${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).before(1000)
+      this.expect.element(`${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).before(2000)
       this.api.useCss()
     }
   }],
