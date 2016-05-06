@@ -97,7 +97,7 @@ Feature: Reconciled Check In/Out Events
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
       | Unexpected outgoing    | 0    |
-    Given I submit the following "update individual" event:
+    When I submit the following "update individual" event:
       | centre      | one    |
       | timestamp   | now    |
       | cid_id      | 111111 |
@@ -107,3 +107,37 @@ Feature: Reconciled Check In/Out Events
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 1 |
       | Scheduled incoming  | 1 |
+
+  Scenario: Inter Site Transfer
+    And The following centres exist:
+      | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
+      | two  | 1000          | 10000           | twoman,twobman | twowoman        |
+    Given I submit the following movements:
+      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
+      | Out          | oneman   | 111     | now     | Removal | 999999        |
+      | In           | twoman   | 222     | now     | Removal | 999999        |
+    Then The Centre "one" should show the following under "Male":
+      | Unexpected outgoing | 0 |
+      | Scheduled outgoing  | 1 |
+    Then The Centre "two" should show the following under "Male":
+      | Unexpected incoming | 0 |
+      | Scheduled incoming  | 1 |
+    Given I submit the following "update individual" event:
+      | centre      | one    |
+      | timestamp   | now    |
+      | cid_id      | 999999 |
+      | person_id   | 12     |
+      | gender      | m      |
+      | nationality | abc    |
+    When I submit the following "inter site transfer" event:
+      | centre    | one   |
+      | centre_to | two   |
+      | timestamp | now   |
+      | person_id | 12    |
+      | reason    | Other |
+    Then The Centre "one" should show the following under "Male":
+      | Unexpected outgoing | 0 |
+      | Scheduled outgoing  | 0 |
+    Then The Centre "two" should show the following under "Male":
+      | Unexpected incoming | 0 |
+      | Scheduled incoming  | 0 |
