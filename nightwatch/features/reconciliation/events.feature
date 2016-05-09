@@ -6,7 +6,7 @@ Feature: Reconciled Check In/Out Events
     And The following centres exist:
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
       | one  | 1000          | 10000           | oneman,onebman | onewoman        |
-    Given I am on the wallboard
+    And I am on the wallboard
     And The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |

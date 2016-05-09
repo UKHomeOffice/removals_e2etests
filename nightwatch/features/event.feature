@@ -73,24 +73,23 @@ Feature: Unreconciled Events
       | nationality | abc    |
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 1 |
-    Given I submit the following "update individual" event:
-      | centre      | one      |
-      | timestamp   | now      |
-      | cid_id      | 999999   |
-      | person_id   | 12       |
-      | gender      | f        |
-      | nationality | abc      |
+    And I submit the following "update individual" event:
+      | centre      | one    |
+      | timestamp   | now    |
+      | cid_id      | 999999 |
+      | person_id   | 12     |
+      | gender      | f      |
+      | nationality | abc    |
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 0 |
 
 
-
   Scenario: (Out Of Order) Unreconciled Check Out Event shows as Unexpected Outgoing and does not affect Availability
-    And I submit the following "check out" event:
+    Given I submit the following "check out" event:
       | centre    | one |
       | timestamp | now |
       | person_id | 12  |
-    Given The Centre "one" should show the following under "Male":
+    Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
       | Beds out of commission | 0    |

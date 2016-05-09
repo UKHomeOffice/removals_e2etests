@@ -26,7 +26,7 @@ Feature: Performance
       | nine   | 9000          | 90000           | mnine         | fnine           |
       | ten    | 10000         | 100000          | mten          | ften            |
       | eleven | 11000         | 110000          | meleven       | feleven         |
-    Given I am on the wallboard
+    And I am on the wallboard
     And I spawn "75" socket clients to the backend
     And I capture the browser memory footprint
 

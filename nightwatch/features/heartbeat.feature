@@ -18,7 +18,7 @@ Feature: Heartbeat
       | Availability           | 1000 |
       | Scheduled outgoing     | 0    |
       | Scheduled incoming     | 0    |
-    Then The Centre "one" should show the following under "Female":
+    And The Centre "one" should show the following under "Female":
       | Contractual Capacity   | 10000 |
       | Occupied               | 0     |
       | Beds out of commission | 0     |
@@ -40,7 +40,7 @@ Feature: Heartbeat
       | Availability           | -1100 |
       | Scheduled outgoing     | 0     |
       | Scheduled incoming     | 0     |
-    Then The Centre "one" should show the following under "Female":
+    And The Centre "one" should show the following under "Female":
       | Contractual Capacity   | 10000 |
       | Occupied               | 2000  |
       | Beds out of commission | 3000  |

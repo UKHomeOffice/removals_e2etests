@@ -6,8 +6,8 @@ Feature: Movements
     And The following centres exist:
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
       | one  | 1000          | 10000           | oneman,onebman | onewoman        |
-    Given I am on the wallboard
-    Given The Centre "one" should show the following under "Male":
+    And I am on the wallboard
+    Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
       | Beds out of commission | 0    |
@@ -38,7 +38,7 @@ Feature: Movements
   Scenario: Unreconciled In Movement shows as Scheduled incoming and reduces availability
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In          | oneman   | 111     | now     | Removal | 1             |
+      | In           | oneman   | 111     | now     | Removal | 1             |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
