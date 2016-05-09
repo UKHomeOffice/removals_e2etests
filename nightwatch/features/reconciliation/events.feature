@@ -49,16 +49,15 @@ Feature: Reconciled Check In/Out Events
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | Out          | oneman   | 111     | now     | Removal | 1234          |
-    Then The Centre "one" should show the following under "Male":
-      | Availability       | 1000 |
-      | Scheduled outgoing | 1    |
-    And I submit the following "update individual" event:
+    And The following detainee exists:
       | centre      | one  |
-      | timestamp   | now  |
       | cid_id      | 1234 |
       | person_id   | 12   |
       | gender      | m    |
       | nationality | abc  |
+    Then The Centre "one" should show the following under "Male":
+      | Availability       | 1000 |
+      | Scheduled outgoing | 1    |
     And I submit the following "check out" event:
       | centre    | one |
       | timestamp | now |
