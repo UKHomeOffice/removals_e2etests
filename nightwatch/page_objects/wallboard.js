@@ -17,6 +17,9 @@ module.exports = {
       this.api.useXpath()
       this.expect.element(`${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).before(2000)
       this.api.useCss()
+    },
+    clickKeycloakUpdate: function () {
+      this.click('@keycloak_update')
     }
   }],
   elements: {
@@ -25,6 +28,9 @@ module.exports = {
     },
     disconnected_message: {
       selector: '.disconnected'
+    },
+    keycloak_update: {
+      selector: '#keycloak-update'
     }
   }
 }

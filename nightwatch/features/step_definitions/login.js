@@ -35,6 +35,13 @@ module.exports = function () {
     this.page.login().expect.element('@username').to.be.visible.before(5000)
   })
 
+  this.Then(/^I should be able to see the keycloak update page$/, function () {
+    if (this.globals.auth_required === false) {
+      return true
+    }
+    this.expect.element('body').text.to.contain('Edit Account').before(5000)
+  })
+
   this.Then(/^I login$/, function () {
     if (this.globals.auth_required === false) {
       return true

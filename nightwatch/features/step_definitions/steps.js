@@ -1,7 +1,7 @@
 /* global _ */
 'use strict'
 
-module.exports = function () {
+module.exports = function (browser) {
   this.Given(/^I am on the wallboard$/, function () {
     this.init()
   })
@@ -16,5 +16,9 @@ module.exports = function () {
       this.page.wallboard().expectCentreDetail(centreName, gender, k, v)
     )
     this.page.wallboard().toggleCentreDetails(centreName, gender)
+  })
+
+  this.When(/^I click on the keycloak update link$/, function () {
+    this.page.wallboard().clickKeycloakUpdate()
   })
 }
