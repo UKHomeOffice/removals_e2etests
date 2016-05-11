@@ -32,6 +32,9 @@ Feature: Movements
       | Expected incoming      | 0    |
       | Expected outgoing      | 1    |
       | Unexpected incoming    | 0    |
+    And the Centre "one" should show the following CIDS under "Male" "Scheduled outgoing":
+      | CID Person ID |
+      | 1             |
 
   Scenario: Unreconciled In Movement shows as Expected incoming and reduces availability
     When I submit the following movements:
@@ -47,3 +50,6 @@ Feature: Movements
       | Expected incoming      | 1    |
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
+    And the Centre "one" should show the following CIDS under "Male" "Scheduled incoming":
+      | CID Person ID |
+      | 1             |

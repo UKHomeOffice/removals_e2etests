@@ -13,9 +13,24 @@ module.exports = {
         .click(centreToggle)
         .useCss()
     },
+
+    toggleCentreDetailsCid: function (centreName, gender, k) {
+      let centreDetailCidToggle = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]`
+      this.api
+        .useXpath()
+        .expect.element(centreDetailCidToggle).to.be.present.after(1000)
+      this.api
+        .click(centreDetailCidToggle)
+        .useCss()
+    },
     expectCentreDetail: function (centreName, gender, k, v) {
       this.api.useXpath()
       this.expect.element(`${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).before(2000)
+      this.api.useCss()
+    },
+    expectCentreDetailCids: function (centreName, gender, k, cid) {
+      this.api.useXpath()
+      this.expect.element(`${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]`).text.to.contain(cid).before(2000)
       this.api.useCss()
     }
   }],
