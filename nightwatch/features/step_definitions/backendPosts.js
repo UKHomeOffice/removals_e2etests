@@ -6,11 +6,16 @@ require('sugar-date')
 
 module.exports = function () {
   this.When(/^I submit the following movements:$/, function (table) {
+    const tablehashes = table.hashes()
+    tablehashes.map((movement) => {
+      movement['MO Date'] = Date.create(movement['MO Date'] || 'now').format('{dd}/{MM}/{yyyy} {hh}:{mm}:{ss}')
+    })
+
     this.perform((client, done) =>
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/cid_entry/movement`,
-        body: { Output: table.hashes() }
+        body: { Output: tablehashes }
       })
         .finally(() => done())
     )

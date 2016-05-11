@@ -141,3 +141,51 @@ Feature: Reconciled Check In/Out Events
     Then The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |
       | Scheduled incoming  | 0 |
+
+  Scenario: Event Timestamp outside of reconciliation period (d+-2) does not reconcile
+    When I submit the following movements:
+      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
+      | In           | oneman   | 111     | now     | Removal | 1234          |
+    Then The Centre "one" should show the following under "Male":
+      | Availability        | 999 |
+      | Scheduled incoming  | 1   |
+      | Scheduled outgoing  | 0   |
+      | Unexpected incoming | 0   |
+      | Unexpected outgoing | 0   |
+    And I submit the following "check in" event:
+      | centre      | one        |
+      | timestamp   | 4 days ago |
+      | cid_id      | 1234       |
+      | person_id   | 12         |
+      | gender      | m          |
+      | nationality | abc        |
+    Then The Centre "one" should show the following under "Male":
+      | Availability        | 999 |
+      | Scheduled incoming  | 1   |
+      | Scheduled outgoing  | 0   |
+      | Unexpected incoming | 0   |
+      | Unexpected outgoing | 0   |
+
+  Scenario: Movement Timestamp outside of reconciliation period (d+-2) does not reconcile
+    And I submit the following "check in" event:
+      | centre      | one  |
+      | timestamp   | now  |
+      | cid_id      | 1234 |
+      | person_id   | 12   |
+      | gender      | m    |
+      | nationality | abc  |
+    Then The Centre "one" should show the following under "Male":
+      | Availability        | 1000 |
+      | Scheduled incoming  | 0    |
+      | Scheduled outgoing  | 0    |
+      | Unexpected incoming | 1    |
+      | Unexpected outgoing | 0    |
+    When I submit the following movements:
+      | MO In/MO Out | Location | MO Ref. | MO Date    | MO Type | CID Person ID |
+      | In           | oneman   | 111     | 4 days ago | Removal | 1234          |
+    Then The Centre "one" should show the following under "Male":
+      | Availability        | 1000 |
+      | Scheduled incoming  | 0    |
+      | Scheduled outgoing  | 0    |
+      | Unexpected incoming | 1    |
+      | Unexpected outgoing | 0    |

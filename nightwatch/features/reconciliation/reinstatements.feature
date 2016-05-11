@@ -20,7 +20,7 @@ Feature: Reinstatements
       | Unexpected outgoing    | 0    |
 
   Scenario: Reconciled Reinstatement prevents Check Out from affecting Unexpected Out
-    And I submit the following "check in" event:
+    And I submit the following "update individual" event:
       | centre      | one  |
       | timestamp   | now  |
       | cid_id      | 1234 |
@@ -40,7 +40,7 @@ Feature: Reinstatements
       | Availability           | 1000 |
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
-      | Unexpected incoming    | 1    |
+      | Unexpected incoming    | 0    |
       | Unexpected outgoing    | 1    |
     And I submit the following "reinstatement" event:
       | centre      | one  |
@@ -55,6 +55,6 @@ Feature: Reinstatements
       | Availability           | 1000 |
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
-      | Unexpected incoming    | 1    |
+      | Unexpected incoming    | 0    |
       | Unexpected outgoing    | 0    |
 

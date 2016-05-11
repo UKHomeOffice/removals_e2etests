@@ -40,7 +40,7 @@ Feature: Unreconciled Events
       | Unexpected outgoing    | 0    |
 
   Scenario: Unreconciled Check Out Event shows as Unexpected Outgoing and does not affect Availability
-    Given I submit the following "check in" event:
+    Given I submit the following "update individual" event:
       | centre      | one    |
       | timestamp   | now    |
       | cid_id      | 999999 |
@@ -60,7 +60,7 @@ Feature: Unreconciled Events
       | Availability           | 1000 |
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
-      | Unexpected incoming    | 1    |
+      | Unexpected incoming    | 0    |
       | Unexpected outgoing    | 1    |
 
   Scenario: Update changes gender
@@ -82,7 +82,8 @@ Feature: Unreconciled Events
       | nationality | abc      |
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 0 |
-
+    Then The Centre "one" should show the following under "Female":
+      | Unexpected incoming | 1 |
 
 
   Scenario: (Out Of Order) Unreconciled Check Out Event shows as Unexpected Outgoing and does not affect Availability
@@ -101,7 +102,7 @@ Feature: Unreconciled Events
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
       | Unexpected outgoing    | 0    |
-    And I submit the following "check in" event:
+    And I submit the following "update individual" event:
       | centre      | one    |
       | timestamp   | now    |
       | cid_id      | 999999 |
@@ -117,6 +118,6 @@ Feature: Unreconciled Events
       | Availability           | 1000 |
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
-      | Unexpected incoming    | 1    |
+      | Unexpected incoming    | 0    |
       | Unexpected outgoing    | 1    |
 
