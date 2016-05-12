@@ -11,7 +11,9 @@ global.rp = request.defaults({jar: cookie_jar, json: true})
 global._ = require('lodash')
 
 module.exports = {
-  src_folders: [require('nightwatch-cucumber')()],
+  src_folders: [require('nightwatch-cucumber')({
+    closeSession: 'afterScenario'
+  })],
   output_folder: 'reports',
   custom_commands_path: '',
   custom_assertions_path: '',
