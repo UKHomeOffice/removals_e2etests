@@ -74,7 +74,8 @@ module.exports = function () {
     )
   })
 
-  this.Given(/^I spawn "([^"]*)" socket clients to the backend$/, function (count) {
+  this.Given(/^I spawn (?:a single|"([^"]*)") socket clients? to the backend$/, function (count) {
+    count = count || 1;
     this.perform((client, done) => {
       delete socketIOClient.sails
       let io = sailsIOClient(socketIOClient)
@@ -116,11 +117,16 @@ module.exports = function () {
     })
   })
 
-  this.When(/^I submit "([^"]*)" random "([^"]*)s" every "([^"]*)" minute for "([^"]*)" minutes all taking less than "([^"]*)" milliseconds each$/, function (count, type, interval, duration, threshold) {
+  this.When(/^I submit "([^"]*)" random "([^"]*)s?"(?: every "([^"]*)" minutes? for "([^"]*)" minutes? all taking less than "([^"]*)" milliseconds each|)$/, function (count, type, interval, duration, threshold) {
     let urlEndpoint = operation[type].url
 
-    let quantityOfFakes = count * (interval * duration)
-    let MOcounter = 100
+    let quantityOfFakes = operation[type].singular && 1 || count;
+    let delayBetweenPosts = false;
+    if (interval && duration) {
+      quantityOfFakes *= (interval * duration);
+      delayBetweenPosts = ((duration * 60000) / interval) / quantityOfFakes;
+    }
+
     let fakes = {}
     if (type === 'heartbeat') {
       fakes = {
@@ -128,15 +134,13 @@ module.exports = function () {
       }
     }
     if (type === 'movement') {
+      let MOcounter = 100;
       fakes = {
         'Output.items.properties.Location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
         'Output.items.properties.MO Date': () => '05/01/2016 00:01:00',
         'Output.items.properties.MO In/MO Out': () => _.sample(['in', 'out']),
         'Output.items.properties.MO Type': () => _.sample(['Occupancy', 'Non-Occupancy', 'Removal']),
-        'Output.items.properties.MO Ref': () => {
-          MOcounter++
-          return MOcounter.toString()
-        },
+        'Output.items.properties.MO Ref': () => (++MOcounter).toString(),
         'Output.items.properties.CID Person ID': () => _.random(100, 1000000).toString()
       }
     }
@@ -148,12 +152,7 @@ module.exports = function () {
       }
     }
 
-    if (!operation[type].singular) {
-      quantityOfFakes = interval * duration
-    }
-    let delayBetweenPosts = ((duration * 60000) / interval) / quantityOfFakes
-
-    let i = 1
+    let i = 1, uri = `${this.globals.backend_url}/${urlEndpoint}`;
     this.perform((client, done) => {
       let startTime = new Date()
       getSchema(this, urlEndpoint)
@@ -165,14 +164,14 @@ module.exports = function () {
           let startTime = new Date()
           return rp({
             method: 'POST',
-            uri: `${this.globals.backend_url}/${urlEndpoint}`,
+            uri: uri,
             timeout: 999999999,
             body: payload
           })
             .then(() => getMsSince(startTime))
-            .tap((time) => this.assert.ok(time < threshold, `Backend ${type} request ${i} took ${time} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
-            .tap(() => i++)
-            .tap((time) => Promise.delay(delayBetweenPosts - time))
+            .tap((time) => this.assert.ok(time < threshold, `Backend ${type} request ${i++} took ${time} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
+            // .tap(() => i++)
+            .tap((time) => delayBetweenPosts && Promise.delay(delayBetweenPosts - time))
         })
         .then(done)
     })
