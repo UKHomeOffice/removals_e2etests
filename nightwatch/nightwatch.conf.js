@@ -1,4 +1,4 @@
-/* global request cookie_jar */
+/* global request cookie_jar _ */
 const seleniumServer = require('selenium-server')
 const chromedriver = require('chromedriver')
 
@@ -62,7 +62,7 @@ module.exports = {
     },
 
     default: {
-      skiptags: ['wip', 'performance'],
+      skiptags: _.pullAll(['performance', 'wip'], process.argv),
       launch_url: 'http://localhost:8000',
       globals: {
         auth_required: false,
