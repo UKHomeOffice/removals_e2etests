@@ -117,12 +117,14 @@ module.exports = function () {
     })
   })
 
-  this.When(/^I submit "([^"]*)" random "([^"]*)s?"(?: every "([^"]*)" minutes? for "([^"]*)" minutes? all taking less than "([^"]*)" milliseconds each|)$/, function (count, type, interval, duration, threshold) {
+  this.When(/^I submit "([^"]*)" random "([^"]*?)s?"(?: every "([^"]*)" minutes? for "([^"]*)" minutes? all taking less than "([^"]*)" milliseconds each|)$/, function (count, type, interval, duration, threshold) {
+    console.log(count, type, interval, duration, threshold)
     let urlEndpoint = operation[type].url
 
-    let quantityOfFakes = operation[type].singular && 1 || count;
+    let quantityOfFakes = operation[type].singular ? 1 : count;
     let delayBetweenPosts = false;
     if (interval && duration) {
+      interval = /single/i.test(interval) ? 1 : interval;
       quantityOfFakes *= (interval * duration);
       delayBetweenPosts = ((duration * 60000) / interval) / quantityOfFakes;
     }
@@ -162,6 +164,7 @@ module.exports = function () {
         .tap(fakes => this.assert.ok(!_.isEmpty(fakes), `Generated ${quantityOfFakes} fake ${type} payloads in ${getMsSince(startTime)} milliseconds`))
         .each(payload => {
           let startTime = new Date()
+          console.log(delayBetweenPosts) //WTF???
           return rp({
             method: 'POST',
             uri: uri,
@@ -169,7 +172,7 @@ module.exports = function () {
             body: payload
           })
             .then(() => getMsSince(startTime))
-            .tap((time) => this.assert.ok(time < threshold, `Backend ${type} request ${i++} took ${time} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
+            .tap((time) => delayBetweenPosts && this.assert.ok(time < threshold, `Backend ${type} request ${i++} took ${time} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
             // .tap(() => i++)
             .tap((time) => delayBetweenPosts && Promise.delay(delayBetweenPosts - time))
         })
