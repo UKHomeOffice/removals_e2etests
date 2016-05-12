@@ -32,9 +32,10 @@ Feature: Performance
 
   Scenario: An average hour of stuff
     Given I submit "33" random "heartbeats"
-    When I submit "11" random "heartbeats" every "single" minute for "60" minutes all taking less than "1000" milliseconds each
-    And I submit "2" random "events" every "single" minute for "60" minutes all taking less than "500" milliseconds each
-    And I submit "900" random "movements" every "4" minutes for "60" minutes all taking less than "5000" milliseconds each
-    And I submit "100" random "prebookings" every "4" minute for "60" minutes all taking less than "1000" milliseconds each
+    When I submit "11" random "heartbeats" every "single" minute for "1" minutes all taking less than "2000" milliseconds each
+    And I submit "2" random "events" every "single" minute for "1" minutes all taking less than "500" milliseconds each
+    And I submit "900" random "movements" every "4" minutes for "1" minutes all taking less than "5000" milliseconds each
+    And I submit "100" random "prebookings" every "4" minute for "1" minutes all taking less than "1000" milliseconds each
+    Then I wait for all that to finish
     Then I capture the browser memory footprint
     And The browser memory should not have increased by more than 32mb

@@ -74,6 +74,14 @@ module.exports = function () {
     )
   })
 
+  this.Then(/^I wait for all that to finish$/, function () {
+    this.perform((client, done) => {
+      Promise.each(this.promises)
+        .then(done)
+    })
+
+  })
+
   this.Given(/^I spawn (?:a single|"([^"]*)") socket clients? to the backend$/, function (count) {
     count = count || 1;
     this.perform((client, done) => {
@@ -155,13 +163,15 @@ module.exports = function () {
     }
 
     let i = 1, uri = `${this.globals.backend_url}/${urlEndpoint}`;
+    this.promises = this.promises || [];
     this.perform((client, done) => {
       let startTime = new Date()
-      getSchema(this, urlEndpoint)
+      let prom = getSchema(this, urlEndpoint)
         .tap(schema => this.assert.ok(schema !== false, `Got ${type} schema in ${getMsSince(startTime)} milliseconds`))
         .then(schema => alterSchema(schema, type, count))
         .then(schema => generateFakes(schema, fakes, quantityOfFakes))
         .tap(fakes => this.assert.ok(!_.isEmpty(fakes), `Generated ${quantityOfFakes} fake ${type} payloads in ${getMsSince(startTime)} milliseconds`))
+        .tap(() => done())
         .each(payload => {
           let startTime = new Date()
           console.log(delayBetweenPosts) //WTF???
@@ -173,10 +183,9 @@ module.exports = function () {
           })
             .then(() => getMsSince(startTime))
             .tap((time) => delayBetweenPosts && this.assert.ok(time < threshold, `Backend ${type} request ${i++} took ${time} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
-            // .tap(() => i++)
             .tap((time) => delayBetweenPosts && Promise.delay(delayBetweenPosts - time))
-        })
-        .then(done)
+        });
+      this.promises.push(prom);
     })
   })
 }
