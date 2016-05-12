@@ -4,6 +4,30 @@ const moment = require('moment-timezone')
 moment.tz.setDefault('Europe/London')
 require('sugar-date')
 
+const eventPost = function (operation, table) {
+  let tablehashes = table.rowsHash()
+  tablehashes.operation = operation
+  tablehashes.timestamp = Date.create(tablehashes.timestamp || 'now').toISOString()
+
+  if (tablehashes.cid_id) {
+    tablehashes.cid_id = parseInt(tablehashes.cid_id)
+  }
+
+  if (tablehashes.person_id) {
+    tablehashes.person_id = parseInt(tablehashes.person_id)
+  }
+
+  this.perform((client, done) =>
+    rp({
+      method: 'POST',
+      uri: `${client.globals.backend_url}/irc_entry/event`,
+      body: tablehashes,
+      jar: false
+    })
+      .finally(() => done())
+  )
+}
+
 module.exports = function () {
   this.When(/^I submit the following movements:$/, function (table) {
     this.perform((client, done) =>
@@ -17,27 +41,11 @@ module.exports = function () {
   })
 
   this.When(/^I submit the following "([^"]*)" event:$/, function (operation, table) {
-    let tablehashes = table.rowsHash()
-    tablehashes.operation = operation
-    tablehashes.timestamp = Date.create(tablehashes.timestamp || 'now').toISOString()
+    return eventPost.call(this, operation, table)
+  })
 
-    if (tablehashes.cid_id) {
-      tablehashes.cid_id = parseInt(tablehashes.cid_id)
-    }
-
-    if (tablehashes.person_id) {
-      tablehashes.person_id = parseInt(tablehashes.person_id)
-    }
-
-    this.perform((client, done) =>
-      rp({
-        method: 'POST',
-        uri: `${client.globals.backend_url}/irc_entry/event`,
-        body: tablehashes,
-        jar: false
-      })
-        .finally(() => done())
-    )
+  this.When(/^The following detainee exists:$/, function (table) {
+    return eventPost.call(this, 'update individual', table)
   })
 
   this.When(/^I submit the following prebookings:$/, function (table) {

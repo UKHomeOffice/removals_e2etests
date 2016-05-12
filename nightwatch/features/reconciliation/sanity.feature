@@ -7,8 +7,8 @@ Feature: Sanity Checks
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
       | one  | 1000          | 10000           | oneman,onebman | onewoman        |
       | two  | 2000          | 20000           | twoman,twobman | twowoman        |
-    Given I am on the wallboard
-    And The Centre "one" should show the following under "Male":
+    And I am on the wallboard
+    Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
       | Beds out of commission | 0    |
@@ -62,16 +62,16 @@ Feature: Sanity Checks
     Then The Centre "one" should show the following under "Male":
       | Availability       | 999 |
       | Scheduled incoming | 1   |
-    Then The Centre "one" should show the following under "Female":
+    And The Centre "one" should show the following under "Female":
       | Availability       | 9998 |
       | Scheduled incoming | 2    |
-    Then The Centre "two" should show the following under "Male":
+    And The Centre "two" should show the following under "Male":
       | Availability       | 2000 |
       | Scheduled incoming | 0    |
-    Then The Centre "two" should show the following under "Female":
+    And The Centre "two" should show the following under "Female":
       | Availability       | 20000 |
       | Scheduled incoming | 0     |
-    And I submit the following "check in" event:
+    When I submit the following "check in" event:
       | centre      | one  |
       | timestamp   | now  |
       | cid_id      | 1234 |
@@ -95,13 +95,13 @@ Feature: Sanity Checks
     Then The Centre "one" should show the following under "Male":
       | Availability       | 1000 |
       | Scheduled incoming | 0    |
-    Then The Centre "one" should show the following under "Female":
+    And The Centre "one" should show the following under "Female":
       | Availability       | 10000 |
       | Scheduled incoming | 0     |
-    Then The Centre "two" should show the following under "Male":
+    And The Centre "two" should show the following under "Male":
       | Availability       | 2000 |
       | Scheduled incoming | 0    |
-    Then The Centre "two" should show the following under "Female":
+    And The Centre "two" should show the following under "Female":
       | Availability       | 20000 |
       | Scheduled incoming | 0     |
 
