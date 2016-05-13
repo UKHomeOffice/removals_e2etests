@@ -9,7 +9,31 @@ Feature: dailyOccupancyReport
       | two  | 200           | 400             |
 
   Scenario: Heartbeat updates the wallboard
-    When I submit a heartbeat with:
+    Given I submited a heartbeat "yesterday" with:
+      | centre                 | one |
+      | male_occupied          | 15  |
+      | female_occupied        | 25  |
+      | male_outofcommission   | 35  |
+      | female_outofcommission | 45  |
+    And I submited a heartbeat "yesterday" with:
+      | centre                 | one |
+      | male_occupied          | 6   |
+      | female_occupied        | 7   |
+      | male_outofcommission   | 8   |
+      | female_outofcommission | 9   |
+    And I submited a heartbeat "yesterday" with:
+      | centre                 | two |
+      | male_occupied          | 20  |
+      | female_occupied        | 25  |
+      | male_outofcommission   | 30  |
+      | female_outofcommission | 35  |
+    And I submited a heartbeat "yesterday" with:
+      | centre                 | two |
+      | male_occupied          | 40  |
+      | female_occupied        | 45  |
+      | male_outofcommission   | 50  |
+      | female_outofcommission | 55  |
+    And I submit a heartbeat with:
       | centre                 | one |
       | male_occupied          | 10  |
       | female_occupied        | 20  |
@@ -95,3 +119,9 @@ Feature: dailyOccupancyReport
       | one    | female | 300      | 260                  | 40               | 20            | Maintenance - Health and Safety Concern x 1,                                                    |
       | two    | male   | 200      | 130                  | 70               | 50            | Single Occupancy x 1                                                                            |
       | two    | female | 400      | 320                  | 80               | 60            | Medical Isolation x 1, Other x 1                                                                |
+    And The Daily Occupancy Report for "yesterday" should return:
+      | centre | gender | capacity | total beds available | unavailable beds | occupied beds | reasons for not meeting full occupancy |
+      | one    | male   | 100      | 65                   | 35               | 15            | Crime Scene x 1                        |
+      | one    | female | 300      | 255                  | 45               | 25            |                                        |
+      | two    | male   | 200      | 150                  | 50               | 40            |                                        |
+      | two    | female | 400      | 345                  | 55               | 45            | Other x 1                              |
