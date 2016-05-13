@@ -14,6 +14,7 @@ module.exports = {
   src_folders: [require('nightwatch-cucumber')({
     closeSession: 'afterScenario'
   })],
+  globals_path: 'globalsModule.js',
   output_folder: 'reports',
   custom_commands_path: '',
   custom_assertions_path: '',

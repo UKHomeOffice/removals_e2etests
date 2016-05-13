@@ -1,4 +1,3 @@
-/* global rp cookie_jar */
 'use strict'
 
 module.exports = function () {
@@ -10,17 +9,6 @@ module.exports = function () {
       .url(this.globals.backend_url)
 
     this.page.login().dologin(process.env.KEYCLOAK_USER, process.env.KEYCLOAK_PASS)
-
-    this
-      .url(this.globals.backend_url)
-      .getCookie('kc-access', result => {
-        this.kcaccesscookie = result.value
-        cookie_jar.setCookie(rp.cookie(`kc-access=${result.value}`), this.globals.backend_url)
-      })
-      .getCookie('route', result => {
-        this.routecookie = result.value
-        cookie_jar.setCookie(rp.cookie(`route=${result.value}`), this.globals.backend_url)
-      })
   })
 
   this.Given(/^I am an unauthenticated user$/, function () {
