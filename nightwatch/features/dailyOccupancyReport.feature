@@ -12,50 +12,50 @@ Feature: dailyOccupancyReport
     Given I submited a heartbeat "yesterday" with:
       | centre                 | one |
       | male_occupied          | 15  |
-      | female_occupied        | 25  |
-      | male_outofcommission   | 35  |
+      | female_occupied        | 7   |
+      | male_outofcommission   | 8   |
       | female_outofcommission | 45  |
     And I submited a heartbeat "yesterday" with:
       | centre                 | one |
       | male_occupied          | 6   |
-      | female_occupied        | 7   |
-      | male_outofcommission   | 8   |
+      | female_occupied        | 25  |
+      | male_outofcommission   | 35  |
       | female_outofcommission | 9   |
     And I submited a heartbeat "yesterday" with:
       | centre                 | two |
       | male_occupied          | 20  |
-      | female_occupied        | 25  |
-      | male_outofcommission   | 30  |
+      | female_occupied        | 45  |
+      | male_outofcommission   | 50  |
       | female_outofcommission | 35  |
     And I submited a heartbeat "yesterday" with:
       | centre                 | two |
       | male_occupied          | 40  |
-      | female_occupied        | 45  |
-      | male_outofcommission   | 50  |
+      | female_occupied        | 25  |
+      | male_outofcommission   | 30  |
       | female_outofcommission | 55  |
     And I submit a heartbeat with:
       | centre                 | one |
       | male_occupied          | 10  |
-      | female_occupied        | 20  |
-      | male_outofcommission   | 30  |
+      | female_occupied        | 2   |
+      | male_outofcommission   | 3   |
       | female_outofcommission | 40  |
     And I submit a heartbeat with:
       | centre                 | one |
       | male_occupied          | 1   |
-      | female_occupied        | 2   |
-      | male_outofcommission   | 3   |
+      | female_occupied        | 20  |
+      | male_outofcommission   | 30  |
       | female_outofcommission | 4   |
     And I submit a heartbeat with:
       | centre                 | two |
       | male_occupied          | 5   |
-      | female_occupied        | 6   |
-      | male_outofcommission   | 7   |
+      | female_occupied        | 60  |
+      | male_outofcommission   | 70  |
       | female_outofcommission | 8   |
     And I submit a heartbeat with:
       | centre                 | two |
       | male_occupied          | 50  |
-      | female_occupied        | 60  |
-      | male_outofcommission   | 70  |
+      | female_occupied        | 6   |
+      | male_outofcommission   | 7   |
       | female_outofcommission | 80  |
     And I submit the following "out commission" event:
       | centre  | one                                       |
