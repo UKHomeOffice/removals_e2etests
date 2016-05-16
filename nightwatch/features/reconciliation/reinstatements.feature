@@ -17,25 +17,6 @@ Feature: Reinstatements
       | centre    | one |
       | person_id | 12  |
 
-  Scenario: Reconciled Reinstatement prevents Check Out from affecting Unexpected Out
-    Then The Centre "one" should show the following under "Male":
-      | Unexpected outgoing | 1 |
-    And I submit the following "reinstatement" event:
-      | centre    | one |
-      | timestamp | now |
-      | person_id | 12  |
-    Then The Centre "one" should show the following under "Male":
-      | Contractual Capacity   | 1000 |
-      | Occupied               | 0    |
-      | Beds out of commission | 0    |
-      | Contingency            | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
-      | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
-
   Scenario: Reconciled Reinstatement on expected movement
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
@@ -56,4 +37,3 @@ Feature: Reinstatements
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 1    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |

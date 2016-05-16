@@ -17,7 +17,6 @@ Feature: Movements
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
 
   Scenario: Unreconciled Out Movement shows as Scheduled Outgoing and does not affect Availability
     When I submit the following movements:
@@ -33,7 +32,6 @@ Feature: Movements
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 1    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
 
   Scenario: Unreconciled In Movement shows as Scheduled incoming and reduces availability
     When I submit the following movements:
@@ -49,4 +47,3 @@ Feature: Movements
       | Scheduled incoming     | 1    |
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
