@@ -17,7 +17,6 @@ Feature: Reconciled Check In/Out Events
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
 
   Scenario: Reconciled Check In Event and Movement In does not show as Unexpected In and Scheduled In or affect Availability
     When I submit the following movements:
@@ -43,9 +42,8 @@ Feature: Reconciled Check In/Out Events
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
 
-  Scenario: Reconciled Check out Event and Movement out does not show as Unexpected out and Scheduled out or affect Availability
+  Scenario: Reconciled Check out Event and Movement out does not show as Scheduled out or affect Availability
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | Out          | oneman   | 111     | now     | Removal | 1234          |
@@ -72,7 +70,6 @@ Feature: Reconciled Check In/Out Events
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
 
   Scenario: Update changes cid_id
     Given I submit the following movements:
@@ -95,7 +92,6 @@ Feature: Reconciled Check In/Out Events
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
     When I submit the following "update individual" event:
       | centre      | one    |
       | timestamp   | now    |
@@ -122,7 +118,6 @@ Feature: Reconciled Check In/Out Events
       | Out          | oneman   | 111     | now     | Removal | 999999        |
       | In           | twoman   | 222     | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
-      | Unexpected outgoing | 0 |
       | Scheduled outgoing  | 1 |
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |
@@ -134,7 +129,6 @@ Feature: Reconciled Check In/Out Events
       | person_id | 12    |
       | reason    | Other |
     Then The Centre "one" should show the following under "Male":
-      | Unexpected outgoing | 0 |
       | Scheduled outgoing  | 0 |
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |
@@ -156,9 +150,6 @@ Feature: Reconciled Check In/Out Events
       | timestamp | now   |
       | person_id | 12    |
       | reason    | Other |
-    Then The Centre "one" should show the following under "Male":
-      | Unexpected outgoing | 1 |
-      | Scheduled outgoing  | 0 |
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 1 |
       | Scheduled incoming  | 0 |
@@ -167,7 +158,6 @@ Feature: Reconciled Check In/Out Events
       | Out          | oneman   | 111     | now     | Removal | 999999        |
       | In           | twoman   | 222     | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
-      | Unexpected outgoing | 0 |
       | Scheduled outgoing  | 0 |
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |

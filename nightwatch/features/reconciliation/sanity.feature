@@ -18,7 +18,6 @@ Feature: Sanity Checks
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
     And The Centre "one" should show the following under "Female":
       | Contractual Capacity   | 10000 |
       | Occupied               | 0     |
@@ -29,7 +28,6 @@ Feature: Sanity Checks
       | Scheduled incoming     | 0     |
       | Scheduled outgoing     | 0     |
       | Unexpected incoming    | 0     |
-      | Unexpected outgoing    | 0     |
     And The Centre "two" should show the following under "Male":
       | Contractual Capacity   | 2000 |
       | Occupied               | 0    |
@@ -40,7 +38,6 @@ Feature: Sanity Checks
       | Scheduled incoming     | 0    |
       | Scheduled outgoing     | 0    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
     And The Centre "two" should show the following under "Female":
       | Contractual Capacity   | 20000 |
       | Occupied               | 0     |
@@ -51,7 +48,6 @@ Feature: Sanity Checks
       | Scheduled incoming     | 0     |
       | Scheduled outgoing     | 0     |
       | Unexpected incoming    | 0     |
-      | Unexpected outgoing    | 0     |
 
   Scenario: Centre one's events shouldn't affect Centre two, male shouldn't affect female
     When I submit the following movements:
