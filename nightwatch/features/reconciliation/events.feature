@@ -118,7 +118,7 @@ Feature: Reconciled Check In/Out Events
       | Out          | oneman   | 111     | now     | Removal | 999999        |
       | In           | twoman   | 222     | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
-      | Scheduled outgoing  | 1 |
+      | Scheduled outgoing | 1 |
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |
       | Scheduled incoming  | 1 |
@@ -129,7 +129,7 @@ Feature: Reconciled Check In/Out Events
       | person_id | 12    |
       | reason    | Other |
     Then The Centre "one" should show the following under "Male":
-      | Scheduled outgoing  | 0 |
+      | Scheduled outgoing | 0 |
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |
       | Scheduled incoming  | 0 |
@@ -158,7 +158,7 @@ Feature: Reconciled Check In/Out Events
       | Out          | oneman   | 111     | now     | Removal | 999999        |
       | In           | twoman   | 222     | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
-      | Scheduled outgoing  | 0 |
+      | Scheduled outgoing | 0 |
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |
       | Scheduled incoming  | 0 |
