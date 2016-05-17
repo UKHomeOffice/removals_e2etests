@@ -162,3 +162,23 @@ Feature: Reconciled Check In/Out Events
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |
       | Scheduled incoming  | 0 |
+
+  Scenario: Inter Site Transfer (before checkin/detainee exists)
+    Given The following centres exist:
+      | name | male_capacity |
+      | two  | 1000          |
+    When I submit the following "inter site transfer" event:
+      | centre    | one   |
+      | centre_to | two   |
+      | timestamp | now   |
+      | person_id | 12    |
+      | reason    | Other |
+    And I submit the following "check in" event:
+      | centre      | one    |
+      | cid_id      | 999999 |
+      | person_id   | 12     |
+      | gender      | m      |
+      | nationality | abc    |
+    And The Centre "two" should show the following under "Male":
+      | Unexpected incoming | 1 |
+      | Scheduled incoming  | 0 |
