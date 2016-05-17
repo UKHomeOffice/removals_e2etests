@@ -55,7 +55,7 @@ Feature: Prebooking
       | Beds out of commission | 0    |
       | Contingency            | 1    |
       | Prebookings            | 1    |
-      | Availability           | 998  |
+      | Availability           | 996  |
       | Scheduled outgoing     | 0    |
       | Scheduled incoming     | 2    |
 
