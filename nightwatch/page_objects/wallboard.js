@@ -8,7 +8,7 @@ module.exports = {
       let centreToggle = `${getCentreGenderScope(centreName, gender)}//a[contains(@class, "detail-toggle")]`
       this.api
         .useXpath()
-        .expect.element(centreToggle).to.be.present.after(1000)
+        .expect.element(centreToggle).to.be.present.after(5000)
       this.api
         .click(centreToggle)
         .useCss()
