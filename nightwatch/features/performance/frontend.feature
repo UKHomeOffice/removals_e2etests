@@ -30,12 +30,44 @@ Feature: Performance
     And I spawn a single socket client to the backend
     And I capture the browser memory footprint
 
-  Scenario: An average hour of stuff
-    Given I submit "33" random "heartbeats"
-    When I submit "11" random "heartbeats" every "single" minute for "1" minutes all taking less than "2000" milliseconds each
-    And I submit "2" random "events" every "single" minute for "1" minutes all taking less than "500" milliseconds each
-    And I submit "900" random "movements" every "4" minutes for "1" minutes all taking less than "5000" milliseconds each
-    And I submit "100" random "prebookings" every "4" minute for "1" minutes all taking less than "1000" milliseconds each
-    Then I wait for all that to finish
+#  Scenario: Some stuff
+##    Given I submit "5" random "heartbeats"
+#    When I simulate "2" minutes with the following updates:
+#      | type      | quantity | interval | intervalUnit | limit | limitUnit   |
+#      | heartbeat | 3        | 1        | minute       | 2     | second      |
+#    Then I capture the browser memory footprint
+#    And The browser memory should not have increased by more than 32mb
+
+  Scenario: Lots of stuff
+#    Given I submit "5" random "heartbeats"
+    When I simulate "5" minutes with the following updates:
+      | type       | quantity | interval | intervalUnit | limit | limitUnit   |
+      | heartbeat  | 3        | 1        | minute       | 2     | second      |
+      | event      | 2        | 1        | minute       | 500   | millisecond |
+      | movement   | 10       | 1        | minute       | 5     | second      |
+      | prebooking | 7        | 1        | minute       | 1     | seconds     |
     Then I capture the browser memory footprint
     And The browser memory should not have increased by more than 32mb
+
+#  Scenario: An average hour of stuff
+##    Given I submit "5" random "heartbeats"
+#    When I simulate "a single" hour of updates with "3" heartbeats every "single" minute taking less than "2" seconds each
+#    Then I capture the browser memory footprint
+#    And The browser memory should not have increased by more than 32mb
+#
+#  Scenario: An average 2 hours of lots of stuff
+##    Given I submit "5" random "heartbeats"
+#    When I simulate "2" hours of updates with "3" heartbeats every "single" minute taking less than "2000" milliseconds each, "2" events every "single" minute taking less than "500" milliseconds each, "10" movements every "single" minute taking less than "5" seconds each, and "7" prebookings every "single" minute taking less than "1" seconds each
+#    Then I capture the browser memory footprint
+#    And The browser memory should not have increased by more than 32mb
+
+#
+#  Scenario: An average hour of stuff
+#    Given I submit "5" random "heartbeats"
+#    When I submit "3" random "heartbeats" every "single" minute for "2" minutes all taking less than "2000" milliseconds each
+#    And I submit "2" random "events" every "single" minute for "2" minutes all taking less than "500" milliseconds each
+#    And I submit "10" random "movements" every "single" minutes for "2" minutes all taking less than "5000" milliseconds each
+#    And I submit "7" random "prebookings" every "single" minute for "2" minutes all taking less than "1000" milliseconds each
+#    Then I wait for all that to finish
+#    Then I capture the browser memory footprint
+#    And The browser memory should not have increased by more than 32mb

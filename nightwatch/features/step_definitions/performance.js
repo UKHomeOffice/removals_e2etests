@@ -17,6 +17,14 @@ const operation = {
 }
 
 const getMsSince = (startTime) => parseInt(new Date() - startTime)
+const numberize = str => /single/i.test(str) ? 1 : parseInt(str);
+const milliize = (units => unit => units[unit] || 1)({
+  day: 24 * 60 * 60 * 1000,
+  hour: 60 * 60 * 1000,
+  minute: 60 * 1000,
+  second: 1000
+});
+
 
 const getSchema = (context, urlEndpoint) => rp({
   method: 'OPTIONS',
@@ -24,11 +32,31 @@ const getSchema = (context, urlEndpoint) => rp({
 })
   .then(response => response.data)
 
-const generateFakes = (schema, fakes, quantityOfFakes) => {
+const fakers = centres => ({
+  heartbeat: {
+    centre: () => _.sample(_.map(centres, 'name'))
+  },
+  movement: (MOcounter =>
+    ({
+      'Output.items.properties.Location': () => _.sample(_.merge(_.map(centres, 'male_cid_name'), _.map(centres, 'female_cid_name'))),
+      'Output.items.properties.MO Date': () => '05/01/2016 00:01:00',
+      'Output.items.properties.MO In/MO Out': () => _.sample(['in', 'out']),
+      'Output.items.properties.MO Type': () => _.sample(['Occupancy', 'Non-Occupancy', 'Removal']),
+      'Output.items.properties.MO Ref': () => (++MOcounter).toString(),
+      'Output.items.properties.CID Person ID': () => _.random(100, 1000000).toString()
+    }))(100),
+  prebooking: {
+    'Output.items.properties.location': () => _.sample(_.merge(_.map(centres, 'male_cid_name'), _.map(centres, 'female_cid_name'))),
+    'Output.items.properties.timestamp': () => moment().set({ hour: 7, minute: 0, second: 0 }).format(),
+    'Output.items.properties.cid_id': () => _.random(100, 1000000).toString()
+  }
+});
+
+const generateFakes = (schema, fakers, numberOfPosts) => {
   let alteredFakes = {}
-  _.mapKeys(fakes, (fake, key) => {
+  _.mapKeys(fakers, (fake, key) => {
     if (!_.isFunction(fake)) {
-      fakes[key] = () => fake
+      fakers[key] = () => fake
     }
     _.set(alteredFakes, key, fake)
     _.set(schema, `properties.${key}.faker`, `custom.${key}`)
@@ -37,7 +65,7 @@ const generateFakes = (schema, fakes, quantityOfFakes) => {
     faker.custom = alteredFakes
     return faker
   })
-  return _.map(_.range(quantityOfFakes), () => jsf(schema))
+  return _.map(_.range(numberOfPosts), () => jsf(schema))
 }
 
 const alterSchema = (schema, type, quantityOfFakes) => {
@@ -54,6 +82,44 @@ const alterSchema = (schema, type, quantityOfFakes) => {
   }
   return schema
 }
+
+const setupPosts = (duration, fakerz) => {
+  console.log('vars +++++++++++++++ ', duration)
+  return function (count, type, interval, intervalUnit, limit, limitUnit) {
+  console.log('more vars +++++++++++++++ ', count, type, interval, intervalUnit, limit, limitUnit)
+    const fakesPerPost = operation[type].singular ? 1 : count;
+    const delayBetweenPosts = Math.round((numberize(interval) * milliize(intervalUnit)) / count);
+    const numberOfPosts = Math.round(duration / delayBetweenPosts);
+    const threshold = numberize(limit) * milliize(limitUnit);
+
+    const urlEndpoint = operation[type].url;
+    const uri = `${this.globals.backend_url}/${urlEndpoint}`;
+    console.log('the rest ================', fakesPerPost, delayBetweenPosts, numberOfPosts, uri)
+
+    return this.perform((client, done) => {
+      const startTime = new Date();
+      return getSchema(this, urlEndpoint)
+          .tap(schema => this.assert.ok(schema !== false, `Got ${type} schema in ${getMsSince(startTime)} milliseconds`))
+          .then(schema => alterSchema(schema, type, fakesPerPost))
+          .then(schema => generateFakes(schema, fakerz[type], numberOfPosts))
+          .tap(fakes => this.assert.ok(!_.isEmpty(fakes), `Generated ${fakesPerPost} fake ${type} payloads in ${getMsSince(startTime)} milliseconds`))
+          .tap(_ => done())
+          .each((payload, i) => {
+            console.log('############', type, payload.Output&&payload.Output.items ? payload.Output.items.length : 1)
+            let postStartTime = new Date();
+            return rp({
+              method: 'POST',
+              uri: uri,
+              timeout: 999999999,
+              body: payload
+            })
+                .then(_ => getMsSince(postStartTime))
+                .tap(time => this.assert.ok(time < threshold, `Backend ${type} request ${i+1} took ${time} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
+                .tap(time => Promise.delay(delayBetweenPosts - time));
+          });
+    });
+  };
+};
 
 const makeSocketClient = (context, io) => new Promise((resolve, reject) => {
   let socket = io.sails.connect()
@@ -101,7 +167,7 @@ module.exports = function () {
     })
   })
 
-  this.Then(/^all the socket clients should have received "([^"]*)" message each$/, function (count) {
+  this.Then(/^all the socket clients should have received "([^"]*)" messages? each$/, function (count) {
     let i = 0
     this.perform((client, done) => {
       client.socketClients
@@ -113,7 +179,7 @@ module.exports = function () {
     })
   })
 
-  this.Then(/^The browser memory should not have increased by more than ([^"]*)mb$/, function (megabytes) {
+  this.Then(/^The browser memory should not have increased by more than (\d+)mb$/, function (megabytes) {
     this.perform((client, done) => {
       client.assert.ok(this.browser_memory_footprint.length >= 2, `${this.browser_memory_footprint.length} memory footprints to use`)
       let before = this.browser_memory_footprint[0]
@@ -124,6 +190,55 @@ module.exports = function () {
       done()
     })
   })
+  
+  this.When(/^I simulate "([^"]+)" (\w+?)s? with the following updates:$/, function (duration, durationUnit, table) {
+    duration = numberize(duration) * milliize(durationUnit);
+    const fakerz = fakers(this.centres);
+    this.perform((client, done) => {
+      Promise.all(table.hashes().map(row => {
+        console.log('more vars +++++++++++++++ ', row)
+        const fakesPerPost = operation[row.type].singular ? 1 : row.quantity;
+        const delayBetweenPosts = Math.round((numberize(row.interval) * milliize(row.intervalUnit)) / row.quantity);
+        const numberOfPosts = Math.round(duration / delayBetweenPosts);
+        const threshold = numberize(row.limit) * milliize(row.limitUnit);
+
+        const urlEndpoint = operation[row.type].url;
+        const uri = `${this.globals.backend_url}/${urlEndpoint}`;
+        console.log('the rest ================', fakesPerPost, delayBetweenPosts, numberOfPosts, uri)
+
+        const startTime = new Date();
+        return getSchema(this, urlEndpoint)
+            .tap(schema => this.assert.ok(schema !== false, `Got ${row.type} schema in ${getMsSince(startTime)} milliseconds`))
+            .then(schema => alterSchema(schema, row.type, fakesPerPost))
+            .then(schema => generateFakes(schema, fakerz[row.type], numberOfPosts))
+            .tap(fakes => console.log('>>>>>>>> # fakes:',fakes.length)&& this.assert.ok(!_.isEmpty(fakes), `Generated ${fakesPerPost} fake ${row.type} payloads in ${getMsSince(startTime)} milliseconds`))
+            // .tap(_ => done())
+            .each((payload, i) => {
+              console.log('############', row.type, payload.Output ? payload.Output.length : payload)
+              let postStartTime = new Date();
+              return rp({
+                method: 'POST',
+                uri: uri,
+                timeout: 999999999,
+                body: payload
+              })
+                  .then(_ => getMsSince(postStartTime))
+                  .tap(time => this.assert.ok(time < threshold, `Backend ${row.type} request ${i + 1} took ${time}(${time - threshold}) milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
+                  .tap(time => Promise.delay(delayBetweenPosts - time));
+            });
+      })).finally(_ => done());
+    });
+  });
+
+  this.When(/^I simulate "([^"]+)" (\w+?)s? of updates with ((?:(?:, )?(?:and )?"[^"]+" \w+ every "[^"]+" \w+(?: taking less than "[^"]+" \w+ each)?)+)$/, function (duration, durationUnit, updates, done) {
+    duration = numberize(duration) * milliize(durationUnit);
+    const fakerz = fakers(this.centres);
+    const poster = setupPosts(duration, fakerz);
+    const proms = updates.match(/(?:, )?(?:and )?"[^"]+" \w+ every "[^"]+" \w+(?: taking less than "[^"]+" \w+ each)?/g).map(update =>
+      poster.apply(this, /"([^"]+)" (\w+?)s? every "([^"]+)" (\w+?)s?(?: taking less than "([^"]+)" (\w+?)s? )/.exec(update).slice(1))
+    );
+    Promise.all(proms).then(_ => done());
+  });
 
   this.When(/^I submit "([^"]*)" random "([^"]*?)s?"(?: every "([^"]*)" minutes? for "([^"]*)" minutes? all taking less than "([^"]*)" milliseconds each|)$/, function (count, type, interval, duration, threshold) {
     console.log(count, type, interval, duration, threshold)
@@ -173,6 +288,7 @@ module.exports = function () {
         .tap(fakes => this.assert.ok(!_.isEmpty(fakes), `Generated ${quantityOfFakes} fake ${type} payloads in ${getMsSince(startTime)} milliseconds`))
         .tap(() => done())
         .each(payload => {
+          console.log('############', type, payload.Output&&payload.Output.items ? payload.Output.items.length : 1)
           let startTime = new Date()
           console.log(delayBetweenPosts) //WTF???
           return rp({
