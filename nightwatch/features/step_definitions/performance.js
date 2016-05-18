@@ -17,6 +17,7 @@ const operation = {
 }
 
 const getMsSince = (startTime) => parseInt(new Date() - startTime)
+const timeVthreshold = vs => vs > 0 ? `(+${vs})` : '';
 const numberize = str => /single/i.test(str) ? 1 : parseInt(str);
 const milliize = (units => unit => units[unit] || 1)({
   day: 24 * 60 * 60 * 1000,
@@ -24,7 +25,6 @@ const milliize = (units => unit => units[unit] || 1)({
   minute: 60 * 1000,
   second: 1000
 });
-
 
 const getSchema = (context, urlEndpoint) => rp({
   method: 'OPTIONS',
@@ -211,10 +211,11 @@ module.exports = function () {
             .tap(schema => this.assert.ok(schema !== false, `Got ${row.type} schema in ${getMsSince(startTime)} milliseconds`))
             .then(schema => alterSchema(schema, row.type, fakesPerPost))
             .then(schema => generateFakes(schema, fakerz[row.type], numberOfPosts))
-            .tap(fakes => console.log('>>>>>>>> # fakes:',fakes.length)&& this.assert.ok(!_.isEmpty(fakes), `Generated ${fakesPerPost} fake ${row.type} payloads in ${getMsSince(startTime)} milliseconds`))
+                            .tap(fakes => console.log('>>>>>>>> generated',fakes.length,'fake',row.type))
+            .tap(fakes => this.assert.ok(!_.isEmpty(fakes), `Generated ${fakesPerPost} fake ${row.type} payloads in ${getMsSince(startTime)} milliseconds`))
             // .tap(_ => done())
-            .each((payload, i) => {
-              console.log('############', row.type, payload.Output ? payload.Output.length : payload)
+            .each((payload, i, len) => {
+              console.log('############ sending', payload.Output ? payload.Output.length : 1, row.type, i+1, '/', len)
               let postStartTime = new Date();
               return rp({
                 method: 'POST',
@@ -223,7 +224,7 @@ module.exports = function () {
                 body: payload
               })
                   .then(_ => getMsSince(postStartTime))
-                  .tap(time => this.assert.ok(time < threshold, `Backend ${row.type} request ${i + 1} took ${time}(${time - threshold}) milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
+                  .tap(time => this.assert.ok(time < threshold, `Backend ${row.type} request ${i + 1} took ${time}${timeVthreshold(time - threshold)} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
                   .tap(time => Promise.delay(delayBetweenPosts - time));
             });
       })).finally(_ => done());

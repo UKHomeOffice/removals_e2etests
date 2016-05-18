@@ -45,7 +45,7 @@ Feature: Performance
       | heartbeat  | 3        | 1        | minute       | 2     | second      |
       | event      | 2        | 1        | minute       | 500   | millisecond |
       | movement   | 10       | 1        | minute       | 5     | second      |
-      | prebooking | 7        | 1        | minute       | 1     | seconds     |
+      | prebooking | 7        | 1        | minute       | 1     | second      |
     Then I capture the browser memory footprint
     And The browser memory should not have increased by more than 32mb
 
