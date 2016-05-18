@@ -1,4 +1,3 @@
-@focus
 Feature: Prebooking & Contingency
 
   Background:
@@ -12,12 +11,12 @@ Feature: Prebooking & Contingency
 
   Scenario: New valid Pre-bookings replace existing bookings
     Given I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | ops2       | oneman   |        | betweenToday7amAndTomorrow7am |
-      | depmu      | oneman   |        | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | ops2       | oneman   |        | today 9am |
+      | depmu      | oneman   |        | today 9am |
     When I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | ops1       | oneman   |        | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | ops1       | oneman   |        | today 9am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Contingency          | 0    |
@@ -26,12 +25,12 @@ Feature: Prebooking & Contingency
 
   Scenario: New valid Contingency bookings replace existing bookings
     Given I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | ops2       | oneman   |        | betweenToday7amAndTomorrow7am |
-      | depmu      | oneman   |        | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | ops2       | oneman   |        | today 9am |
+      | depmu      | oneman   |        | today 9am |
     When I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | depmu      | oneman   |        | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | depmu      | oneman   |        | today 9am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Contingency          | 1    |
@@ -40,11 +39,11 @@ Feature: Prebooking & Contingency
 
   Scenario: New valid Movement In Orders replace related pre-bookings
     Given I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | ops1       | oneman   |        | betweenToday7amAndTomorrow7am |
-      | ops1       | oneman   | 1000   | betweenToday7amAndTomorrow7am |
-      | ops1       | oneman   | 2000   | betweenToday7amAndTomorrow7am |
-      | ops1       | oneman   | 3000   | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | ops1       | oneman   |        | today 9am |
+      | ops1       | oneman   | 1000   | today 9am |
+      | ops1       | oneman   | 2000   | today 9am |
+      | ops1       | oneman   | 3000   | today 9am |
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type   | CID Person ID |
       | In           | twoman   | 991     | now     | Occupancy | 1000          |
@@ -62,11 +61,11 @@ Feature: Prebooking & Contingency
 
   Scenario: New valid Movement In Orders replace related Contingency bookings
     Given I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | htu        | oneman   |        | betweenToday7amAndTomorrow7am |
-      | htu ops1   | oneman   | 1000   | betweenToday7amAndTomorrow7am |
-      | depmu      | oneman   | 2000   | betweenToday7amAndTomorrow7am |
-      | depmu ops1 | oneman   | 3000   | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | htu        | oneman   |        | today 9am |
+      | htu ops1   | oneman   | 1000   | today 9am |
+      | depmu      | oneman   | 2000   | today 9am |
+      | depmu ops1 | oneman   | 3000   | today 9am |
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type   | CID Person ID |
       | In           | twoman   | 991     | now     | Occupancy | 1000          |
@@ -88,11 +87,11 @@ Feature: Prebooking & Contingency
       | In           | twoman   | 991     | now     | Occupancy | 1000          |
       | In           | oneman   | 992     | now     | Occupancy | 2000          |
     When I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | ops1       | oneman   |        | betweenToday7amAndTomorrow7am |
-      | ops1       | oneman   | 1000   | betweenToday7amAndTomorrow7am |
-      | ops1       | oneman   | 2000   | betweenToday7amAndTomorrow7am |
-      | ops1       | oneman   | 3000   | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | ops1       | oneman   |        | today 9am |
+      | ops1       | oneman   | 1000   | today 9am |
+      | ops1       | oneman   | 2000   | today 9am |
+      | ops1       | oneman   | 3000   | today 9am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Prebookings          | 2    |
@@ -110,11 +109,11 @@ Feature: Prebooking & Contingency
       | In           | twoman   | 991     | now     | Occupancy | 1000          |
       | In           | oneman   | 992     | now     | Occupancy | 2000          |
     When I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | htu        | oneman   |        | betweenToday7amAndTomorrow7am |
-      | htu ops1   | oneman   | 1000   | betweenToday7amAndTomorrow7am |
-      | depmu      | oneman   | 2000   | betweenToday7amAndTomorrow7am |
-      | depmu ops1 | oneman   | 3000   | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | htu        | oneman   |        | today 9am |
+      | htu ops1   | oneman   | 1000   | today 9am |
+      | depmu      | oneman   | 2000   | today 9am |
+      | depmu ops1 | oneman   | 3000   | today 9am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Contingency          | 2    |
@@ -128,14 +127,14 @@ Feature: Prebooking & Contingency
 
   Scenario: New valid Pre-bookings are ignored
     Given I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | ops1       | oneman   |        | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | ops1       | oneman   |        | today 9am |
     When I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      |            | oneman   |        | betweenToday7amAndTomorrow7am |
-      | ops1       |          |        | betweenToday7amAndTomorrow7am |
-      | ops1       | oneman   |        | beforeToday7am                |
-      | ops1       | oneman   |        | afterTomorrow7am              |
+      | task_force | location | cid_id | timestamp    |
+      |            | oneman   |        | today 9am    |
+      | ops1       |          |        | today 9am    |
+      | ops1       | oneman   |        | today 6am    |
+      | ops1       | oneman   |        | tomorrow 8am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Prebookings          | 1    |
@@ -143,13 +142,13 @@ Feature: Prebooking & Contingency
 
   Scenario: New valid Contingency bookings are ignored
     Given I submit the following prebookings:
-      | task_force | location | cid_id | timestamp                     |
-      | depmu      | oneman   |        | betweenToday7amAndTomorrow7am |
+      | task_force | location | cid_id | timestamp |
+      | depmu      | oneman   |        | today 9am |
     When I submit the following prebookings:
-      | task_force  | location | cid_id | timestamp                     |
-      | htu         |          |        | betweenToday7amAndTomorrow7am |
-      | htu ops 1   | oneman   |        | beforeToday7am                |
-      | depmu ops 1 | oneman   |        | afterTomorrow7am              |
+      | task_force  | location | cid_id | timestamp    |
+      | htu         |          |        | today 9am    |
+      | htu ops 1   | oneman   |        | today 6am    |
+      | depmu ops 1 | oneman   |        | tomorrow 8am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Contingency          | 1    |

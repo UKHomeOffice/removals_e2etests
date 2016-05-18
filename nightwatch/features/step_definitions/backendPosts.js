@@ -1,7 +1,5 @@
 /* global rp _ */
 'use strict'
-const moment = require('moment-timezone')
-moment.tz.setDefault('Europe/London')
 require('sugar-date')
 
 const eventPost = function (operation, table) {
@@ -49,21 +47,8 @@ module.exports = function () {
   })
 
   this.When(/^I submit the following prebookings:$/, function (table) {
-    var validTimestamp = moment().set({hour: 7, minute: 0, second: 0}).format()
-    var pastTimestamp = moment(validTimestamp).subtract(1, 'millisecond').format()
-    var futureTimestamp = moment(validTimestamp).add(1, 'day').format()
     let payload = _.map(table.hashes(), (row) => {
-      switch (row.timestamp) {
-        case 'beforeToday7am':
-          row.timestamp = pastTimestamp
-          break
-        case 'afterTomorrow7am':
-          row.timestamp = futureTimestamp
-          break
-        case 'betweenToday7amAndTomorrow7am':
-          row.timestamp = validTimestamp
-      }
-
+      row.timestamp = Date.create(row.timestamp || 'today 8am').toISOString();
       return row
     })
     this.perform((client, done) =>
