@@ -34,7 +34,7 @@ module.exports = function () {
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/cid_entry/movement`,
-        body: { Output: table.hashes() }
+        body: {Output: table.hashes()}
       })
         .finally(() => done())
     )
@@ -49,15 +49,28 @@ module.exports = function () {
   })
 
   this.When(/^I submit the following prebookings:$/, function (table) {
+    var validTimestamp = moment().set({hour: 7, minute: 0, second: 0}).format()
+    var pastTimestamp = moment(validTimestamp).subtract(1, 'millisecond').format()
+    var futureTimestamp = moment(validTimestamp).add(1, 'day').format()
     let payload = _.map(table.hashes(), (row) => {
-      row.timestamp = Date.create(row.timestamp || 'now').toISOString()
+      switch (row.timestamp) {
+        case 'beforeToday7am':
+          row.timestamp = pastTimestamp
+          break
+        case 'afterTomorrow7am':
+          row.timestamp = futureTimestamp
+          break
+        case 'betweenToday7amAndTomorrow7am':
+          row.timestamp = validTimestamp
+      }
+
       return row
     })
     this.perform((client, done) =>
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/depmu_entry/prebooking`,
-        body: { Output: payload }
+        body: {Output: payload}
       })
         .finally(() => done())
     )
