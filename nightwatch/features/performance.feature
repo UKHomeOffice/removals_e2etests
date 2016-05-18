@@ -1,4 +1,4 @@
-@performance
+@frontend @focus
 Feature: Performance
 
 #  For performance testing we will test with 3 times normal load
@@ -30,26 +30,15 @@ Feature: Performance
     And I spawn "75" socket clients to the backend
     And I capture the browser memory footprint
 
-  Scenario: 3x normal load heartbeat
-    When I submit "33" random "heartbeats" every "1" minute for "10" minutes all taking less than "1000" milliseconds each
+  Scenario: 1x normal load
+    When I simulate "5" minutes with the following updates:
+      | type       | quantity | interval | intervalUnit | limit | limitUnit |
+      | heartbeat  | 11       | 1        | minute       | 2     | second    |
+      | event      | 1        | 1        | minute       | 2     | second    |
+      | movement   | 900      | 4        | minute       | 5     | second    |
+      | prebooking | 100      | 4        | minute       | 1     | second    |
     Then all the socket clients should have received "660" message each
-    And I capture the browser memory footprint
-    Then The browser memory should not have increased by more than 32mb
 
-#  Scenario: Events
-#    When I submit "3" random "events" every "1" minute for "10" minutes all taking less than "500" milliseconds each
-#    And I capture the browser memory footprint
-#    Then all the socket clients should have received "60" message each
-#    Then The browser memory should not have increased by more than "10"mb
-#
-  Scenario: 3x normal load movements
-    When I submit "2700" random "movements" every "2" minute for "10" minutes all taking less than "25000" milliseconds each
-    Then all the socket clients should have received "5" message each
-    And I capture the browser memory footprint
-    Then The browser memory should not have increased by more than 32mb
+    Then I capture the browser memory footprint
+    And The browser memory should not have increased by more than 32mb
 
-  Scenario: 3x normal load prebookings
-    When I submit "300" random "prebookings" every "2" minute for "10" minutes all taking less than "3000" milliseconds each
-    Then all the socket clients should have received "5" message each
-    And I capture the browser memory footprint
-    Then The browser memory should not have increased by more than 32mb
