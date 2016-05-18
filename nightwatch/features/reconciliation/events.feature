@@ -6,6 +6,7 @@ Feature: Reconciled Check In/Out Events
     And The following centres exist:
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
       | one  | 1000          | 10000           | oneman,onebman | onewoman        |
+      | two  | 1000          | 10000           | twoman,twobman | twowoman        |
     And I am on the wallboard
     And The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
@@ -104,10 +105,7 @@ Feature: Reconciled Check In/Out Events
       | Scheduled incoming  | 1 |
 
   Scenario: Inter Site Transfer (movement first)
-    Given The following centres exist:
-      | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
-      | two  | 1000          | 10000           | twoman,twobman | twowoman        |
-    And The following detainee exists:
+    Given The following detainee exists:
       | centre      | one    |
       | cid_id      | 999999 |
       | person_id   | 12     |
@@ -135,10 +133,7 @@ Feature: Reconciled Check In/Out Events
       | Scheduled incoming  | 0 |
 
   Scenario: Inter Site Transfer (event first)
-    Given The following centres exist:
-      | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
-      | two  | 1000          | 10000           | twoman,twobman | twowoman        |
-    And The following detainee exists:
+    Given The following detainee exists:
       | centre      | one    |
       | cid_id      | 999999 |
       | person_id   | 12     |
