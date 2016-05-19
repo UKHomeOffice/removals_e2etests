@@ -1,7 +1,5 @@
 /* global rp _ */
 'use strict'
-const moment = require('moment-timezone')
-moment.tz.setDefault('Europe/London')
 require('sugar-date')
 
 const eventPost = function (operation, table) {
@@ -34,7 +32,7 @@ module.exports = function () {
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/cid_entry/movement`,
-        body: { Output: table.hashes() }
+        body: {Output: table.hashes()}
       })
         .finally(() => done())
     )
@@ -50,14 +48,14 @@ module.exports = function () {
 
   this.When(/^I submit the following prebookings:$/, function (table) {
     let payload = _.map(table.hashes(), (row) => {
-      row.timestamp = Date.create(row.timestamp || 'now').toISOString()
+      row.timestamp = Date.create(row.timestamp || 'today 8am').toISOString();
       return row
     })
     this.perform((client, done) =>
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/depmu_entry/prebooking`,
-        body: { Output: payload }
+        body: {Output: payload}
       })
         .finally(() => done())
     )
