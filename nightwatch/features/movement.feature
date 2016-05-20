@@ -33,17 +33,17 @@ Feature: Movements
       | Expected outgoing      | 1    |
       | Unexpected incoming    | 0    |
 
-#  Scenario: Unreconciled In Movement shows as Expected incoming and reduces availability
-#    When I submit the following movements:
-#      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-#      | In           | oneman   | 111     | now     | Removal | 1             |
-#    Then The Centre "one" should show the following under "Male":
-#      | Contractual Capacity   | 1000 |
-#      | Occupied               | 0    |
-#      | Beds out of commission | 0    |
-#      | Contingency            | 0    |
-#      | Prebookings            | 0    |
-#      | Availability           | 999  |
-#      | Expected incoming      | 1    |
-#      | Expected outgoing      | 0    |
-#      | Unexpected incoming    | 0    |
+  Scenario: Unreconciled In Movement shows as Expected incoming and reduces availability
+    When I submit the following movements:
+      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
+      | In           | oneman   | 111     | now     | Removal | 1             |
+    Then The Centre "one" should show the following under "Male":
+      | Contractual Capacity   | 1000 |
+      | Occupied               | 0    |
+      | Beds out of commission | 0    |
+      | Contingency            | 0    |
+      | Prebookings            | 0    |
+      | Availability           | 999  |
+      | Expected incoming      | 1    |
+      | Expected outgoing      | 0    |
+      | Unexpected incoming    | 0    |
