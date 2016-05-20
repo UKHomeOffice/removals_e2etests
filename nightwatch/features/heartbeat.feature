@@ -16,16 +16,16 @@ Feature: Heartbeat
       | Beds out of commission | 0    |
       | Prebookings            | 0    |
       | Availability           | 1000 |
-      | Scheduled outgoing     | 0    |
-      | Scheduled incoming     | 0    |
+      | Expected outgoing      | 0    |
+      | Expected incoming      | 0    |
     And The Centre "one" should show the following under "Female":
       | Contractual Capacity   | 10000 |
       | Occupied               | 0     |
       | Beds out of commission | 0     |
       | Prebookings            | 0     |
       | Availability           | 10000 |
-      | Scheduled outgoing     | 0     |
-      | Scheduled incoming     | 0     |
+      | Expected outgoing      | 0     |
+      | Expected incoming      | 0     |
     When I submit a heartbeat with:
       | centre                 | one  |
       | male_occupied          | 100  |
@@ -38,13 +38,13 @@ Feature: Heartbeat
       | Beds out of commission | 2000  |
       | Prebookings            | 0     |
       | Availability           | -1100 |
-      | Scheduled outgoing     | 0     |
-      | Scheduled incoming     | 0     |
+      | Expected outgoing      | 0     |
+      | Expected incoming      | 0     |
     And The Centre "one" should show the following under "Female":
       | Contractual Capacity   | 10000 |
       | Occupied               | 2000  |
       | Beds out of commission | 3000  |
       | Prebookings            | 0     |
       | Availability           | 5000  |
-      | Scheduled outgoing     | 0     |
-      | Scheduled incoming     | 0     |
+      | Expected outgoing      | 0     |
+      | Expected incoming      | 0     |

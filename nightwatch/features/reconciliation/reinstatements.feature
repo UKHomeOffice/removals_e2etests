@@ -22,7 +22,7 @@ Feature: Reinstatements
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | Out          | oneman   | 111     | now     | Removal | 1234          |
     Then The Centre "one" should show the following under "Male":
-      | Scheduled outgoing | 0 |
+      | Expected outgoing | 0 |
     And I submit the following "reinstatement" event:
       | centre    | one |
       | timestamp | now |
@@ -34,6 +34,6 @@ Feature: Reinstatements
       | Contingency            | 0    |
       | Prebookings            | 0    |
       | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 1    |
+      | Expected incoming      | 0    |
+      | Expected outgoing      | 1    |
       | Unexpected incoming    | 0    |

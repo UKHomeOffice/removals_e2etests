@@ -15,8 +15,8 @@ Feature: Sanity Checks
       | Contingency            | 0    |
       | Prebookings            | 0    |
       | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
+      | Expected incoming      | 0    |
+      | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
     And The Centre "one" should show the following under "Female":
       | Contractual Capacity   | 10000 |
@@ -25,8 +25,8 @@ Feature: Sanity Checks
       | Contingency            | 0     |
       | Prebookings            | 0     |
       | Availability           | 10000 |
-      | Scheduled incoming     | 0     |
-      | Scheduled outgoing     | 0     |
+      | Expected incoming      | 0     |
+      | Expected outgoing      | 0     |
       | Unexpected incoming    | 0     |
     And The Centre "two" should show the following under "Male":
       | Contractual Capacity   | 2000 |
@@ -35,8 +35,8 @@ Feature: Sanity Checks
       | Contingency            | 0    |
       | Prebookings            | 0    |
       | Availability           | 2000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
+      | Expected incoming      | 0    |
+      | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
     And The Centre "two" should show the following under "Female":
       | Contractual Capacity   | 20000 |
@@ -45,8 +45,8 @@ Feature: Sanity Checks
       | Contingency            | 0     |
       | Prebookings            | 0     |
       | Availability           | 20000 |
-      | Scheduled incoming     | 0     |
-      | Scheduled outgoing     | 0     |
+      | Expected incoming      | 0     |
+      | Expected outgoing      | 0     |
       | Unexpected incoming    | 0     |
 
   Scenario: Centre one's events shouldn't affect Centre two, male shouldn't affect female
@@ -56,17 +56,17 @@ Feature: Sanity Checks
       | In           | onewoman | 222     | now     | Removal | 4321          |
       | In           | onewoman | 333     | now     | Removal | 5432          |
     Then The Centre "one" should show the following under "Male":
-      | Availability       | 999 |
-      | Scheduled incoming | 1   |
+      | Availability      | 999 |
+      | Expected incoming | 1   |
     And The Centre "one" should show the following under "Female":
-      | Availability       | 9998 |
-      | Scheduled incoming | 2    |
+      | Availability      | 9998 |
+      | Expected incoming | 2    |
     And The Centre "two" should show the following under "Male":
-      | Availability       | 2000 |
-      | Scheduled incoming | 0    |
+      | Availability      | 2000 |
+      | Expected incoming | 0    |
     And The Centre "two" should show the following under "Female":
-      | Availability       | 20000 |
-      | Scheduled incoming | 0     |
+      | Availability      | 20000 |
+      | Expected incoming | 0     |
     When I submit the following "check in" event:
       | centre      | one  |
       | timestamp   | now  |
@@ -89,15 +89,15 @@ Feature: Sanity Checks
       | gender      | f    |
       | nationality | abc  |
     Then The Centre "one" should show the following under "Male":
-      | Availability       | 1000 |
-      | Scheduled incoming | 0    |
+      | Availability      | 1000 |
+      | Expected incoming | 0    |
     And The Centre "one" should show the following under "Female":
-      | Availability       | 10000 |
-      | Scheduled incoming | 0     |
+      | Availability      | 10000 |
+      | Expected incoming | 0     |
     And The Centre "two" should show the following under "Male":
-      | Availability       | 2000 |
-      | Scheduled incoming | 0    |
+      | Availability      | 2000 |
+      | Expected incoming | 0    |
     And The Centre "two" should show the following under "Female":
-      | Availability       | 20000 |
-      | Scheduled incoming | 0     |
+      | Availability      | 20000 |
+      | Expected incoming | 0     |
 
