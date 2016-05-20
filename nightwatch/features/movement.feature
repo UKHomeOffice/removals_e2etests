@@ -14,11 +14,11 @@ Feature: Movements
       | Contingency            | 0    |
       | Prebookings            | 0    |
       | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
+      | Expected incoming      | 0    |
+      | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
 
-  Scenario: Unreconciled Out Movement shows as Scheduled Outgoing and does not affect Availability
+  Scenario: Unreconciled Out Movement shows as Expected Outgoing and does not affect Availability
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | Out          | oneman   | 111     | now     | Removal | 1             |
@@ -29,21 +29,21 @@ Feature: Movements
       | Contingency            | 0    |
       | Prebookings            | 0    |
       | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 1    |
+      | Expected incoming      | 0    |
+      | Expected outgoing      | 1    |
       | Unexpected incoming    | 0    |
 
-  Scenario: Unreconciled In Movement shows as Scheduled incoming and reduces availability
-    When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111     | now     | Removal | 1             |
-    Then The Centre "one" should show the following under "Male":
-      | Contractual Capacity   | 1000 |
-      | Occupied               | 0    |
-      | Beds out of commission | 0    |
-      | Contingency            | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 999  |
-      | Scheduled incoming     | 1    |
-      | Scheduled outgoing     | 0    |
-      | Unexpected incoming    | 0    |
+#  Scenario: Unreconciled In Movement shows as Expected incoming and reduces availability
+#    When I submit the following movements:
+#      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
+#      | In           | oneman   | 111     | now     | Removal | 1             |
+#    Then The Centre "one" should show the following under "Male":
+#      | Contractual Capacity   | 1000 |
+#      | Occupied               | 0    |
+#      | Beds out of commission | 0    |
+#      | Contingency            | 0    |
+#      | Prebookings            | 0    |
+#      | Availability           | 999  |
+#      | Expected incoming      | 1    |
+#      | Expected outgoing      | 0    |
+#      | Unexpected incoming    | 0    |

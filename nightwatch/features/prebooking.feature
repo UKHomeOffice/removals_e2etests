@@ -51,12 +51,12 @@ Feature: Prebooking & Contingency
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Prebookings          | 2    |
-      | Scheduled incoming   | 1    |
+      | Expected incoming    | 1    |
       | Availability         | 997  |
     Then The Centre "two" should show the following under "Male":
       | Contractual Capacity | 2000 |
       | Prebookings          | 0    |
-      | Scheduled incoming   | 1    |
+      | Expected incoming    | 1    |
       | Availability         | 1999 |
 
   Scenario: New valid Movement In Orders replace related Contingency bookings
@@ -73,12 +73,12 @@ Feature: Prebooking & Contingency
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Contingency          | 2    |
-      | Scheduled incoming   | 1    |
+      | Expected incoming    | 1    |
       | Availability         | 997  |
     Then The Centre "two" should show the following under "Male":
       | Contractual Capacity | 2000 |
       | Contingency          | 0    |
-      | Scheduled incoming   | 1    |
+      | Expected incoming    | 1    |
       | Availability         | 1999 |
 
   Scenario: New valid pre-bookings are ignored if related Movement In Order exists
@@ -95,12 +95,12 @@ Feature: Prebooking & Contingency
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Prebookings          | 2    |
-      | Scheduled incoming   | 1    |
+      | Expected incoming    | 1    |
       | Availability         | 997  |
     Then The Centre "two" should show the following under "Male":
       | Contractual Capacity | 2000 |
       | Prebookings          | 0    |
-      | Scheduled incoming   | 1    |
+      | Expected incoming    | 1    |
       | Availability         | 1999 |
 
   Scenario: New valid Contingency bookings are ignored if related Movement In Order exists
@@ -117,12 +117,12 @@ Feature: Prebooking & Contingency
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Contingency          | 2    |
-      | Scheduled incoming   | 1    |
+      | Expected incoming    | 1    |
       | Availability         | 997  |
     Then The Centre "two" should show the following under "Male":
       | Contractual Capacity | 2000 |
       | Contingency          | 0    |
-      | Scheduled incoming   | 1    |
+      | Expected incoming    | 1    |
       | Availability         | 1999 |
 
   Scenario: New valid Pre-bookings are ignored

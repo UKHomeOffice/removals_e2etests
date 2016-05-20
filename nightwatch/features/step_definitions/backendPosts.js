@@ -48,7 +48,7 @@ module.exports = function () {
 
   this.When(/^I submit the following prebookings:$/, function (table) {
     let payload = _.map(table.hashes(), (row) => {
-      row.timestamp = Date.create(row.timestamp || 'today 8am').toISOString();
+      row.timestamp = Date.create(row.timestamp || 'today 8am').toISOString()
       return row
     })
     this.perform((client, done) =>

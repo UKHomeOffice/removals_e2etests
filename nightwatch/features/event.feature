@@ -14,8 +14,8 @@ Feature: Unreconciled Events
       | Contingency            | 0    |
       | Prebookings            | 0    |
       | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
+      | Expected incoming      | 0    |
+      | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
 
   Scenario: Unreconciled Check In Event shows as Unexpected Incoming and does not affect Availability
@@ -33,8 +33,8 @@ Feature: Unreconciled Events
       | Contingency            | 0    |
       | Prebookings            | 0    |
       | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
+      | Expected incoming      | 0    |
+      | Expected outgoing      | 0    |
       | Unexpected incoming    | 1    |
 
   Scenario: Update changes gender
