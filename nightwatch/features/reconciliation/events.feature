@@ -157,3 +157,63 @@ Feature: Reconciled Check In/Out Events
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |
       | Expected incoming   | 0 |
+
+
+  Scenario: Check In event before Movement reconciliation window doesn't reconcile
+    When I submit the following "check in" event:
+      | centre      | one        |
+      | timestamp   | 5 days ago |
+      | cid_id      | 1234       |
+      | person_id   | 12         |
+      | gender      | m          |
+      | nationality | abc        |
+    And I submit the following movements:
+      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
+      | In           | oneman   | 111     | now     | Removal | 1234          |
+    Then The Centre "one" should show the following under "Male":
+      | Availability      | 999 |
+      | Expected incoming | 1   |
+
+  Scenario: Check In event after Movement reconciliation window doesn't reconcile
+    When I submit the following "check in" event:
+      | centre      | one  |
+      | timestamp   | now  |
+      | cid_id      | 1234 |
+      | person_id   | 12   |
+      | gender      | m    |
+      | nationality | abc  |
+    And I submit the following movements:
+      | MO In/MO Out | Location | MO Ref. | MO Date    | MO Type | CID Person ID |
+      | In           | oneman   | 111     | 4 days ago | Removal | 1234          |
+    Then The Centre "one" should show the following under "Male":
+      | Unexpected incoming | 1 |
+
+  Scenario: Early Check In event does reconcile
+    When I submit the following "check in" event:
+      | centre      | one  |
+      | timestamp   | now  |
+      | cid_id      | 1234 |
+      | person_id   | 12   |
+      | gender      | m    |
+      | nationality | abc  |
+    Then The Centre "one" should show the following under "Male":
+      | Unexpected incoming | 1 |
+    And I submit the following movements:
+      | MO In/MO Out | Location | MO Ref. | MO Date  | MO Type | CID Person ID |
+      | In           | oneman   | 111     | tomorrow | Removal | 1234          |
+    Then The Centre "one" should show the following under "Male":
+      | Unexpected incoming | 0 |
+
+  Scenario: Too Early Check In event doesn't reconcile
+    When I submit the following "check in" event:
+      | centre      | one  |
+      | timestamp   | now  |
+      | cid_id      | 1234 |
+      | person_id   | 12   |
+      | gender      | m    |
+      | nationality | abc  |
+    And I submit the following movements:
+      | MO In/MO Out | Location | MO Ref. | MO Date         | MO Type | CID Person ID |
+      | In           | oneman   | 111     | 4 days from now | Removal | 1234          |
+    Then The Centre "one" should show the following under "Male":
+      | Unexpected incoming | 1 |
