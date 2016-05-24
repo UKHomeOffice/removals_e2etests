@@ -18,14 +18,14 @@ const operation = {
 }
 
 const getMsSince = (startTime) => parseInt(new Date() - startTime)
-const timeVthreshold = vs => vs > 0 ? `(+${vs})` : '';
-const numberize = str => /single/i.test(str) ? 1 : parseInt(str);
+const timeVthreshold = vs => vs > 0 ? `(+${vs})` : ''
+const numberize = str => /single/i.test(str) ? 1 : parseInt(str)
 const milliize = (units => unit => units[unit] || 1)({
   day: 24 * 60 * 60 * 1000,
   hour: 60 * 60 * 1000,
   minute: 60 * 1000,
   second: 1000
-});
+})
 
 const getSchema = (context, urlEndpoint) => rp({
   method: 'OPTIONS',
@@ -43,7 +43,7 @@ const fakers = centres => ({
       Date.create('today 8am'),
       Date.create('yesterday 8am'),
       Date.create('one day before yesterday 8am')
-    ], (date) => date.toISOString())),
+    ], (date) => date.toISOString()))
   },
   movement: (MOcounter =>
     ({
@@ -52,7 +52,7 @@ const fakers = centres => ({
         Date.create('today 8am'),
         Date.create('yesterday 8am'),
         Date.create('one day before yesterday 8am')
-      ], (date) => date.format("{dd}/{MM}/{yyyy} {HH}:{mm}:{ss}"))),
+      ], (date) => date.format('{dd}/{MM}/{yyyy} {HH}:{mm}:{ss}'))),
       'Output.items.properties.MO In/MO Out': () => _.sample(['in', 'out']),
       'Output.items.properties.MO Type': () => _.sample(['Occupancy', 'Non-Occupancy', 'Removal']),
       'Output.items.properties.MO Ref': () => (++MOcounter).toString(),
@@ -63,7 +63,7 @@ const fakers = centres => ({
     'Output.items.properties.timestamp': () => moment().set({hour: 7, minute: 0, second: 0}).format(),
     'Output.items.properties.cid_id': () => _.random(100, 1000000).toString()
   }
-});
+})
 
 const generateFakes = (schema, fakers, numberOfPosts) => {
   let alteredFakes = {}
@@ -84,7 +84,7 @@ const generateFakes = (schema, fakers, numberOfPosts) => {
 const alterSchema = (schema, type, quantityOfFakes) => {
   if (type === 'event') {
     schema.definitions.operation.faker = 'custom.operation'
-    schema.oneOf = [_.find(schema.oneOf, {"description": "Check in event"})];
+    schema.oneOf = [_.find(schema.oneOf, {'description': 'Check in event'})]
   }
   if (type === 'movement') {
     schema.properties.Output.minItems = quantityOfFakes
@@ -124,11 +124,10 @@ module.exports = function () {
       Promise.each(this.promises)
         .then(done)
     })
-
   })
 
   this.Given(/^I spawn (?:a single|"([^"]*)") socket clients? to the backend$/, function (count) {
-    count = count || 1;
+    count = count || 1
     this.perform((client, done) => {
       delete socketIOClient.sails
       let io = sailsIOClient(socketIOClient)
@@ -171,19 +170,19 @@ module.exports = function () {
   })
 
   this.When(/^I simulate "([^"]+)" (\w+?)s? with the following updates:$/, function (duration, durationUnit, table) {
-    duration = numberize(duration) * milliize(durationUnit);
-    const fakerz = fakers(this.centres);
+    duration = numberize(duration) * milliize(durationUnit)
+    const fakerz = fakers(this.centres)
     this.perform((client, done) => {
       Promise.all(table.hashes().map(row => {
-        const fakesPerPost = operation[row.type].singular ? 1 : row.quantity;
-        const delayBetweenPosts = Math.floor((numberize(row.interval) * milliize(row.intervalUnit)) / (operation[row.type].singular ? row.quantity : 1));
-        const numberOfPosts = Math.floor(duration / delayBetweenPosts);
+        const fakesPerPost = operation[row.type].singular ? 1 : row.quantity
+        const delayBetweenPosts = Math.floor((numberize(row.interval) * milliize(row.intervalUnit)) / (operation[row.type].singular ? row.quantity : 1))
+        const numberOfPosts = Math.floor(duration / delayBetweenPosts)
 
-        const threshold = numberize(row.limit) * milliize(row.limitUnit);
+        const threshold = numberize(row.limit) * milliize(row.limitUnit)
 
-        const urlEndpoint = operation[row.type].url;
-        const uri = `${this.globals.backend_url}/${urlEndpoint}`;
-        const startTime = new Date();
+        const urlEndpoint = operation[row.type].url
+        const uri = `${this.globals.backend_url}/${urlEndpoint}`
+        const startTime = new Date()
 
         return getSchema(this, urlEndpoint)
           .tap(schema => this.assert.ok(schema !== false, `Got ${row.type} schema in ${getMsSince(startTime)} milliseconds`))
@@ -191,7 +190,7 @@ module.exports = function () {
           .then(schema => generateFakes(schema, fakerz[row.type], numberOfPosts))
           .tap(fakes => this.assert.ok(!_.isEmpty(fakes), `Generated ${fakes.length} fake ${row.type} payloads in ${getMsSince(startTime)} milliseconds`))
           .each((payload, i, len) => {
-            let postStartTime = new Date();
+            let postStartTime = new Date()
             return rp({
               method: 'POST',
               uri: uri,
@@ -200,9 +199,9 @@ module.exports = function () {
             })
               .then(_ => getMsSince(postStartTime))
               .tap(time => this.assert.ok(time < threshold, `Backend ${row.type} request ${i + 1} of ${len} took ${time}${timeVthreshold(time - threshold)} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
-              .tap(time => Promise.delay(delayBetweenPosts - time));
-          });
-      })).finally(_ => done());
-    });
-  });
+              .tap(time => Promise.delay(delayBetweenPosts - time))
+          })
+      })).finally(_ => done())
+    })
+  })
 }

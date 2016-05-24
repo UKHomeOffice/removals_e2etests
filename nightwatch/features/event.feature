@@ -36,35 +36,7 @@ Feature: Unreconciled Events
       | Expected incoming      | 0    |
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 1    |
-      | Unexpected outgoing    | 0    |
     And the Centre "one" should show the following CIDS under "Male" "Unexpected incoming":
-      | CID Person ID |
-      | 999999        |
-
-  Scenario: Unreconciled Check Out Event shows as Unexpected Outgoing and does not affect Availability
-    Given I submit the following "check in" event:
-      | centre      | one    |
-      | timestamp   | now    |
-      | cid_id      | 999999 |
-      | person_id   | 12     |
-      | gender      | m      |
-      | nationality | abc    |
-    And I submit the following "check out" event:
-      | centre    | one |
-      | timestamp | now |
-      | person_id | 12  |
-    Then The Centre "one" should show the following under "Male":
-      | Contractual Capacity   | 1000 |
-      | Occupied               | 0    |
-      | Beds out of commission | 0    |
-      | Contingency            | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
-      | Unexpected incoming    | 1    |
-      | Unexpected outgoing    | 1    |
-    And the Centre "one" should show the following CIDS under "Male" "Unexpected outgoing":
       | CID Person ID |
       | 999999        |
 
@@ -101,10 +73,9 @@ Feature: Unreconciled Events
       | Contingency            | 0    |
       | Prebookings            | 0    |
       | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
+      | Expected incoming     | 0    |
+      | Expected outgoing     | 0    |
       | Unexpected incoming    | 0    |
-      | Unexpected outgoing    | 0    |
     And I submit the following "check in" event:
       | centre      | one    |
       | timestamp   | now    |
@@ -119,14 +90,9 @@ Feature: Unreconciled Events
       | Contingency            | 0    |
       | Prebookings            | 0    |
       | Availability           | 1000 |
-      | Scheduled incoming     | 0    |
-      | Scheduled outgoing     | 0    |
+      | Expected incoming     | 0    |
+      | Expected outgoing     | 0    |
       | Unexpected incoming    | 1    |
-      | Unexpected outgoing    | 1    |
     And the Centre "one" should show the following CIDS under "Male" "Unexpected incoming":
       | CID Person ID |
       | 999999        |
-    And the Centre "one" should show the following CIDS under "Male" "Unexpected outgoing":
-      | CID Person ID |
-      | 999999        |
-
