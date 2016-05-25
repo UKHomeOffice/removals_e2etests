@@ -49,6 +49,10 @@ module.exports = {
     },
     disconnected_message: {
       selector: '.disconnected'
-    }
+    },
+    reports_from: '#from',
+    reports_to: '#to',
+    reports_get_summary: '#getSummary',
+    reports_get_raw: '#getRaw'
   }
 }
