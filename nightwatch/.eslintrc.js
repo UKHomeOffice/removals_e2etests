@@ -1,6 +1,9 @@
 module.exports = {
-    "extends": "standard",
-    "plugins": [
-        "standard"
-    ]
+  "extends": "standard",
+  "rules": {
+    "handle-callback-err": 0
+  },
+  "plugins": [
+    "standard"
+  ]
 };
