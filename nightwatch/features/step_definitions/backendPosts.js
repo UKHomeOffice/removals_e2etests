@@ -2,7 +2,7 @@
 'use strict'
 require('sugar-date')
 
-const eventPost = function (operation, table) {
+const eventPost = function (operation, table, requestDecorator) {
   let tablehashes = table.rowsHash()
   tablehashes.operation = operation
   tablehashes.timestamp = Date.create(tablehashes.timestamp || 'now').toISOString()
@@ -15,14 +15,19 @@ const eventPost = function (operation, table) {
     tablehashes.person_id = parseInt(tablehashes.person_id)
   }
 
-  this.perform((client, done) =>
-    rp({
-      method: 'POST',
-      uri: `${client.globals.backend_url}/irc_entry/event`,
-      body: tablehashes,
-      jar: false
-    })
-      .finally(() => done())
+  if (!requestDecorator) {
+    requestDecorator = (req) => req
+  }
+  return this.perform((client, done) =>
+    requestDecorator(
+      rp({
+        method: 'POST',
+        uri: `${client.globals.backend_url}/irc_entry/event`,
+        body: tablehashes,
+        jar: false
+      })
+        .finally(() => done())
+    )
   )
 }
 
@@ -40,6 +45,16 @@ module.exports = function () {
 
   this.When(/^I submit the following "([^"]*)" event:$/, function (operation, table) {
     return eventPost.call(this, operation, table)
+  })
+
+  this.When(/^I submit the following "([^"]*)" event expecting a "([^"]*)" error:$/, function (operation, expectedStatus, table) {
+    var didError = false
+    var actualStatus
+    return eventPost.call(this, operation, table, (request) =>
+      request.catch(Error, error => (didError = true) && (actualStatus = error.statusCode))
+        .finally(() => this.assert.ok(didError, 'An error occurred'))
+        .finally(() => this.assert.ok(actualStatus.toString() === expectedStatus.toString(), `Status "${actualStatus}" was as expected "${expectedStatus}"`))
+    )
   })
 
   this.When(/^The following detainee exists:$/, function (table) {
