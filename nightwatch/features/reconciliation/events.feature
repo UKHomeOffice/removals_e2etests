@@ -26,6 +26,9 @@ Feature: Reconciled Check In/Out Events
     Then The Centre "one" should show the following under "Male":
       | Availability      | 999 |
       | Expected incoming | 1   |
+    And the Centre "one" should show the following CIDS under "Male" "Expected incoming":
+      | CID Person ID |
+      | 1234          |
     And I submit the following "check in" event:
       | centre      | one  |
       | timestamp   | now  |
@@ -57,6 +60,9 @@ Feature: Reconciled Check In/Out Events
     Then The Centre "one" should show the following under "Male":
       | Availability      | 1000 |
       | Expected outgoing | 1    |
+    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing":
+      | CID Person ID |
+      | 1234          |
     And I submit the following "check out" event:
       | centre    | one |
       | timestamp | now |
@@ -103,6 +109,12 @@ Feature: Reconciled Check In/Out Events
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 1 |
       | Expected incoming   | 1 |
+    And the Centre "one" should show the following CIDS under "Male" "Expected incoming":
+      | CID Person ID |
+      | 999999        |
+    And the Centre "one" should show the following CIDS under "Male" "Unexpected incoming":
+      | CID Person ID |
+      | 111111        |
 
   Scenario: Inter Site Transfer (movement first)
     Given The following detainee exists:
@@ -116,10 +128,16 @@ Feature: Reconciled Check In/Out Events
       | Out          | oneman   | 111     | now     | Removal | 999999        |
       | In           | twoman   | 222     | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
-      | Expected outgoing | 1 |
+      | Expected outgoing   | 1 |
+    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing":
+      | CID Person ID |
+      | 999999        |
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 0 |
       | Expected incoming   | 1 |
+    And the Centre "two" should show the following CIDS under "Male" "Expected incoming":
+      | CID Person ID |
+      | 999999        |
     When I submit the following "inter site transfer" event:
       | centre    | one   |
       | centre_to | two   |
@@ -148,6 +166,9 @@ Feature: Reconciled Check In/Out Events
     And The Centre "two" should show the following under "Male":
       | Unexpected incoming | 1 |
       | Expected incoming   | 0 |
+    And the Centre "two" should show the following CIDS under "Male" "Unexpected incoming":
+      | CID Person ID |
+      | 999999        |
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | Out          | oneman   | 111     | now     | Removal | 999999        |

@@ -80,6 +80,12 @@ Feature: Prebooking & Contingency
       | Contingency          | 0    |
       | Expected incoming    | 1    |
       | Availability         | 1999 |
+    And the Centre "one" should show the following CIDS under "Male" "Expected incoming":
+      | CID Person ID |
+      | 2000          |
+    And the Centre "two" should show the following CIDS under "Male" "Expected incoming":
+      | CID Person ID |
+      | 1000          |
 
   Scenario: New valid pre-bookings are ignored if related Movement In Order exists
     Given I submit the following movements:
