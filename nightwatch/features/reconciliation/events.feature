@@ -19,13 +19,25 @@ Feature: Reconciled Check In/Out Events
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
 
-  Scenario: Reconciled Check In Event and Movement In does not show as Unexpected In and Expected In or affect Availability
+  Scenario: Reconciling a Movement In with a Check In event removes it from the Expected Incoming count and CID ID list, and changes the Availability
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | In           | oneman   | 111     | now     | Removal | 1234          |
+      | In           | oneman   | 211     | now     | Removal | 1235          |
     Then The Centre "one" should show the following under "Male":
-      | Availability      | 999 |
-      | Expected incoming | 1   |
+      | Contractual Capacity   | 1000 |
+      | Occupied               | 0    |
+      | Beds out of commission | 0    |
+      | Contingency            | 0    |
+      | Prebookings            | 0    |
+      | Availability           | 998  |
+      | Expected incoming      | 2    |
+      | Expected outgoing      | 0    |
+      | Unexpected incoming    | 0    |
+    And the Centre "one" should show the following CIDS under "Male" "Expected incoming":
+      | CID Person ID |
+      | 1234          |
+      | 1235          |
     And I submit the following "check in" event:
       | centre      | one  |
       | timestamp   | now  |
@@ -39,10 +51,13 @@ Feature: Reconciled Check In/Out Events
       | Beds out of commission | 0    |
       | Contingency            | 0    |
       | Prebookings            | 0    |
-      | Availability           | 1000 |
-      | Expected incoming      | 0    |
+      | Availability           | 999  |
+      | Expected incoming      | 1    |
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
+    And the Centre "one" should show the following CIDS under "Male" "Expected incoming":
+      | CID Person ID |
+      | 1235          |
 
   Scenario: Reconciled Check out Event and Movement out does not show as Expected out or affect Availability
     When I submit the following movements:

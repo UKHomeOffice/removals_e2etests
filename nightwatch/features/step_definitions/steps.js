@@ -17,4 +17,15 @@ module.exports = function () {
     )
     this.page.wallboard().toggleCentreDetails(centreName, gender)
   })
+
+  this.Then(/^the Centre "([^"]*)" should show the following CIDS under "([^"]*)" "([^"]*)":$/, function (centreName, gender, detail, table) {
+    // @TODO: add something to test order
+    this.page.wallboard().toggleCentreDetails(centreName, gender)
+    this.page.wallboard().toggleCentreDetailsCid(centreName, gender, detail)
+    _.map(table.hashes(), (row, index) =>
+      this.page.wallboard().expectCentreDetailCids(centreName, gender, detail, index + 1, row['CID Person ID'])
+    )
+    this.page.wallboard().toggleCentreDetailsCid(centreName, gender, detail)
+    this.page.wallboard().toggleCentreDetails(centreName, gender)
+  })
 }
