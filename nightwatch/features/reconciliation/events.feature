@@ -59,10 +59,11 @@ Feature: Reconciled Check In/Out Events
       | CID Person ID |
       | 1235          |
 
-  Scenario: Reconciled Check out Event and Movement out does not show as Expected out or affect Availability
+  Scenario: Reconciling a Check out Event with a Movement out removes it from the Expected Outgoing count and CID ID list, but does not change the Availability
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | Out          | oneman   | 111     | now     | Removal | 1234          |
+      | Out          | oneman   | 131     | now     | Removal | 7634          |
     And The following detainee exists:
       | centre      | one  |
       | cid_id      | 1234 |
@@ -70,8 +71,19 @@ Feature: Reconciled Check In/Out Events
       | gender      | m    |
       | nationality | abc  |
     Then The Centre "one" should show the following under "Male":
-      | Availability      | 1000 |
-      | Expected outgoing | 1    |
+      | Contractual Capacity   | 1000 |
+      | Occupied               | 0    |
+      | Beds out of commission | 0    |
+      | Contingency            | 0    |
+      | Prebookings            | 0    |
+      | Availability           | 1000 |
+      | Expected incoming      | 0    |
+      | Expected outgoing      | 2    |
+      | Unexpected incoming    | 0    |
+    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing":
+      | CID Person ID |
+      | 1234          |
+      | 7634          |
     And I submit the following "check out" event:
       | centre    | one |
       | timestamp | now |
@@ -84,8 +96,11 @@ Feature: Reconciled Check In/Out Events
       | Prebookings            | 0    |
       | Availability           | 1000 |
       | Expected incoming      | 0    |
-      | Expected outgoing      | 0    |
+      | Expected outgoing      | 1    |
       | Unexpected incoming    | 0    |
+    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing":
+      | CID Person ID |
+      | 7634          |
 
   Scenario: Update changes cid_id
     Given I submit the following movements:
