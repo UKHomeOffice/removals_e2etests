@@ -32,7 +32,7 @@ Feature: Movements
       | Expected incoming      | 0    |
       | Expected outgoing      | 1    |
       | Unexpected incoming    | 0    |
-    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing":
+    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing", which should be clickable:
       | CID Person ID |
       | 1433          |
 
@@ -50,6 +50,6 @@ Feature: Movements
       | Expected incoming      | 1    |
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
-    And the Centre "one" should show the following CIDS under "Male" "Expected incoming":
+    And the Centre "one" should show the following CIDS under "Male" "Expected incoming", which should be clickable:
       | CID Person ID |
       | 12345555      |
