@@ -12,7 +12,7 @@ git checkout $BRANCH || true
 cd ../fe
 git checkout $BRANCH || true
 cd ..
-docker build -t ibm-frontend be
-docker build -t ibm-backend fe
+#docker build -t ibm-frontend be
+#docker build -t ibm-backend fe
 
 ./runtests.sh --env docker
