@@ -22,9 +22,14 @@ module.exports = {
         .click(centreDetailNestedToggle)
         .useCss()
     },
-    expectCentreDetail: function (centreName, gender, k, v) {
+    expectCentreDetail: function (centreName, gender, k, v, toNotBePresent) {
+      let centreDetail = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`
       this.api.useXpath()
-      this.expect.element(`${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).before(2000)
+      if (toNotBePresent) {
+        this.expect.element(centreDetail).to.not.be.present.after(2000)
+      } else {
+        this.expect.element(centreDetail).text.to.equal(v).before(2000)
+      }
       this.api.useCss()
     },
     expectCentreDetailCids: function (centreName, gender, k, i, cid, clickable) {
