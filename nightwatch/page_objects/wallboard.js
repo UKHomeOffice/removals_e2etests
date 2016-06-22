@@ -13,13 +13,13 @@ module.exports = {
         .click(centreToggle)
         .useCss()
     },
-    toggleCentreDetailsCid: function (centreName, gender, k) {
-      let centreDetailCidToggle = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr`
+    toggleCentreDetailsNested: function (centreName, gender, k) {
+      let centreDetailNestedToggle = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr`
       this.api
         .useXpath()
-        .expect.element(centreDetailCidToggle).to.be.present.after(2000)
+        .expect.element(centreDetailNestedToggle).to.be.present.after(2000)
       this.api
-        .click(centreDetailCidToggle)
+        .click(centreDetailNestedToggle)
         .useCss()
     },
     expectCentreDetail: function (centreName, gender, k, v) {

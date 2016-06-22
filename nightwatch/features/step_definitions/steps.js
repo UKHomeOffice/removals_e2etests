@@ -25,11 +25,11 @@ module.exports = function () {
       clickable = false
     }
     this.page.wallboard().toggleCentreDetails(centreName, gender)
-    this.page.wallboard().toggleCentreDetailsCid(centreName, gender, detail)
+    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
     _.map(table.hashes(), (row, index) =>
       this.page.wallboard().expectCentreDetailCids(centreName, gender, detail, index + 1, row['CID Person ID'], clickable)
     )
-    this.page.wallboard().toggleCentreDetailsCid(centreName, gender, detail)
+    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
     this.page.wallboard().toggleCentreDetails(centreName, gender)
   })
 }
