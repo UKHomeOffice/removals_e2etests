@@ -13,6 +13,8 @@ const eventPost = function (operation, table, requestDecorator) {
 
   if (tablehashes.person_id) {
     tablehashes.person_id = parseInt(tablehashes.person_id)
+  } else if (tablehashes.single_occupancy_person_id) {
+    tablehashes.single_occupancy_person_id = parseInt(tablehashes.single_occupancy_person_id)
   }
 
   if (!requestDecorator) {
