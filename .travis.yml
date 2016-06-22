@@ -17,4 +17,4 @@ before_install:
 
 
 script:
-  - ./runtests-ci.sh
+  - ./runtests-ci.sh  --env docker
