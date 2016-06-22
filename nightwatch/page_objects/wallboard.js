@@ -13,9 +13,28 @@ module.exports = {
         .click(centreToggle)
         .useCss()
     },
+    toggleCentreDetailsCid: function (centreName, gender, k) {
+      let centreDetailCidToggle = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr`
+      this.api
+        .useXpath()
+        .expect.element(centreDetailCidToggle).to.be.present.after(2000)
+      this.api
+        .click(centreDetailCidToggle)
+        .useCss()
+    },
     expectCentreDetail: function (centreName, gender, k, v) {
       this.api.useXpath()
       this.expect.element(`${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).before(2000)
+      this.api.useCss()
+    },
+    expectCentreDetailCids: function (centreName, gender, k, i, cid, clickable) {
+      this.api.useXpath()
+      const listItem = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr//ul/li[${i}]`
+      this.expect.element(listItem).text.to.contain(cid).before(2000)
+      if (clickable) { // IBM-243 : check the CID is still visible after clicking on it
+        this.api.click(listItem)
+        this.expect.element(listItem).text.to.contain(cid).before(2000)
+      }
       this.api.useCss()
     }
   }],

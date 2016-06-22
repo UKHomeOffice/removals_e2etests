@@ -36,6 +36,9 @@ Feature: Unreconciled Events
       | Expected incoming      | 0    |
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 1    |
+    And the Centre "one" should show the following CIDS under "Male" "Unexpected incoming", which should be clickable:
+      | CID Person ID |
+      | 999999        |
 
   Scenario: Update changes gender
     Given I submit the following "check in" event:

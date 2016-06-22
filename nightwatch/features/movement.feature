@@ -21,7 +21,7 @@ Feature: Movements
   Scenario: Unreconciled Out Movement shows as Expected Outgoing and does not affect Availability
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | Out          | oneman   | 111     | now     | Removal | 1             |
+      | Out          | oneman   | 111     | now     | Removal | 1433          |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
@@ -32,11 +32,14 @@ Feature: Movements
       | Expected incoming      | 0    |
       | Expected outgoing      | 1    |
       | Unexpected incoming    | 0    |
+    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing", which should be clickable:
+      | CID Person ID |
+      | 1433          |
 
   Scenario: Unreconciled In Movement shows as Expected incoming and reduces availability
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111     | now     | Removal | 1             |
+      | In           | oneman   | 111     | now     | Removal | 12345555      |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
@@ -47,3 +50,6 @@ Feature: Movements
       | Expected incoming      | 1    |
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
+    And the Centre "one" should show the following CIDS under "Male" "Expected incoming", which should be clickable:
+      | CID Person ID |
+      | 12345555      |

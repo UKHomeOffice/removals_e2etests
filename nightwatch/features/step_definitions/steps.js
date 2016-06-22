@@ -17,4 +17,19 @@ module.exports = function () {
     )
     this.page.wallboard().toggleCentreDetails(centreName, gender)
   })
+
+  this.Then(/^the Centre "([^"]*)" should show the following CIDS under "([^"]*)" "([^"]*)"(, which should be clickable)?:$/, function (centreName, gender, detail, clickable, table) {
+    // @TODO: add something to test order
+    if (typeof table === 'function') {
+      table = clickable
+      clickable = false
+    }
+    this.page.wallboard().toggleCentreDetails(centreName, gender)
+    this.page.wallboard().toggleCentreDetailsCid(centreName, gender, detail)
+    _.map(table.hashes(), (row, index) =>
+      this.page.wallboard().expectCentreDetailCids(centreName, gender, detail, index + 1, row['CID Person ID'], clickable)
+    )
+    this.page.wallboard().toggleCentreDetailsCid(centreName, gender, detail)
+    this.page.wallboard().toggleCentreDetails(centreName, gender)
+  })
 }
