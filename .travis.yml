@@ -2,21 +2,19 @@ sudo: required
 
 env:
   DOCKER_COMPOSE_VERSION: 1.8.0-rc1
-  DOCKER_VERSION: 1.10.1-0~trusty
-
-
-before_install:
-#  docker
-  - apt-cache madison docker-engine
-  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
-#  docker compose
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+  DOCKER_VERSION: 1.11.2-0~trusty
 
 services:
   - docker
+
+before_install:
+#  docker
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
+#  docker compose
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+  - chmod +x /usr/local/bin/docker-compose
+
 
 script:
   - ./runtests-ci.sh
