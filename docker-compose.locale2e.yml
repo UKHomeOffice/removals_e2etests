@@ -5,14 +5,14 @@ services:
      - backend
      - frontend
   backend:
-    image: "ibm-backend"
+    image: ibm-backend
     expose:
       - 8080
     environment:
      - NODE_ENV=development
      - PORT=8080
   frontend:
-    image: "ibm-frontend"
+    image: ibm-frontend
     expose:
      - 80
     environment:
