@@ -13,7 +13,7 @@ fi
 trap tidyup EXIT
 function tidyup {
     docker-compose down
-    docker-compose rm --all
+    docker-compose rm -f
 }
 
 #cleanup
