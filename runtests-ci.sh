@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
-export BRANCH=$(git rev-parse --abbrev-ref HEAD)
+export BRANCH=origin/$(git rev-parse --abbrev-ref HEAD)
+export DOCKER_BRANCH=$(echo $BRANCH | sed -e "s/\//_/g")
 
-rm -rf be fe
+docker pull quay.io/ukhomeofficedigital/removals-api:${DOCKER_BRANCH} || docker pull quay.io/ukhomeofficedigital/removals-api:origin_master
+docker tag quay.io/ukhomeofficedigital/removals-api:${DOCKER_BRANCH} ibm-backend || docker tag quay.io/ukhomeofficedigital/removals-api:origin_master ibm-backend
+docker pull quay.io/ukhomeofficedigital/removals-wallboard:${DOCKER_BRANCH} || docker pull quay.io/ukhomeofficedigital/removals-wallboard:origin_master
+docker tag quay.io/ukhomeofficedigital/removals-wallboard:${DOCKER_BRANCH} ibm-frontend || docker tag quay.io/ukhomeofficedigital/removals-wallboard:origin_master ibm-frontend
 
-git clone https://github.com/UKHomeOffice/removals_integration.git be
-git clone https://github.com/UKHomeOffice/removals_wallboard.git fe
-cd be
-git checkout $BRANCH || true
-cd ../fe
-git checkout $BRANCH || true
-cd ..
 
 ./runtests.sh --env docker
