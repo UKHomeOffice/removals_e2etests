@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-export BRANCH=origin/$(git rev-parse --abbrev-ref HEAD)
+export BRANCH=origin/$TRAVIS_BRANCH
 export DOCKER_BRANCH=$(echo $BRANCH | sed -e "s/\//_/g")
 
 docker pull quay.io/ukhomeofficedigital/removals-api:${DOCKER_BRANCH} || docker pull quay.io/ukhomeofficedigital/removals-api:origin_master
