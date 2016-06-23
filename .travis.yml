@@ -17,4 +17,4 @@ before_install:
 
 
 script:
-  - ./runtests-ci.sh  --env docker
+  - travis_retry ./runtests-ci.sh  --env docker
