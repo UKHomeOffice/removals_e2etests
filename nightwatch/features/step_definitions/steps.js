@@ -32,4 +32,14 @@ module.exports = function () {
     this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
     this.page.wallboard().toggleCentreDetails(centreName, gender)
   })
+
+  this.Then(/^the Centre "([^"]*)" should( not)? show the following Reasons under "([^"]*)" "([^"]*)":$/, function (centreName, elementNotToBePresent, gender, detail, table) {
+    this.page.wallboard().toggleCentreDetails(centreName, gender)
+    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
+    _.map(table.rowsHash(), (v, k) =>
+      this.page.wallboard().expectCentreDetail(centreName, gender, k, v, elementNotToBePresent)
+    )
+    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
+    this.page.wallboard().toggleCentreDetails(centreName, gender)
+  })
 }
