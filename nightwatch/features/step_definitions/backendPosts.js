@@ -97,6 +97,18 @@ module.exports = function () {
     )
   })
 
+  this.Then(/^There are no existing ports/, function () {
+    this.perform((client, done) =>
+      rp(`${client.globals.backend_url}/port`)
+        .then(body => body.data)
+        .map(port => rp({
+          method: 'DELETE',
+          uri: `${client.globals.backend_url}/port/${port.id}`
+        }))
+        .finally(() => done())
+    )
+  })
+
   this.Then(/^There are no existing centres$/, function () {
     this.perform((client, done) =>
       rp(`${client.globals.backend_url}/centres`)
@@ -122,6 +134,22 @@ module.exports = function () {
             female_capacity: parseInt(row.female_capacity) || 0,
             female_cid_name: row.female_cid_name ? row.female_cid_name.split(',') : [],
             male_cid_name: row.male_cid_name ? row.male_cid_name.split(',') : []
+          }
+        })
+          .finally(() => done())
+      )
+    )
+  })
+
+  this.Then(/^The following ports exist:$/, function (table) {
+    this.ports = table.hashes()
+    _.map(table.hashes(), (row) =>
+      this.perform((client, done) =>
+        rp({
+          method: 'POST',
+          uri: `${client.globals.backend_url}/port`,
+          body: {
+            location: row.name
           }
         })
           .finally(() => done())
