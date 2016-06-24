@@ -13,18 +13,23 @@ module.exports = {
         .click(centreToggle)
         .useCss()
     },
-    toggleCentreDetailsCid: function (centreName, gender, k) {
-      let centreDetailCidToggle = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr`
+    toggleCentreDetailsNested: function (centreName, gender, k) {
+      let centreDetailNestedToggle = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr`
       this.api
         .useXpath()
-        .expect.element(centreDetailCidToggle).to.be.present.after(2000)
+        .expect.element(centreDetailNestedToggle).to.be.present.after(2000)
       this.api
-        .click(centreDetailCidToggle)
+        .click(centreDetailNestedToggle)
         .useCss()
     },
-    expectCentreDetail: function (centreName, gender, k, v) {
+    expectCentreDetail: function (centreName, gender, k, v, toNotBePresent) {
+      let centreDetail = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`
       this.api.useXpath()
-      this.expect.element(`${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`).text.to.equal(v).before(2000)
+      if (toNotBePresent) {
+        this.expect.element(centreDetail).to.not.be.present.after(2000)
+      } else {
+        this.expect.element(centreDetail).text.to.equal(v).before(2000)
+      }
       this.api.useCss()
     },
     expectCentreDetailCids: function (centreName, gender, k, i, cid, clickable) {

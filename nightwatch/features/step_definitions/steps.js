@@ -25,11 +25,21 @@ module.exports = function () {
       clickable = false
     }
     this.page.wallboard().toggleCentreDetails(centreName, gender)
-    this.page.wallboard().toggleCentreDetailsCid(centreName, gender, detail)
+    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
     _.map(table.hashes(), (row, index) =>
       this.page.wallboard().expectCentreDetailCids(centreName, gender, detail, index + 1, row['CID Person ID'], clickable)
     )
-    this.page.wallboard().toggleCentreDetailsCid(centreName, gender, detail)
+    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
+    this.page.wallboard().toggleCentreDetails(centreName, gender)
+  })
+
+  this.Then(/^the Centre "([^"]*)" should( not)? show the following Reasons under "([^"]*)" "([^"]*)":$/, function (centreName, elementNotToBePresent, gender, detail, table) {
+    this.page.wallboard().toggleCentreDetails(centreName, gender)
+    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
+    _.map(table.rowsHash(), (v, k) =>
+      this.page.wallboard().expectCentreDetail(centreName, gender, k, v, elementNotToBePresent)
+    )
+    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
     this.page.wallboard().toggleCentreDetails(centreName, gender)
   })
 }
