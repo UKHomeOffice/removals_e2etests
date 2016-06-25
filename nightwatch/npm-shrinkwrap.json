@@ -197,6 +197,11 @@
         }
       }
     },
+    "csv-parse": {
+      "version": "1.1.1",
+      "from": "https://registry.npmjs.org/csv-parse/-/csv-parse-1.1.1.tgz",
+      "resolved": "https://registry.npmjs.org/csv-parse/-/csv-parse-1.1.1.tgz"
+    },
     "cucumber": {
       "version": "0.10.4",
       "from": "cucumber@>=0.10.2 <0.11.0",
