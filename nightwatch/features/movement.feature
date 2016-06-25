@@ -6,6 +6,10 @@ Feature: Movements
     And The following centres exist:
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
       | one  | 1000          | 10000           | oneman,onebman | onewoman        |
+    And There are no existing ports
+    And The following ports exist:
+      | name     |
+      | Big Port |
     And I am on the wallboard
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
@@ -53,3 +57,16 @@ Feature: Movements
     And the Centre "one" should show the following CIDS under "Male" "Expected incoming", which should be clickable:
       | CID Person ID |
       | 12345555      |
+
+  Scenario: Non-occupancy Movements that relate to a port should be considered like any other
+    When I submit the following movements:
+      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type       | CID Person ID |
+      | Out          | Big Port | 110     | now     | Non-Occupancy | 12345555      |
+      | In           | oneman   | 111     | now     | Non-Occupancy | 12345555      |
+      | Out          | oneman   | 112     | now     | Non-Occupancy | 12345555      |
+      | In           | Big Port | 113     | now     | Non-Occupancy | 12345555      |
+    Then The Centre "one" should show the following under "Male":
+      | Contractual Capacity | 1000 |
+      | Availability         | 999  |
+      | Expected incoming    | 1    |
+      | Expected outgoing    | 1    |
