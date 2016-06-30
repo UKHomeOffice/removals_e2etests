@@ -59,28 +59,6 @@ Feature: Prebooking & Contingency
       | Expected incoming    | 1    |
       | Availability         | 1999 |
 
-  Scenario: New valid Movement In Orders replace related Contingency bookings
-    Given I submit the following prebookings:
-      | task_force | location | cid_id | timestamp |
-      | htu        | oneman   |        | today 9am |
-      | htu ops1   | oneman   | 1000   | today 9am |
-      | depmu      | oneman   | 2000   | today 9am |
-      | depmu ops1 | oneman   | 3000   | today 9am |
-    When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type   | CID Person ID |
-      | In           | twoman   | 991     | now     | Occupancy | 1000          |
-      | In           | oneman   | 992     | now     | Occupancy | 2000          |
-    Then The Centre "one" should show the following under "Male":
-      | Contractual Capacity | 1000 |
-      | Contingency          | 2    |
-      | Expected incoming    | 1    |
-      | Availability         | 997  |
-    Then The Centre "two" should show the following under "Male":
-      | Contractual Capacity | 2000 |
-      | Contingency          | 0    |
-      | Expected incoming    | 1    |
-      | Availability         | 1999 |
-
   Scenario: New valid pre-bookings are ignored if related Movement In Order exists
     Given I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type   | CID Person ID |
@@ -103,27 +81,21 @@ Feature: Prebooking & Contingency
       | Expected incoming    | 1    |
       | Availability         | 1999 |
 
-  Scenario: New valid Contingency bookings are ignored if related Movement In Order exists
-    Given I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type   | CID Person ID |
-      | In           | twoman   | 991     | now     | Occupancy | 1000          |
-      | In           | oneman   | 992     | now     | Occupancy | 2000          |
-    When I submit the following prebookings:
+  Scenario: New valid Contingency bookings are ignored if they have a cid
+    Given I submit the following prebookings:
       | task_force | location | cid_id | timestamp |
       | htu        | oneman   |        | today 9am |
-      | htu ops1   | oneman   | 1000   | today 9am |
-      | depmu      | oneman   | 2000   | today 9am |
-      | depmu ops1 | oneman   | 3000   | today 9am |
+      | htu ops1   | oneman   |        | today 9am |
+      | depmu      | oneman   |        | today 9am |
+      | depmu ops1 | oneman   |        | today 9am |
+      | htu        | oneman   | 1000   | today 9am |
+      | htu ops1   | oneman   | 2000   | today 9am |
+      | depmu      | oneman   | 3000   | today 9am |
+      | depmu ops1 | oneman   | 4000   | today 9am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
-      | Contingency          | 2    |
-      | Expected incoming    | 1    |
-      | Availability         | 997  |
-    Then The Centre "two" should show the following under "Male":
-      | Contractual Capacity | 2000 |
-      | Contingency          | 0    |
-      | Expected incoming    | 1    |
-      | Availability         | 1999 |
+      | Contingency          | 4    |
+      | Availability         | 996  |
 
   Scenario: New valid Pre-bookings are ignored
     Given I submit the following prebookings:
