@@ -34,10 +34,9 @@ Feature: Reconciled Check In/Out Events
       | Expected incoming      | 2    |
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
-    And the Centre "one" should show the following CIDS under "Male" "Expected incoming":
-      | CID Person ID |
-      | 1234          |
-      | 1235          |
+    And the Centre "one" should show the following Reasons under "Male" "Expected incoming":
+      | 1234 | 1 |
+      | 1235 | 1 |
     And I submit the following "check in" event:
       | centre      | one  |
       | timestamp   | now  |
@@ -55,9 +54,8 @@ Feature: Reconciled Check In/Out Events
       | Expected incoming      | 1    |
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
-    And the Centre "one" should show the following CIDS under "Male" "Expected incoming":
-      | CID Person ID |
-      | 1235          |
+    And the Centre "one" should show the following Reasons under "Male" "Expected incoming":
+      | 1235 | 1 |
 
   Scenario: Reconciling a Check out Event with a Movement out removes it from the Expected Outgoing count and CID ID list, but does not change the Availability
     When I submit the following movements:
@@ -80,10 +78,9 @@ Feature: Reconciled Check In/Out Events
       | Expected incoming      | 0    |
       | Expected outgoing      | 2    |
       | Unexpected incoming    | 0    |
-    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing":
-      | CID Person ID |
-      | 1234          |
-      | 7634          |
+    And the Centre "one" should show the following Reasons under "Male" "Expected outgoing":
+      | 1234 |  |
+      | 7634 |  |
     And I submit the following "check out" event:
       | centre    | one |
       | timestamp | now |
@@ -98,9 +95,8 @@ Feature: Reconciled Check In/Out Events
       | Expected incoming      | 0    |
       | Expected outgoing      | 1    |
       | Unexpected incoming    | 0    |
-    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing":
-      | CID Person ID |
-      | 7634          |
+    And the Centre "one" should show the following Reasons under "Male" "Expected outgoing":
+      | 7634 | 1 |
 
   Scenario: Update changes cid_id
     Given I submit the following movements:
