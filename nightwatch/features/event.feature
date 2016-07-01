@@ -60,3 +60,34 @@ Feature: Unreconciled Events
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 0 |
 
+  Scenario: Only Check ins within the reconciliation window show on the dashboard
+    Given I submit the following "check in" event:
+      | centre      | one                  |
+      | timestamp   | three days ago 23:30 |
+      | cid_id      | 999991               |
+      | person_id   | 12                   |
+      | gender      | m                    |
+      | nationality | abc                  |
+    Given I submit the following "check in" event:
+      | centre      | one                |
+      | timestamp   | two days ago 23:30 |
+      | cid_id      | 999992             |
+      | person_id   | 12                 |
+      | gender      | m                  |
+      | nationality | abc                |
+    Given I submit the following "check in" event:
+      | centre      | one             |
+      | timestamp   | yesterday 23:30 |
+      | cid_id      | 999993          |
+      | person_id   | 12              |
+      | gender      | m               |
+      | nationality | abc             |
+    Given I submit the following "check in" event:
+      | centre      | one         |
+      | timestamp   | today 23:30 |
+      | cid_id      | 999994      |
+      | person_id   | 12          |
+      | gender      | m           |
+      | nationality | abc         |
+    Then The Centre "one" should show the following under "Male":
+      | Unexpected incoming | 3 |
