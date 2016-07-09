@@ -36,20 +36,20 @@ Feature: Performance
     And I capture the browser memory footprint
     Then The browser memory should not have increased by more than 32mb
 
-#  Scenario: Events
-#    When I submit "3" random "events" every "1" minute for "10" minutes all taking less than "500" milliseconds each
-#    And I capture the browser memory footprint
-#    Then all the socket clients should have received "60" message each
-#    Then The browser memory should not have increased by more than "10"mb
-#
+  Scenario: Events
+    When I submit "3" random "events" every "1" minute for "10" minutes all taking less than "500" milliseconds each
+#    Then all the socket clients should have received "210" message each
+    And I capture the browser memory footprint
+    Then The browser memory should not have increased by more than 10mb
+
   Scenario: 3x normal load movements
     When I submit "2700" random "movements" every "2" minute for "10" minutes all taking less than "25000" milliseconds each
-    Then all the socket clients should have received "5" message each
+#    Then all the socket clients should have received "220" message each
     And I capture the browser memory footprint
     Then The browser memory should not have increased by more than 32mb
 
   Scenario: 3x normal load prebookings
     When I submit "300" random "prebookings" every "2" minute for "10" minutes all taking less than "3000" milliseconds each
-    Then all the socket clients should have received "5" message each
+#    Then all the socket clients should have received "210" message each
     And I capture the browser memory footprint
     Then The browser memory should not have increased by more than 32mb
