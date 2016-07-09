@@ -27,18 +27,10 @@ module.exports = {
       this.api.useXpath()
       if (toNotBePresent) {
         this.expect.element(centreDetail).to.not.be.present.after(2000)
-      } else {
+      } else if (v) {
         this.expect.element(centreDetail).text.to.equal(v).before(2000)
-      }
-      this.api.useCss()
-    },
-    expectCentreDetailCids: function (centreName, gender, k, i, cid, clickable) {
-      this.api.useXpath()
-      const listItem = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr//ul/li[${i}]`
-      this.expect.element(listItem).text.to.contain(cid).before(2000)
-      if (clickable) { // IBM-243 : check the CID is still visible after clicking on it
-        this.api.click(listItem)
-        this.expect.element(listItem).text.to.contain(cid).before(2000)
+      } else {
+        this.expect.element(centreDetail).to.be.present.after(2000)
       }
       this.api.useCss()
     }

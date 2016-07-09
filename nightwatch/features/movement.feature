@@ -36,9 +36,8 @@ Feature: Movements
       | Expected incoming      | 0    |
       | Expected outgoing      | 1    |
       | Unexpected incoming    | 0    |
-    And the Centre "one" should show the following CIDS under "Male" "Expected outgoing", which should be clickable:
-      | CID Person ID |
-      | 1433          |
+    And the Centre "one" should show the following Reasons under "Male" "Expected outgoing":
+      | 1433 | 1 |
 
   Scenario: Unreconciled In Movement shows as Expected incoming and reduces availability
     When I submit the following movements:
@@ -54,9 +53,8 @@ Feature: Movements
       | Expected incoming      | 1    |
       | Expected outgoing      | 0    |
       | Unexpected incoming    | 0    |
-    And the Centre "one" should show the following CIDS under "Male" "Expected incoming", which should be clickable:
-      | CID Person ID |
-      | 12345555      |
+    And the Centre "one" should show the following Reasons under "Male" "Expected incoming":
+      | 12345555 | 1 |
 
   Scenario: Non-occupancy Movements that relate to a port should be considered like any other
     When I submit the following movements:
