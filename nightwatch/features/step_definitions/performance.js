@@ -10,10 +10,10 @@ const sailsIOClient = require('sails.io.js')
 moment.tz.setDefault('Europe/London')
 
 const operation = {
-  heartbeat: { singular: true, url: 'irc_entry/heartbeat' },
-  event: { singular: true, url: 'irc_entry/event' },
-  movement: { singular: false, url: 'cid_entry/movement' },
-  prebooking: { singular: false, url: 'depmu_entry/prebooking' }
+  heartbeat: {singular: true, url: 'irc_entry/heartbeat'},
+  event: {singular: true, url: 'irc_entry/event'},
+  movement: {singular: false, url: 'cid_entry/movement'},
+  prebooking: {singular: false, url: 'depmu_entry/prebooking'}
 }
 
 const getMsSince = (startTime) => parseInt(new Date() - startTime)
@@ -98,7 +98,7 @@ module.exports = function () {
       client.socketClients
         .map(socket => {
           i++
-          this.assert.equal(count, socket.messages.length, `Socket [${i}] received ${socket.messages.length} messages`)
+          this.assert.equal(socket.messages.length, count, `Socket [${i}] received ${socket.messages.length} messages`)
         })
         .finally(done)
     })
@@ -127,6 +127,11 @@ module.exports = function () {
         centre: () => _.sample(_.map(this.centres, 'name'))
       }
     }
+    if (type === 'event') {
+      fakes = {
+        centre: () => _.sample(_.map(this.centres, 'name'))
+      }
+    }
     if (type === 'movement') {
       fakes = {
         'Output.items.properties.Location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
@@ -143,7 +148,7 @@ module.exports = function () {
     if (type === 'prebooking') {
       fakes = {
         'Output.items.properties.location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
-        'Output.items.properties.timestamp': () => moment().set({ hour: 7, minute: 0, second: 0 }).format(),
+        'Output.items.properties.timestamp': () => moment().set({hour: 7, minute: 0, second: 0}).format(),
         'Output.items.properties.cid_id': () => _.random(100, 1000000).toString()
       }
     }
@@ -169,6 +174,8 @@ module.exports = function () {
             timeout: 999999999,
             body: payload
           })
+            .catch(() => {
+            })
             .then(() => getMsSince(startTime))
             .tap((time) => this.assert.ok(time < threshold, `Backend ${type} request ${i} took ${time} milliseconds sleeping for ${((delayBetweenPosts - time) / 1000).toFixed(2)} seconds`))
             .tap(() => i++)
