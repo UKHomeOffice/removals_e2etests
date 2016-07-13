@@ -10,6 +10,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | b
 source ~/.nvm/nvm.sh
 
 # Install Node
+cd nightwatch
 nvm install 4.2
 nvm use 4.2
 npm install
@@ -24,7 +25,7 @@ npm install
 
 ## Running the code against a remote environment with docker-compose
 ```shell
-./run-tests.sh --env dev
+./runtests.sh --env dev
 ```
 
 
@@ -39,7 +40,7 @@ cd frontend_codebase
 docker build -t ibm-frontend .
 
 # Run tests
-./run-tests.sh --env docker
+./runtests.sh --env docker
 ```
 
 
