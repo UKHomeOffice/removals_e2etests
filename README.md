@@ -1,7 +1,8 @@
-# End to End tests 
+# End to End tests
+
+[![Build](https://travis-ci.org/UKHomeOffice/removals_e2etests.png)](https://travis-ci.org/UKHomeOffice/removals_e2etests)
 
 There are two ways to run the tests, if you want to just get started quickly then use docker, if you want to integrate this into your IDE for example you might prefer to run the code on your machine.
-
 
 ## Running the code on your machine:
 ```shell
@@ -16,22 +17,26 @@ cd removals_e2etests/nightwatch
 npm install
 ```
 
-## Run tests against localhost
+## Run tests against an environment
 ```shell
 # Start the [FE Application] (https://github.com/UKHomeOffice/removals_wallboard)
 cd removals_wallboard
-gup dev
+gulp dev
 
 # Start the [API Application] (https://github.com/UKHomeOffice/removals_integration)
 cd removals_integration
 PORT=8080 npm start
 
-# Run the e2e tests
+# Run the e2e tests locally
 cd removals_e2etests/nightwatch
 ./test.sh
+
+# Run the e2e tests against a remote environment
+cd removals_e2etests/nightwatch
+./test.sh [docker|dev|int|uat]
 ```
 
-## Run e2e tests against a remote environment with docker-compose
+## Run e2e tests against an environment with docker-compose
 ```shell
 # Setup the keycloak credentials file
 cd removals_e2etests
