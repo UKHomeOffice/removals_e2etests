@@ -26,7 +26,7 @@ Feature: Bed commission state changing events
       | timestamp | now                         |
       | bed_ref   | abc3                        |
       | gender    | m                           |
-      | reason    | Maintenance – Planned works |
+      | reason    | Maintenance - Planned works |
     And I submit the following "out commission" event:
       | centre    | one         |
       | timestamp | now         |
@@ -55,7 +55,7 @@ Feature: Bed commission state changing events
     Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
       | Maintenance - Malicious/Accidental Damage | 1 |
       | Maintenance - Health and Safety Concern   | 1 |
-      | Maintenance – Planned works               | 1 |
+      | Maintenance - Planned works               | 1 |
       | Crime Scene                               | 1 |
       | Medical Isolation                         | 1 |
       | Other                                     | 1 |
