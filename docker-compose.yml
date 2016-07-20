@@ -2,6 +2,10 @@ version: '2'
 services:
   waiter:
     image: martin/wait
+    depends_on:
+      - selenium
+    environment:
+      - selenium_TCP=tcp://selenium:4444
   test:
     build: .
     volumes:

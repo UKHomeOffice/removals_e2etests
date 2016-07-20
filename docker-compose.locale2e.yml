@@ -1,20 +1,57 @@
-version: '2'
+version: "2"
 services:
-  test:
-    depends_on:
-     - backend
-     - frontend
+
   backend:
     image: ibm-backend
+    depends_on:
+      - mysql
+      - redis
+    entrypoint: "sh -c 'while ! timeout 1 bash -c \"echo > /dev/tcp/mysql/3306 && echo > /dev/tcp/redis/6379\"; do sleep 1; done; npm run migrations ; npm start'"
+    environment:
+      - NODE_ENV=production
+      - PORT=8080
+      - DBHOST=mysql
+      - DBPORT=3306
+      - DBUSER=root
+      - DBPASS=root
+      - DBNAME=removals
+      - REDIS_SERVICE_HOST=redis
+      - REDIS_SERVICE_PORT=6379
     expose:
       - 8080
-    environment:
-     - NODE_ENV=development
-     - PORT=8080
+
   frontend:
     image: ibm-frontend
-    expose:
-     - 80
     environment:
-     - BACKEND=http://backend:8080
-     - PORT=80
+      - BACKEND=http://backend:8080
+      - PORT=80
+    expose:
+      - 80
+
+  mysql:
+    environment:
+      - MYSQL_DATABASE=removals
+      - MYSQL_ROOT_PASSWORD=root
+    expose:
+      - 3306
+    image: mysql
+
+  redis:
+    image: redis
+    expose:
+      - 6379
+
+  test:
+    depends_on:
+      - backend
+      - frontend
+
+  waiter:
+    depends_on:
+      - backend
+      - frontend
+    environment:
+      - redis_TCP=tcp://redis:6379
+      - mysql_TCP=tcp://mysql:3306
+      - backend_TCP=tcp://backend:8080
+      - frontend_TCP=tcp://frontend:80
