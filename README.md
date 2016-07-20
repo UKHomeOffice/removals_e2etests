@@ -1,4 +1,4 @@
-# End to End tests
+# End to End Feature & Performance Tests
 
 [![Build](https://travis-ci.org/UKHomeOffice/removals_e2etests.png)](https://travis-ci.org/UKHomeOffice/removals_e2etests)
 
@@ -31,12 +31,30 @@ PORT=8080 npm start
 cd removals_e2etests/nightwatch
 ./test.sh
 
-# Run the e2e tests against a remote environment
+# Setup the keycloak credentials file & Run the e2e tests against a remote environment
+cd removals_e2etests
+echo "KEYCLOAK_USER=myusername
+KEYCLOAK_PASS=mypassword" > mycredentials
+
 cd removals_e2etests/nightwatch
 ./test.sh [docker|dev|int|uat]
 ```
 
-## Run e2e tests against an environment with docker-compose
+##Run e2e tests against a local environment with docker-compose
+```shell
+# Build the [API Application] (https://github.com/UKHomeOffice/removals_integration)
+cd removals_integration
+docker build -t removals_integration .
+
+# Build the [FE Application] (https://github.com/UKHomeOffice/removals_wallboard)
+cd removals_wallboard
+docker build -t removals_wallboard .
+
+# Run tests
+./runtests.sh --env docker
+```
+
+## Run e2e tests against a remote environment with docker-compose
 ```shell
 # Setup the keycloak credentials file
 cd removals_e2etests
@@ -61,6 +79,22 @@ KEYCLOAK_PASS=mypassword" > mycredentials
 ./runtests.sh --env [dev|int|uat] --tag performance
 ```
 
+## Run e2e tests against an environment with IntelliJ
+```shell
+# Add a new Node.js Configuration setting
+```
+![Alt text](/images/intellij_settings_to_run_e2etests.png?raw=true "Run e2e tests against an environment with IntelliJ")
+
+## Run e2e performance tests against a remote environment with IntelliJ
+```shell
+# Comment out line 66 in e2e_tests/nightwatch/nightwatch.conf.js:
+//skiptags: _.pullAll(['performance', 'wip'], process.argv),
+
+# Add a new Node.js Configuration setting
+```
+![Alt text](/images/intellij_settings_to_run_e2e_performance_tests.png?raw=true "Run e2e performance tests against an environment with IntelliJ")
+
+## IBM Environments
 | env | backend | frontend |
 | --- | ------- | -------- |
 | default | http://localhost:8080 | http://localhost:8000 |
@@ -68,17 +102,3 @@ KEYCLOAK_PASS=mypassword" > mycredentials
 | dev | https://api-ircbd-dev.notprod.homeoffice.gov.uk | https://wallboard-ircbd-dev.notprod.homeoffice.gov.uk |
 | int | https://api-ircbd-int.notprod.homeoffice.gov.uk | https://wallboard-ircbd-int.notprod.homeoffice.gov.uk |
 | uat | https://api-ircbd-uat.notprod.homeoffice.gov.uk | https://wallboard-ircbd-uat.notprod.homeoffice.gov.uk |
-
-## Running the code against a local environment with docker-compose
-```shell
-# Build the backend
-cd backend_codebase
-docker build -t ibm-backend .
-
-# Build the frontend
-cd frontend_codebase
-docker build -t ibm-frontend .
-
-# Run tests
-./runtests.sh --env docker
-```
