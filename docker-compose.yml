@@ -15,7 +15,7 @@ services:
     environment:
       - SELENIUM_HOST=selenium
   selenium:
-    image: selenium/standalone-chrome:2.49.1
+    image: selenium/standalone-chrome:2.53.0
     expose:
       - 4444
     environment:
