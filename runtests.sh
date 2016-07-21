@@ -18,6 +18,7 @@ function tidyup {
 
 #cleanup
 rm -fr nightwatch/reports/* nightwatch/screenshots/default
+mkdir -p nightwatch/reports nightwatch/screenshots/default
 
 docker-compose up -d --build
 
