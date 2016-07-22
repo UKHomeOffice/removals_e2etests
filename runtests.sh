@@ -25,10 +25,11 @@ docker-compose up -d --build
 echo "waiting for everything to be up"
 
 docker wait removalse2etests_waiter_1
+docker-compose logs waiter
 
-docker-compose run test nightwatch $@
+docker-compose run --rm test nightwatch $@
 exitcode=$?
 
-docker-compose run test nightwatch-html-reporter -d reports -t cover -b false
+docker-compose run --rm test nightwatch-html-reporter -d reports -t cover -b false
 
 exit $exitcode
