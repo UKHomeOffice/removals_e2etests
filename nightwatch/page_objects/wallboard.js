@@ -26,9 +26,9 @@ module.exports = {
       let centreDetail = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr/td[last()]`
       this.api.useXpath()
       if (toNotBePresent) {
-        this.expect.element(centreDetail).to.not.be.present.after(2000)
+        this.expect.element(centreDetail).to.not.be.present.after(5000)
       } else {
-        this.expect.element(centreDetail).text.to.equal(v).before(2000)
+        this.expect.element(centreDetail).text.to.equal(v).before(5000)
       }
       this.api.useCss()
     },
