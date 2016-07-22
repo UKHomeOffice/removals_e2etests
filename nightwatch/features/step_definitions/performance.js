@@ -55,11 +55,9 @@ const alterSchema = (schema, type, quantityOfFakes) => {
   return schema
 }
 
-const makeSocketClient = (context, io) => new Promise((resolve, reject) => {
+const makeSocketClient = (io) => new Promise((resolve, reject) => {
   let socket = io.sails.connect()
-
   socket.messages = []
-
   socket.get('/centres', (body, JWR) => {
     socket.on('centres', (message) => socket.messages.push(message))
     resolve(socket)
@@ -83,11 +81,18 @@ module.exports = function () {
       io.sails.transports = ['polling']
       io.sails.initialConnectionHeaders = {
         nosession: true,
-        Cookie: `route=${this.routecookie}; kc-access=${this.kcaccesscookie}`
+        Cookie: `route=${this.routecookie}; kc-access=${global.kcaccesscookie}`
       }
       io.sails.environment = 'production'
-      this.socketClients = Promise.all(_.map(_.range(count), () => makeSocketClient(this, io)))
-        .tap(sockets => this.assert.equal(sockets.length, count, `${count} sockets opened`))
+      var counter = 1
+      this.socketClients = Promise.map(
+        _.range(count), (item, index, length) => makeSocketClient(io)
+          .timeout(20000)
+          .catch(Promise.TimeoutError, () => Promise.resolve(false))
+          .tap(socket => console.log(`Client ${counter++} of ${length} ${socket ? 'connected' : 'failed'}`)),
+        {concurrency: 10}
+      )
+        .then(sockets => this.assert.ok(!_.includes(sockets, false), `${count} sockets opened`))
         .finally(done)
     })
   })
