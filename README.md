@@ -72,11 +72,8 @@ cd removals_e2etests
 echo "KEYCLOAK_USER=myusername
 KEYCLOAK_PASS=mypassword" > mycredentials
 
-# Comment out line 66 in e2e_tests/nightwatch/nightwatch.conf.js:
-//skiptags: _.pullAll(['performance', 'wip'], process.argv),
-
 # Run performance tests
-./runtests.sh --env [dev|int|uat] --tag performance
+./runtests.sh --env [docker|dev|int|uat] --tag performance
 ```
 
 ## Run e2e tests against an environment with IntelliJ

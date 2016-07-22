@@ -10,6 +10,11 @@ global.cookie_jar = request.jar()
 global.rp = request.defaults({jar: cookie_jar, json: true})
 global._ = require('lodash')
 
+const skiptags = () => {
+  var tags = _.pullAll(['performance'], process.argv)
+  return _.isEmpty(tags) ? undefined : tags
+}
+
 module.exports = {
   src_folders: [require('nightwatch-cucumber')({
     closeSession: 'afterScenario'
@@ -63,7 +68,7 @@ module.exports = {
     },
 
     default: {
-      skiptags: _.pullAll(['performance', 'wip'], process.argv),
+      skiptags: skiptags(),
       launch_url: 'http://localhost:8000',
       globals: {
         auth_required: false,
