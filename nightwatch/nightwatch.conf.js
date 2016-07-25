@@ -11,8 +11,8 @@ global.rp = request.defaults({jar: cookie_jar, json: true})
 global._ = require('lodash')
 
 const skiptags = () => {
-  var tags = _.pullAll(['performance'], process.argv)
-  return _.isEmpty(tags) ? undefined : tags
+  var tags = ['performance']
+  return _.includes(process.argv, '--tag') ? undefined : tags
 }
 
 module.exports = {

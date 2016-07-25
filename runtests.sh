@@ -3,6 +3,8 @@
 if [[ $@ == *"docker"* ]]
 then
     export COMPOSE_FILE=docker-compose.yml:docker-compose.locale2e.yml
+else
+    export COMPOSE_FILE=docker-compose.yml
 fi
 
 
