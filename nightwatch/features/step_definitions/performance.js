@@ -74,26 +74,37 @@ module.exports = function () {
 
   this.Given(/^I spawn "([^"]*)" socket clients to the backend$/, function (count) {
     this.perform((client, done) => {
-      delete socketIOClient.sails
-      let io = sailsIOClient(socketIOClient)
-      io.sails.autoConnect = false
-      io.sails.url = this.globals.backend_url
-      io.sails.transports = ['polling']
-      io.sails.initialConnectionHeaders = {
-        nosession: true,
-        Cookie: `route=${this.routecookie}; kc-access=${global.kcaccesscookie}`
-      }
-      io.sails.environment = 'production'
-      var counter = 1
-      this.socketClients = Promise.map(
-        _.range(count), (item, index, length) => makeSocketClient(io)
-          .timeout(20000)
-          .catch(Promise.TimeoutError, () => Promise.resolve(false))
-          .tap(socket => console.log(`Client ${counter++} of ${length} ${socket ? 'connected' : 'failed'}`)),
-        {concurrency: 10}
-      )
-        .then(sockets => this.assert.ok(!_.includes(sockets, false), `${count} sockets opened`))
-        .finally(done)
+      rp({
+        followRedirect: false,
+        uri: `${this.globals.backend_url}`,
+        jar: false,
+        resolveWithFullResponse: true
+      })
+        .catch((response) => response.response.headers['set-cookie'][0])
+        .then((routecookie) => {
+          delete socketIOClient.sails
+          let io = sailsIOClient(socketIOClient)
+          io.sails.autoConnect = false
+          io.sails.url = this.globals.backend_url
+          io.sails.transports = ['polling']
+
+          io.sails.initialConnectionHeaders = {
+            nosession: true,
+            Cookie: `kc-access=${global.kcaccesscookie}; ${routecookie}`
+          }
+          io.sails.environment = 'production'
+          var counter = 1
+          this.socketClients = Promise.map(
+            _.range(count),
+            (item, index, length) => makeSocketClient(io)
+              .timeout(20000)
+              .catch(Promise.TimeoutError, () => Promise.resolve(false))
+              .tap(socket => console.log(`Client ${counter++} of ${length} ${socket ? 'connected' : 'failed'}`)),
+            {concurrency: 10}
+          )
+            .then(sockets => this.assert.equal(_.compact(sockets).length, count, `${count} sockets opened`))
+            .finally(done)
+        })
     })
   })
 
