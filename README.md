@@ -82,11 +82,6 @@ KEYCLOAK_PASS=mypassword" > mycredentials
 ```
 ![Alt text](/images/intellij_settings_to_run_e2etests.png?raw=true "Run e2e tests against an environment with IntelliJ")
 
-## Run e2e performance tests against a remote environment with IntelliJ
-```shell
-# Comment out line 66 in e2e_tests/nightwatch/nightwatch.conf.js:
-//skiptags: _.pullAll(['performance', 'wip'], process.argv),
-
 # Add a new Node.js Configuration setting
 ```
 ![Alt text](/images/intellij_settings_to_run_e2e_performance_tests.png?raw=true "Run e2e performance tests against an environment with IntelliJ")
