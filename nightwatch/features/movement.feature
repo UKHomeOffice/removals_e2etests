@@ -62,9 +62,9 @@ Feature: Movements
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type       | CID Person ID |
       | Out          | Big Port | 110     | now     | Non-Occupancy | 12345555      |
-      | In           | oneman   | 111     | now     | Non-Occupancy | 12345555      |
-      | Out          | oneman   | 112     | now     | Non-Occupancy | 12345555      |
-      | In           | Big Port | 113     | now     | Non-Occupancy | 12345555      |
+      | In           | oneman   | 110     | now     | Non-Occupancy | 12345555      |
+      | Out          | oneman   | 111     | now     | Non-Occupancy | 12345555      |
+      | In           | Big Port | 111     | now     | Non-Occupancy | 12345555      |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Availability         | 999  |

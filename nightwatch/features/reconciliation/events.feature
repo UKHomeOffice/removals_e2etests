@@ -144,7 +144,7 @@ Feature: Reconciled Check In/Out Events
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | Out          | oneman   | 111     | now     | Removal | 999999        |
-      | In           | twoman   | 222     | now     | Removal | 999999        |
+      | In           | twoman   | 111     | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
       | Expected outgoing | 1 |
     And The Centre "two" should show the following under "Male":
@@ -181,7 +181,7 @@ Feature: Reconciled Check In/Out Events
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
       | Out          | oneman   | 111     | now     | Removal | 999999        |
-      | In           | twoman   | 222     | now     | Removal | 999999        |
+      | In           | twoman   | 111     | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
       | Expected outgoing | 0 |
     And The Centre "two" should show the following under "Male":
