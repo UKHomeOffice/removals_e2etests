@@ -6,6 +6,7 @@ Feature: Bed commission state changing events
     And The following centres exist:
       | name | male_capacity |
       | one  | 1000          |
+      | two  | 500           |
     Given I am on the wallboard
 
   Scenario: Out of commission collection of reasons
@@ -53,6 +54,14 @@ Feature: Bed commission state changing events
       | single_occupancy_person_id | 9999             |
       | reason                     | Single Occupancy |
     Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
+      | Maintenance - Malicious/Accidental Damage | 1 |
+      | Maintenance - Health and Safety Concern   | 1 |
+      | Maintenance - Planned works               | 1 |
+      | Crime Scene                               | 1 |
+      | Medical Isolation                         | 1 |
+      | Other                                     | 1 |
+      | Single Occupancy                          | 1 |
+    Then the Centre "two" should not show the following Reasons under "Male" "Beds out of commission":
       | Maintenance - Malicious/Accidental Damage | 1 |
       | Maintenance - Health and Safety Concern   | 1 |
       | Maintenance - Planned works               | 1 |
