@@ -61,7 +61,7 @@ const makeSocketClient = (io) => rp({
   jar: false,
   resolveWithFullResponse: true
 })
-  .catch((response) => _.get(response, 'response.headers.set-cookie[0]', 'foo'))
+  .catch((response) => _.get(response, 'response.headers.set-cookie[0]', ''))
   .then((routecookie) => {
     io.sails.initialConnectionHeaders.Cookie = `kc-access=${global.kcaccesscookie}; ${routecookie}`
     return new Promise((resolve, reject) => {
