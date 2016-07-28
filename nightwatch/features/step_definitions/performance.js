@@ -6,6 +6,7 @@ const moment = require('moment-timezone')
 const jsf = require('json-schema-faker')
 const socketIOClient = require('socket.io-client')
 const sailsIOClient = require('sails.io.js')
+const retry = require('bluebird-retry')
 
 moment.tz.setDefault('Europe/London')
 
@@ -96,8 +97,13 @@ module.exports = function () {
       var counter = 1
       this.socketClients = Promise.map(
         _.range(count),
-        (item, index, length) => makeSocketClient(io)
-          .timeout(30000)
+        (item, index, length) => retry(
+          () => makeSocketClient(io)
+            .timeout(30000),
+          {
+            max_tries: 10
+          }
+        )
           .catch(Promise.TimeoutError, () => Promise.resolve(false))
           .tap(socket => console.log(`Client ${counter++} of ${length} ${socket ? 'connected' : 'failed'}`)),
         {concurrency: 10}
