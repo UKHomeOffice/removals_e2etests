@@ -22,7 +22,7 @@ function tidyup {
 rm -fr nightwatch/reports/* nightwatch/screenshots/default
 mkdir -p nightwatch/reports nightwatch/screenshots/default
 
-docker-compose up -d --build
+docker-compose up -d --build --force-recreate
 
 echo "waiting for everything to be up"
 
