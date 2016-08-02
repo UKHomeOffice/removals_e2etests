@@ -35,11 +35,16 @@ const eventPost = function (operation, table, requestDecorator) {
 
 module.exports = function () {
   this.When(/^I submit the following movements:$/, function (table) {
+    let payload = _.map(table.hashes(), (row) => {
+      row['MO Date'] = Date.create(row['MO Date'] || 'now').set({hour: 12}).format('{dd}/{MM}/{yyyy} {H}:{mm}:{ss}')
+      return row
+    })
+
     this.perform((client, done) =>
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/cid_entry/movement`,
-        body: {Output: table.hashes()}
+        body: {Output: payload}
       })
         .finally(() => done())
     )
