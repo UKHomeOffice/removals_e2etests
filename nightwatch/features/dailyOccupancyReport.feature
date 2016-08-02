@@ -9,7 +9,7 @@ Feature: dailyOccupancyReport
       | two  | 200           | 400             |
     And I am on the wallboard
 
-  Scenario: Heartbeat updates the wallboard
+  Scenario: Reports
     And I submit a heartbeat with:
       | centre                 | one |
       | male_occupied          | 10  |
