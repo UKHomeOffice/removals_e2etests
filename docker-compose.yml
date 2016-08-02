@@ -19,6 +19,7 @@ services:
     expose:
       - 4444
     environment:
+      - LANGUAGE=en_GB
       - SCREEN_WIDTH=1024
       - SCREEN_HEIGHT=768
       - SCREEN_DEPTH=24
