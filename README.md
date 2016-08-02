@@ -10,9 +10,9 @@ There are two ways to run the tests, if you want to just get started quickly the
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.0/install.sh | bash
 source ~/.nvm/nvm.sh
 
-# Install & Use Node 4.2
-nvm install 4.2
-nvm use 4.2
+# Install & Use Node 4
+nvm install 4
+nvm use 4
 cd removals_e2etests/nightwatch
 npm install
 ```
