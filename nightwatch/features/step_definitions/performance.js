@@ -43,14 +43,14 @@ const generateFakes = (schema, fakes, quantityOfFakes) => {
 
 const alterSchema = (schema, type, quantityOfFakes) => {
   if (type === 'movement') {
-    schema.properties.Output.minItems = quantityOfFakes
-    schema.properties.Output.maxItems = quantityOfFakes
-    schema.properties.Output.items.properties['MO Ref.'].faker = 'custom.Output.items.properties.MO Ref'
+    schema.properties.cDataSet.minItems = quantityOfFakes
+    schema.properties.cDataSet.maxItems = quantityOfFakes
+    schema.properties.cDataSet.items.properties['MO Ref'].faker = 'custom.cDataSet.items.properties.MO Ref'
     delete schema.properties.additionalProperties
   }
   if (type === 'prebooking') {
-    schema.properties.Output.minItems = quantityOfFakes
-    schema.properties.Output.maxItems = quantityOfFakes
+    schema.properties.cDataSet.minItems = quantityOfFakes
+    schema.properties.cDataSet.maxItems = quantityOfFakes
     delete schema.properties.additionalProperties
   }
   return schema
@@ -155,22 +155,22 @@ module.exports = function () {
     }
     if (type === 'movement') {
       fakes = {
-        'Output.items.properties.Location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
-        'Output.items.properties.MO Date': () => '05/01/2016 00:01:00',
-        'Output.items.properties.MO In/MO Out': () => _.sample(['in', 'out']),
-        'Output.items.properties.MO Type': () => _.sample(['Occupancy', 'Non-Occupancy', 'Removal']),
-        'Output.items.properties.MO Ref': () => {
+        'cDataSet.items.properties.Location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
+        'cDataSet.items.properties.MO Date': () => '05/01/2016 00:01:00',
+        'cDataSet.items.properties.MO In/MO Out': () => _.sample(['in', 'out']),
+        'cDataSet.items.properties.MO Type': () => _.sample(['Occupancy', 'Non-Occupancy', 'Removal']),
+        'cDataSet.items.properties.MO Ref': () => {
           MOcounter++
           return MOcounter.toString()
         },
-        'Output.items.properties.CID Person ID': () => _.random(100, 1000000).toString()
+        'cDataSet.items.properties.CID Person ID': () => _.random(100, 1000000).toString()
       }
     }
     if (type === 'prebooking') {
       fakes = {
-        'Output.items.properties.location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
-        'Output.items.properties.timestamp': () => moment().set({hour: 7, minute: 0, second: 0}).format(),
-        'Output.items.properties.cid_id': () => _.random(100, 1000000).toString()
+        'cDataSet.items.properties.location': () => _.sample(_.merge(_.map(this.centres, 'male_cid_name'), _.map(this.centres, 'female_cid_name'))),
+        'cDataSet.items.properties.timestamp': () => moment().set({hour: 7, minute: 0, second: 0}).format(),
+        'cDataSet.items.properties.cid_id': () => _.random(100, 1000000).toString()
       }
     }
 

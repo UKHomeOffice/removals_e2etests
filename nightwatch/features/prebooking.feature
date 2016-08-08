@@ -51,9 +51,9 @@ Feature: Prebooking & Contingency
       | ops1       | oneman   | 2000   | today 9am |
       | ops1       | oneman   | 3000   | today 9am |
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type   | CID Person ID |
-      | In           | twoman   | 991     | now     | Occupancy | 1000          |
-      | In           | oneman   | 992     | now     | Occupancy | 2000          |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type   | CID Person ID |
+      | In           | twoman   | 991    | now     | Occupancy | 1000          |
+      | In           | oneman   | 992    | now     | Occupancy | 2000          |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Prebookings          | 2    |
@@ -70,9 +70,9 @@ Feature: Prebooking & Contingency
 
   Scenario: New valid pre-bookings are ignored if related Movement In Order exists
     Given I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type   | CID Person ID |
-      | In           | twoman   | 991     | now     | Occupancy | 1000          |
-      | In           | oneman   | 992     | now     | Occupancy | 2000          |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type   | CID Person ID |
+      | In           | twoman   | 991    | now     | Occupancy | 1000          |
+      | In           | oneman   | 992    | now     | Occupancy | 2000          |
     Then The Centre "one" should show the following under "Male":
       | Expected incoming | 1 |
     When I submit the following prebookings:

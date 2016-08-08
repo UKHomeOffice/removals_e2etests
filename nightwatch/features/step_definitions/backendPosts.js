@@ -36,6 +36,8 @@ const eventPost = function (operation, table, requestDecorator) {
 module.exports = function () {
   this.When(/^I submit the following movements:$/, function (table) {
     let payload = _.map(table.hashes(), (row) => {
+      row['CID Person ID'] = parseInt(row['CID Person ID'])
+      row['MO Ref'] = parseInt(row['MO Ref'])
       row['MO Date'] = Date.create(row['MO Date'] || 'now').set({hour: 12}).format('{dd}/{MM}/{yyyy} {H}:{mm}:{ss}')
       return row
     })
@@ -44,7 +46,7 @@ module.exports = function () {
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/cid_entry/movement`,
-        body: {Output: payload}
+        body: {cDataSet: payload}
       })
         .finally(() => done())
     )
@@ -70,6 +72,7 @@ module.exports = function () {
 
   this.When(/^I submit the following prebookings:$/, function (table) {
     let payload = _.map(table.hashes(), (row) => {
+      row.cid_id = parseInt(row.cid_id) || 0
       row.timestamp = Date.create(row.timestamp || 'today 8am').toISOString()
       return row
     })
@@ -77,7 +80,7 @@ module.exports = function () {
       rp({
         method: 'POST',
         uri: `${client.globals.backend_url}/depmu_entry/prebooking`,
-        body: {Output: payload}
+        body: {cDataSet: payload}
       })
         .finally(() => done())
     )

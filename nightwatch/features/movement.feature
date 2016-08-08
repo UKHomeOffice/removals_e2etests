@@ -24,8 +24,8 @@ Feature: Movements
 
   Scenario: Unreconciled Out Movement shows as Expected Outgoing and does not affect Availability
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | Out          | oneman   | 111     | now     | Removal | 1433          |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | Out          | oneman   | 111    | now     | Removal | 1433          |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
@@ -42,8 +42,8 @@ Feature: Movements
 
   Scenario: Unreconciled In Movement shows as Expected incoming and reduces availability
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111     | now     | Removal | 12345555      |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | In           | oneman   | 111    | now     | Removal | 12345555      |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
@@ -60,11 +60,11 @@ Feature: Movements
 
   Scenario: Non-occupancy Movements that relate to a port should be considered like any other
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type       | CID Person ID |
-      | Out          | Big Port | 110     | now     | Non-Occupancy | 12345555      |
-      | In           | oneman   | 110     | now     | Non-Occupancy | 12345555      |
-      | Out          | oneman   | 111     | now     | Non-Occupancy | 12345555      |
-      | In           | Big Port | 111     | now     | Non-Occupancy | 12345555      |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type       | CID Person ID |
+      | Out          | Big Port | 110    | now     | Non-Occupancy | 12345555      |
+      | In           | oneman   | 110    | now     | Non-Occupancy | 12345555      |
+      | Out          | oneman   | 111    | now     | Non-Occupancy | 12345555      |
+      | In           | Big Port | 111    | now     | Non-Occupancy | 12345555      |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Availability         | 999  |

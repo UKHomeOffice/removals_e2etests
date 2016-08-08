@@ -51,10 +51,10 @@ Feature: Sanity Checks
 
   Scenario: Centre one's events shouldn't affect Centre two, male shouldn't affect female
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111     | now     | Removal | 1234          |
-      | In           | onewoman | 222     | now     | Removal | 4321          |
-      | In           | onewoman | 333     | now     | Removal | 5432          |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | In           | oneman   | 111    | now     | Removal | 1234          |
+      | In           | onewoman | 222    | now     | Removal | 4321          |
+      | In           | onewoman | 333    | now     | Removal | 5432          |
     Then The Centre "one" should show the following under "Male":
       | Availability      | 999 |
       | Expected incoming | 1   |
