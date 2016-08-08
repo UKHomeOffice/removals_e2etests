@@ -17,4 +17,5 @@ before_install:
 
 
 script:
+  - export TZ=Europe/London
   - travis_retry ./runtests-ci.sh  --env docker
