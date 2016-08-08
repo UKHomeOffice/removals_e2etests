@@ -17,7 +17,7 @@ module.exports = {
       let centreDetailNestedToggle = `${getCentreGenderScope(centreName, gender)}//td/text()[contains(., "${k}")]/ancestor::tr`
       this.api
         .useXpath()
-        .expect.element(centreDetailNestedToggle).to.be.present.after(2000)
+        .expect.element(centreDetailNestedToggle).to.be.present.after(5000)
       this.api
         .click(centreDetailNestedToggle)
         .useCss()

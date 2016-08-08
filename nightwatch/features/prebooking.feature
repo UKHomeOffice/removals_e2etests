@@ -22,6 +22,8 @@ Feature: Prebooking & Contingency
       | Contingency          | 0    |
       | Prebookings          | 1    |
       | Availability         | 999  |
+    Then the Centre "one" should show the following Reasons under "Male" "Prebooking":
+      | ops1 | 1 |
 
   Scenario: New valid Contingency bookings replace existing bookings
     Given I submit the following prebookings:
@@ -36,6 +38,10 @@ Feature: Prebooking & Contingency
       | Contingency          | 1    |
       | Prebookings          | 0    |
       | Availability         | 999  |
+    Then the Centre "one" should not show the following Reasons under "Male" "Prebooking":
+      | ops2 | 1 |
+    And the Centre "one" should show the following Reasons under "Male" "Contingency":
+      | depmu | 1 |
 
   Scenario: New valid Movement In Orders replace related pre-bookings
     Given I submit the following prebookings:
@@ -53,7 +59,10 @@ Feature: Prebooking & Contingency
       | Prebookings          | 2    |
       | Expected incoming    | 1    |
       | Availability         | 997  |
-    Then The Centre "two" should show the following under "Male":
+    And the Centre "one" should show the following Reasons under "Male" "Prebooking":
+      | ops1 | 1 |
+      | 3000 | 1 |
+    And The Centre "two" should show the following under "Male":
       | Contractual Capacity | 2000 |
       | Prebookings          | 0    |
       | Expected incoming    | 1    |
@@ -75,6 +84,9 @@ Feature: Prebooking & Contingency
       | Prebookings          | 2    |
       | Expected incoming    | 1    |
       | Availability         | 997  |
+    And the Centre "one" should show the following Reasons under "Male" "Prebooking":
+      | ops1 | 1 |
+      | 3000 | 1 |
     Then The Centre "two" should show the following under "Male":
       | Contractual Capacity | 2000 |
       | Prebookings          | 0    |
@@ -96,8 +108,13 @@ Feature: Prebooking & Contingency
       | Contractual Capacity | 1000 |
       | Contingency          | 4    |
       | Availability         | 996  |
+    And the Centre "one" should show the following Reasons under "Male" "Contingency":
+      | htu        | 1 |
+      | htu ops1   | 1 |
+      | depmu      | 1 |
+      | depmu ops1 | 1 |
 
-  Scenario: New valid Pre-bookings are ignored
+  Scenario: New invalid Pre-bookings are ignored
     Given I submit the following prebookings:
       | task_force | location | cid_id | timestamp |
       | ops1       | oneman   |        | today 9am |
@@ -111,17 +128,21 @@ Feature: Prebooking & Contingency
       | Contractual Capacity | 1000 |
       | Prebookings          | 1    |
       | Availability         | 999  |
+    And the Centre "one" should show the following Reasons under "Male" "Prebooking":
+      | ops1 | 1 |
 
-  Scenario: New valid Contingency bookings are ignored
+  Scenario: New invalid Contingency bookings are ignored
     Given I submit the following prebookings:
       | task_force | location | cid_id | timestamp |
       | depmu      | oneman   |        | today 9am |
     When I submit the following prebookings:
       | task_force  | location | cid_id | timestamp    |
       | htu         |          |        | today 9am    |
-      | htu ops 1   | oneman   |        | today 6am    |
+      | htu ops 1   | oneman   |        | today 5:59am    |
       | depmu ops 1 | oneman   |        | tomorrow 8am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Contingency          | 1    |
       | Availability         | 999  |
+    And the Centre "one" should show the following Reasons under "Male" "Contingency":
+      | depmu | 1 |
