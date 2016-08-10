@@ -17,6 +17,7 @@ services:
       - DBNAME=removals
       - REDIS_SERVICE_HOST=redis
       - REDIS_SERVICE_PORT=6379
+      - TZ=UTC
     expose:
       - 8080
 
@@ -32,6 +33,7 @@ services:
     environment:
       - MYSQL_DATABASE=removals
       - MYSQL_ROOT_PASSWORD=root
+      - TZ=UTC
     expose:
       - 3306
     image: mysql

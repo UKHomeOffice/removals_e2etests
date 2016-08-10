@@ -12,5 +12,5 @@ before_install:
 
 
 script:
-  - export TZ=Europe/London
+  - export TZ=UTC
   - travis_retry ./runtests-ci.sh
