@@ -13,13 +13,14 @@ services:
       - ./nightwatch/screenshots:/home/app/screenshots
     env_file: mycredentials
     environment:
+      - TZ=UTC
       - SELENIUM_HOST=selenium
   selenium:
     image: selenium/standalone-chrome:2.53.0
     expose:
       - 4444
     environment:
-      - TZ=Europe/London
+      - TZ=UTC
       - LANGUAGE=en_GB
       - SCREEN_WIDTH=1024
       - SCREEN_HEIGHT=768
