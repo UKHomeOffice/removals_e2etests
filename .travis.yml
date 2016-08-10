@@ -1,19 +1,15 @@
 sudo: required
 
 env:
-#  DOCKER_COMPOSE_VERSION: 1.8.0
-#  DOCKER_VERSION: 1.12.0-0~trusty
+  DOCKER_COMPOSE_VERSION: 1.8.0
 
 services:
   - docker
 
-#before_install:
-#  docker
-#  - sudo apt-get -o Dpkg::Options::="--force-confnew" install --force-yes docker-engine=${DOCKER_VERSION}
-#  docker compose
-#  - sudo rm /usr/local/bin/docker-compose
-#  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
-#  - sudo chmod +x /usr/local/bin/docker-compose
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` | sudo tee /usr/local/bin/docker-compose > /dev/null
+  - sudo chmod +x /usr/local/bin/docker-compose
 
 
 script:
