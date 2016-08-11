@@ -73,6 +73,8 @@ Feature: Prebooking & Contingency
       | MO In/MO Out | Location | MO Ref. | MO Date | MO Type   | CID Person ID |
       | In           | twoman   | 991     | now     | Occupancy | 1000          |
       | In           | oneman   | 992     | now     | Occupancy | 2000          |
+    Then The Centre "one" should show the following under "Male":
+      | Expected incoming | 1 |
     When I submit the following prebookings:
       | task_force | location | cid_id | timestamp |
       | ops1       | oneman   |        | today 9am |
@@ -138,7 +140,7 @@ Feature: Prebooking & Contingency
     When I submit the following prebookings:
       | task_force  | location | cid_id | timestamp    |
       | htu         |          |        | today 9am    |
-      | htu ops 1   | oneman   |        | today 5:59am    |
+      | htu ops 1   | oneman   |        | today 5:59am |
       | depmu ops 1 | oneman   |        | tomorrow 8am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
