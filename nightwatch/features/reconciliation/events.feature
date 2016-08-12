@@ -21,9 +21,9 @@ Feature: Reconciled Check In/Out Events
 
   Scenario: Reconciling a Movement In with a Check In event removes it from the Expected Incoming count and CID ID list, and changes the Availability
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111     | now     | Removal | 1234          |
-      | In           | oneman   | 211     | now     | Removal | 1235          |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | In           | oneman   | 111    | now     | Removal | 1234          |
+      | In           | oneman   | 211    | now     | Removal | 1235          |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity   | 1000 |
       | Occupied               | 0    |
@@ -61,9 +61,9 @@ Feature: Reconciled Check In/Out Events
 
   Scenario: Reconciling a Check out Event with a Movement out removes it from the Expected Outgoing count and CID ID list, but does not change the Availability
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | Out          | oneman   | 111     | now     | Removal | 1234          |
-      | Out          | oneman   | 131     | now     | Removal | 7634          |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | Out          | oneman   | 111    | now     | Removal | 1234          |
+      | Out          | oneman   | 131    | now     | Removal | 7634          |
     And The following detainee exists:
       | centre      | one  |
       | cid_id      | 1234 |
@@ -104,8 +104,8 @@ Feature: Reconciled Check In/Out Events
 
   Scenario: Update changes cid_id
     Given I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111     | now     | Removal | 999999        |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | In           | oneman   | 111    | now     | Removal | 999999        |
     When I submit the following "check in" event:
       | centre      | one    |
       | timestamp   | now    |
@@ -142,9 +142,9 @@ Feature: Reconciled Check In/Out Events
       | gender      | m      |
       | nationality | abc    |
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | Out          | oneman   | 111     | now     | Removal | 999999        |
-      | In           | twoman   | 111     | now     | Removal | 999999        |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | Out          | oneman   | 111    | now     | Removal | 999999        |
+      | In           | twoman   | 111    | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
       | Expected outgoing | 1 |
     And The Centre "two" should show the following under "Male":
@@ -179,9 +179,9 @@ Feature: Reconciled Check In/Out Events
       | Unexpected incoming | 1 |
       | Expected incoming   | 0 |
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | Out          | oneman   | 111     | now     | Removal | 999999        |
-      | In           | twoman   | 111     | now     | Removal | 999999        |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | Out          | oneman   | 111    | now     | Removal | 999999        |
+      | In           | twoman   | 111    | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
       | Expected outgoing | 0 |
     And The Centre "two" should show the following under "Male":
@@ -205,8 +205,8 @@ Feature: Reconciled Check In/Out Events
       | gender      | m          |
       | nationality | abc        |
     And I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111     | now     | Removal | 1234          |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | In           | oneman   | 111    | now     | Removal | 1234          |
     Then The Centre "one" should show the following under "Male":
       | Availability      | 999 |
       | Expected incoming | 1   |
@@ -220,8 +220,8 @@ Feature: Reconciled Check In/Out Events
       | gender      | m    |
       | nationality | abc  |
     And I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date    | MO Type | CID Person ID |
-      | In           | oneman   | 111     | 4 days ago | Removal | 1234          |
+      | MO In/MO Out | Location | MO Ref | MO Date    | MO Type | CID Person ID |
+      | In           | oneman   | 111    | 4 days ago | Removal | 1234          |
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 1 |
 
@@ -236,8 +236,8 @@ Feature: Reconciled Check In/Out Events
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 1 |
     And I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date  | MO Type | CID Person ID |
-      | In           | oneman   | 111     | tomorrow | Removal | 1234          |
+      | MO In/MO Out | Location | MO Ref | MO Date  | MO Type | CID Person ID |
+      | In           | oneman   | 111    | tomorrow | Removal | 1234          |
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 0 |
 
@@ -250,7 +250,7 @@ Feature: Reconciled Check In/Out Events
       | gender      | m    |
       | nationality | abc  |
     And I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date         | MO Type | CID Person ID |
-      | In           | oneman   | 111     | 4 days from now | Removal | 1234          |
+      | MO In/MO Out | Location | MO Ref | MO Date         | MO Type | CID Person ID |
+      | In           | oneman   | 111    | 4 days from now | Removal | 1234          |
     Then The Centre "one" should show the following under "Male":
       | Unexpected incoming | 1 |

@@ -30,17 +30,6 @@ Feature: Performance
     And I spawn "75" socket clients to the backend
     And I capture the browser memory footprint
 
-  Scenario: 3x normal load heartbeat
-    When I submit "33" random "heartbeats" every "1" minute for "10" minutes all taking less than "5000" milliseconds each
-    Then all the socket clients should have received "660" message each
-    And I capture the browser memory footprint
-    Then The browser memory should not have increased by more than 32mb
-
-  Scenario: Events
-    When I submit "3" random "events" every "1" minute for "10" minutes all taking less than "5000" milliseconds each
-#    Then all the socket clients should have received "210" message each
-    And I capture the browser memory footprint
-    Then The browser memory should not have increased by more than 10mb
 
   Scenario: 3x normal load movements
     When I submit "2700" random "movements" every "2" minute for "10" minutes all taking less than "5000" milliseconds each

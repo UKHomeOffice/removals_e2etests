@@ -19,8 +19,8 @@ Feature: Reinstatements
 
   Scenario: Reconciled Reinstatement on expected movement
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref. | MO Date | MO Type | CID Person ID |
-      | Out          | oneman   | 111     | now     | Removal | 1234          |
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | Out          | oneman   | 111    | now     | Removal | 1234          |
     Then The Centre "one" should show the following under "Male":
       | Expected outgoing | 0 |
     And I submit the following "reinstatement" event:
