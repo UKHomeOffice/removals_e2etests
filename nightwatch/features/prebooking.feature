@@ -5,7 +5,7 @@ Feature: Prebooking & Contingency
     And There are no existing centres
     And The following centres exist:
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
-      | one  | 1000          | 1000            | Oneman,onebman | onewoman        |
+      | one  | 1000          | 1000            | Oneman,onebman | Female One      |
       | two  | 2000          | 2000            | twoman,twobman | twowoman        |
     And I am on the wallboard
 
@@ -15,9 +15,9 @@ Feature: Prebooking & Contingency
       | ops2       | oneman   |        | today 9am |
       | depmu      | oneman   |        | today 9am |
     When I submit the following prebookings:
-      | task_force | location | cid_id | timestamp |
-      | ops1       | oneman   |        | today 9am |
-      | ops1       | onewoman |        | today 9am |
+      | task_force | location   | cid_id | timestamp |
+      | ops1       | oneman     |        | today 9am |
+      | ops1       | Female One |        | today 9am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Contingency          | 0    |
