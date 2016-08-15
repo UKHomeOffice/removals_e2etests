@@ -5,7 +5,7 @@ Feature: Prebooking & Contingency
     And There are no existing centres
     And The following centres exist:
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
-      | one  | 1000          | 1000            | oneman,onebman | onewoman        |
+      | one  | 1000          | 1000            | Oneman,onebman | onewoman        |
       | two  | 2000          | 2000            | twoman,twobman | twowoman        |
     And I am on the wallboard
 
@@ -17,12 +17,20 @@ Feature: Prebooking & Contingency
     When I submit the following prebookings:
       | task_force | location | cid_id | timestamp |
       | ops1       | oneman   |        | today 9am |
+      | ops1       | onewoman |        | today 9am |
     Then The Centre "one" should show the following under "Male":
       | Contractual Capacity | 1000 |
       | Contingency          | 0    |
       | Prebookings          | 1    |
       | Availability         | 999  |
     Then the Centre "one" should show the following Reasons under "Male" "Prebooking":
+      | ops1 | 1 |
+    Then The Centre "one" should show the following under "Female":
+      | Contractual Capacity | 1000 |
+      | Contingency          | 0    |
+      | Prebookings          | 1    |
+      | Availability         | 999  |
+    Then the Centre "one" should show the following Reasons under "Female" "Prebooking":
       | ops1 | 1 |
 
   Scenario: New valid Contingency bookings replace existing bookings
