@@ -55,11 +55,11 @@ Feature: dailyOccupancyReport
       | gender  | m           |
       | reason  | Crime Scene |
     And I submit the following "out commission" event:
-      | centre    | one         |
-      | bed_ref   | abc5        |
-      | timestamp | yesterday   |
-      | gender    | m           |
-      | reason    | Crime Scene |
+      | centre    | one           |
+      | bed_ref   | abc5          |
+      | timestamp | yesterday 6pm |
+      | gender    | m             |
+      | reason    | Crime Scene   |
     And I submit the following "out commission" event:
       | centre  | two               |
       | bed_ref | xyz1              |
@@ -90,10 +90,19 @@ Feature: dailyOccupancyReport
       | centre    | one       |
       | timestamp | yesterday |
       | bed_ref   | xyz99     |
+    Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
+      | Crime Scene                               | 1 |
+      | Maintenance - Malicious/Accidental Damage | 1 |
+      | Maintenance - Planned works               | 1 |
+    Then the Centre "one" should show the following Reasons under "Female" "Beds out of commission":
+      | Maintenance - Health and Safety Concern | 1 |
+    Then the Centre "two" should show the following Reasons under "Female" "Beds out of commission":
+      | Other             | 2 |
+      | Medical Isolation | 1 |
     Then The "Summary" Occupancy Report for "today" should return:
       | centre | maleInUseMean | femaleInUseMean | maleOutOfCommissionMean | femaleOutOfCommissionMean | maleBedReasons                                                                               | femaleBedReasons                           |
       | one    | 5.5           | 11              | 16.5                    | 22                        | Crime Scene: 2, Maintenance - Malicious/Accidental Damage: 1, Maintenance - Planned works: 1 | Maintenance - Health and Safety Concern: 1 |
-      | two    | 27.5          | 33              | 38.5                    | 44                        |                                                                                              | Other: 2, Medical Isolation: 1             |
+      | two    | 27.5          | 33              | 38.5                    | 44                        | Single Occupancy: 1                                                                          | Medical Isolation: 1, Other: 2             |
     Then The "Raw" Occupancy Report for "today" should return:
       | centre | maleInUse | femaleInUse | maleOutOfCommission | femaleOutOfCommission |
       | one    | 10        | 2           | 3                   | 40                    |
