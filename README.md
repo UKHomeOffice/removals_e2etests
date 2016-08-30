@@ -77,14 +77,10 @@ KEYCLOAK_PASS=mypassword" > mycredentials
 ```
 
 ## Run e2e tests against an environment with IntelliJ
-```shell
-# Add a new Node.js Configuration setting
-```
-![Alt text](/images/intellij_settings_to_run_e2etests.png?raw=true "Run e2e tests against an environment with IntelliJ")
-
-# Add a new Node.js Configuration setting
-```
-![Alt text](/images/intellij_settings_to_run_e2e_performance_tests.png?raw=true "Run e2e performance tests against an environment with IntelliJ")
+### Add a new Node.js Configuration setting for e2e testing
+![Run e2e tests against an environment with IntelliJ](images/intellij_settings_to_run_e2etests.png)
+### Add a new Node.js Configuration setting for performance testing
+![Run e2e performance tests against an environment with IntelliJ](./images/intellij_settings_to_run_e2e_performance_tests.png)
 
 ## IBM Environments
 | env | backend | frontend |
@@ -94,3 +90,6 @@ KEYCLOAK_PASS=mypassword" > mycredentials
 | dev | https://api-ircbd-dev.notprod.homeoffice.gov.uk | https://wallboard-ircbd-dev.notprod.homeoffice.gov.uk |
 | int | https://api-ircbd-int.notprod.homeoffice.gov.uk | https://wallboard-ircbd-int.notprod.homeoffice.gov.uk |
 | uat | https://api-ircbd-uat.notprod.homeoffice.gov.uk | https://wallboard-ircbd-uat.notprod.homeoffice.gov.uk |
+
+# CI branch testing
+Travis will try and fetch an image matching the same branch name of the `removals_integration` and `removals_wallboard` and test against that
