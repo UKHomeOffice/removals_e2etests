@@ -93,3 +93,9 @@ KEYCLOAK_PASS=mypassword" > mycredentials
 
 # CI branch testing
 Travis will try and fetch an image matching the same branch name of the `removals_integration` and `removals_wallboard` and test against that
+
+# [Architecture](http://static.codingthearchitecture.com/c4.pdf)
+### System context diagram
+![](https://www.lucidchart.com/publicSegments/view/45d8442c-ddf5-4a3c-861c-75d533ce4062/image.png)
+### Container/Component diagram
+![](https://www.lucidchart.com/publicSegments/view/f2fc4afe-a8cd-4f7e-8408-e583f5d5a235/image.png)
