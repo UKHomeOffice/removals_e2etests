@@ -53,6 +53,13 @@ Feature: Bed commission state changing events
       | gender                     | m                |
       | single_occupancy_person_id | 9999             |
       | reason                     | Single Occupancy |
+    And I submit the following "out commission" event:
+      | centre                     | one                         |
+      | timestamp                  | now                         |
+      | bed_ref                    | abc8                        |
+      | gender                     | m                           |
+      | single_occupancy_person_id | 9999                        |
+      | reason                     | Single Occupancy - Reserved |
     Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
       | Maintenance - Malicious/Accidental Damage | 1 |
       | Maintenance - Health and Safety Concern   | 1 |
@@ -61,6 +68,7 @@ Feature: Bed commission state changing events
       | Medical Isolation                         | 1 |
       | Other                                     | 1 |
       | Single Occupancy                          | 1 |
+      | Single Occupancy - Reserved               | 1 |
     Then the Centre "two" should not show the following Reasons under "Male" "Beds out of commission":
       | Maintenance - Malicious/Accidental Damage | 1 |
       | Maintenance - Health and Safety Concern   | 1 |
