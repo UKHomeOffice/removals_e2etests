@@ -69,14 +69,14 @@ Feature: Bed commission state changing events
       | Other                                     | 1 |
       | Single Occupancy                          | 1 |
       | Single Occupancy - Reserved               | 1 |
-    Then the Centre "two" should not show the following Reasons under "Male" "Beds out of commission":
-      | Maintenance - Malicious/Accidental Damage | 1 |
-      | Maintenance - Health and Safety Concern   | 1 |
-      | Maintenance - Planned works               | 1 |
-      | Crime Scene                               | 1 |
-      | Medical Isolation                         | 1 |
-      | Other                                     | 1 |
-      | Single Occupancy                          | 1 |
+    Then the Centre "two" should show the following Reasons under "Male" "Beds out of commission":
+      | Maintenance - Malicious/Accidental Damage | 0 |
+      | Maintenance - Health and Safety Concern   | 0 |
+      | Maintenance - Planned works               | 0 |
+      | Crime Scene                               | 0 |
+      | Medical Isolation                         | 0 |
+      | Other                                     | 0 |
+      | Single Occupancy                          | 0 |
 
   Scenario: Bed going out and back in commission
     Given I submit the following "out commission" event:
@@ -91,5 +91,5 @@ Feature: Bed commission state changing events
       | centre    | one  |
       | timestamp | now  |
       | bed_ref   | abc6 |
-    Then the Centre "one" should not show the following Reasons under "Male" "Beds out of commission":
-      | Other | 1 |
+    Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
+      | Other | 0 |
