@@ -93,3 +93,26 @@ Feature: Bed commission state changing events
       | bed_ref   | abc6 |
     Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
       | Other | 0 |
+
+
+  Scenario: Bed going out and back in commission out of order
+    When I submit the following "in commission" event:
+      | centre    | one  |
+      | timestamp | now  |
+      | bed_ref   | abc6 |
+    Given I submit the following "out commission" event:
+      | centre                     | one                         |
+      | timestamp                  | 5 minutes ago               |
+      | bed_ref                    | abc6                        |
+      | gender                     | m                           |
+      | single_occupancy_person_id | 9999                        |
+      | reason                     | Single Occupancy - Reserved |
+    And I submit the following "out commission" event:
+      | centre    | one   |
+      | timestamp | now   |
+      | bed_ref   | abc5  |
+      | gender    | m     |
+      | reason    | Other |
+    Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
+      | Single Occupancy - Reserved | 0 |
+      | Other                       | 1 |
