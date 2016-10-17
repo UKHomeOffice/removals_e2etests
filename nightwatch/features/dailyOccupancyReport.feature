@@ -90,13 +90,13 @@ Feature: dailyOccupancyReport
       | centre    | one       |
       | timestamp | yesterday |
       | bed_ref   | xyz99     |
-    Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
+    Then the Centre "one" should show the following Reasons under "Male" "Out of commission":
       | Crime Scene                               | 1 |
       | Maintenance - Malicious/Accidental Damage | 1 |
       | Maintenance - Planned works               | 1 |
-    Then the Centre "one" should show the following Reasons under "Female" "Beds out of commission":
+    Then the Centre "one" should show the following Reasons under "Female" "Out of commission":
       | Maintenance - Health and Safety Concern | 1 |
-    Then the Centre "two" should show the following Reasons under "Female" "Beds out of commission":
+    Then the Centre "two" should show the following Reasons under "Female" "Out of commission":
       | Other             | 2 |
       | Medical Isolation | 1 |
     Then The "Summary" Occupancy Report for "today" should return:

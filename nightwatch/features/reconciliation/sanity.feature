@@ -9,45 +9,41 @@ Feature: Sanity Checks
       | two  | 2000          | 20000           | twoman,twobman | twowoman        |
     And I am on the wallboard
     Then The Centre "one" should show the following under "Male":
-      | Contractual Capacity   | 1000 |
-      | Occupied               | 0    |
-      | Beds out of commission | 0    |
-      | Contingency            | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 1000 |
-      | Expected incoming      | 0    |
-      | Expected outgoing      | 0    |
-      | Unexpected incoming    | 0    |
+      | In use              | 0    |
+      | Out of commission   | 0    |
+      | Contingency         | 0    |
+      | Prebooked           | 0    |
+      | Estimated available | 1000 |
+      | Reserved            | 0    |
+      | Outgoings           | 0    |
+    And the Centre "one" should show "0" Unexpected "Female" Check-ins
     And The Centre "one" should show the following under "Female":
-      | Contractual Capacity   | 10000 |
-      | Occupied               | 0     |
-      | Beds out of commission | 0     |
-      | Contingency            | 0     |
-      | Prebookings            | 0     |
-      | Availability           | 10000 |
-      | Expected incoming      | 0     |
-      | Expected outgoing      | 0     |
-      | Unexpected incoming    | 0     |
+      | In use              | 0     |
+      | Out of commission   | 0     |
+      | Contingency         | 0     |
+      | Prebooked           | 0     |
+      | Estimated available | 10000 |
+      | Reserved            | 0     |
+      | Outgoings           | 0     |
     And The Centre "two" should show the following under "Male":
-      | Contractual Capacity   | 2000 |
-      | Occupied               | 0    |
-      | Beds out of commission | 0    |
-      | Contingency            | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 2000 |
-      | Expected incoming      | 0    |
-      | Expected outgoing      | 0    |
-      | Unexpected incoming    | 0    |
+      | In use              | 0    |
+      | Out of commission   | 0    |
+      | Contingency         | 0    |
+      | Prebooked           | 0    |
+      | Estimated available | 2000 |
+      | Reserved            | 0    |
+      | Outgoings           | 0    |
+    And the Centre "two" should show "0" Unexpected "Male" Check-ins
     And The Centre "two" should show the following under "Female":
-      | Contractual Capacity   | 20000 |
-      | Occupied               | 0     |
-      | Beds out of commission | 0     |
-      | Contingency            | 0     |
-      | Prebookings            | 0     |
-      | Availability           | 20000 |
-      | Expected incoming      | 0     |
-      | Expected outgoing      | 0     |
-      | Unexpected incoming    | 0     |
+      | In use              | 0     |
+      | Out of commission   | 0     |
+      | Contingency         | 0     |
+      | Prebooked           | 0     |
+      | Estimated available | 20000 |
+      | Reserved            | 0     |
+      | Outgoings           | 0     |
+    And the Centre "two" should show "0" Unexpected "Female" Check-ins
+
 
   Scenario: Centre one's events shouldn't affect Centre two, male shouldn't affect female
     When I submit the following movements:
@@ -56,17 +52,17 @@ Feature: Sanity Checks
       | In           | onewoman | 222    | now     | Removal | 4321          |
       | In           | onewoman | 333    | now     | Removal | 5432          |
     Then The Centre "one" should show the following under "Male":
-      | Availability      | 999 |
-      | Expected incoming | 1   |
+      | Estimated available | 999 |
+      | Reserved            | 1   |
     And The Centre "one" should show the following under "Female":
-      | Availability      | 9998 |
-      | Expected incoming | 2    |
+      | Estimated available | 9998 |
+      | Reserved            | 2    |
     And The Centre "two" should show the following under "Male":
-      | Availability      | 2000 |
-      | Expected incoming | 0    |
+      | Estimated available | 2000 |
+      | Reserved            | 0    |
     And The Centre "two" should show the following under "Female":
-      | Availability      | 20000 |
-      | Expected incoming | 0     |
+      | Estimated available | 20000 |
+      | Reserved            | 0     |
     When I submit the following "check in" event:
       | centre      | one  |
       | timestamp   | now  |
@@ -89,15 +85,15 @@ Feature: Sanity Checks
       | gender      | f    |
       | nationality | abc  |
     Then The Centre "one" should show the following under "Male":
-      | Availability      | 1000 |
-      | Expected incoming | 0    |
+      | Estimated available | 1000 |
+      | Reserved            | 0    |
     And The Centre "one" should show the following under "Female":
-      | Availability      | 10000 |
-      | Expected incoming | 0     |
+      | Estimated available | 10000 |
+      | Reserved            | 0     |
     And The Centre "two" should show the following under "Male":
-      | Availability      | 2000 |
-      | Expected incoming | 0    |
+      | Estimated available | 2000 |
+      | Reserved            | 0    |
     And The Centre "two" should show the following under "Female":
-      | Availability      | 20000 |
-      | Expected incoming | 0     |
+      | Estimated available | 20000 |
+      | Reserved            | 0     |
 

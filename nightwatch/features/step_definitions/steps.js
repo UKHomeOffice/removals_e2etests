@@ -15,36 +15,37 @@ module.exports = function () {
   })
 
   this.Then(/^The Centre "([^"]*)" should show the following under "([^"]*)":$/, function (centreName, gender, table) {
-    this.page.wallboard().toggleCentreDetails(centreName, gender)
     _.map(table.rowsHash(), (v, k) =>
       this.page.wallboard().expectCentreDetail(centreName, gender, k, v)
     )
-    this.page.wallboard().toggleCentreDetails(centreName, gender)
   })
 
-  this.Then(/^the Centre "([^"]*)" should show the following CIDS under "([^"]*)" "([^"]*)"(, which should be clickable)?:$/, function (centreName, gender, detail, clickable, table) {
-    // @TODO: add something to test order
-    if (typeof table === 'function') {
-      table = clickable
-      clickable = false
-    }
-    this.page.wallboard().toggleCentreDetails(centreName, gender)
-    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
+  this.Then(/^the Centre "([^"]*)" should show the following CIDS under "([^"]*)" "([^"]*)":$/, function (centreName, gender, detail, table) {
+    this.page.wallboard().toggleCentreDetailsNested(centreName, detail)
     _.map(table.hashes(), (row, index) =>
-      this.page.wallboard().expectCentreDetailCids(centreName, gender, detail, index + 1, row['CID Person ID'], clickable)
+      this.page.wallboard().expectCentreDetailCids(centreName, gender, detail, index + 1, row['CID Person ID'])
     )
-    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
-    this.page.wallboard().toggleCentreDetails(centreName, gender)
+    this.page.wallboard().toggleCentreDetailsNested(centreName, detail)
   })
 
-  this.Then(/^the Centre "([^"]*)" should( not)? show the following Reasons under "([^"]*)" "([^"]*)":$/, function (centreName, elementNotToBePresent, gender, detail, table) {
-    this.page.wallboard().toggleCentreDetails(centreName, gender)
-    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
+  this.Then(/^the Centre "([^"]*)" should show the following Reasons under "([^"]*)" "([^"]*)":$/, function (centreName, gender, detail, table) {
+    this.page.wallboard().toggleCentreDetailsNested(centreName, detail)
     _.map(table.rowsHash(), (v, k) =>
-      this.page.wallboard().expectCentreDetail(centreName, gender, k, v, elementNotToBePresent)
+      this.page.wallboard().expectCentreDetail(centreName, gender, k, v)
     )
-    this.page.wallboard().toggleCentreDetailsNested(centreName, gender, detail)
-    this.page.wallboard().toggleCentreDetails(centreName, gender)
+    this.page.wallboard().toggleCentreDetailsNested(centreName, detail)
+  })
+
+  this.Then(/^the Centre "([^"]*)" should show( the following)? "([^"]*)" Unexpected "([^"]*)" Check\-ins(:)?$/, function (centreName, hastable, count, gender, ignore, table) {
+    this.page.wallboard().expectCentreUnexpectedCount(centreName, gender, parseInt(count))
+    if (table.hashes) {
+      _.map(table.hashes(), (row, index) =>
+        this.page.wallboard().expectCentreUnexpectedCids(centreName, gender, index + 1, row['CID Person ID'])
+      )
+    } else {
+      // in this case table may be the callback
+      table()
+    }
   })
 
   this.Then(/^The "(Summary|Raw)" Occupancy Report for "([^"]*)" should return:$/, function (report, day, table) {

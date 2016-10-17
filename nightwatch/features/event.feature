@@ -8,17 +8,16 @@ Feature: Unreconciled Events
       | one  | 1000          | 10000           | oneman,onebman | onewoman        |
     Given I am on the wallboard
     And The Centre "one" should show the following under "Male":
-      | Contractual Capacity   | 1000 |
-      | Occupied               | 0    |
-      | Beds out of commission | 0    |
-      | Contingency            | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 1000 |
-      | Expected incoming      | 0    |
-      | Expected outgoing      | 0    |
-      | Unexpected incoming    | 0    |
+      | In use              | 0    |
+      | Out of commission   | 0    |
+      | Contingency         | 0    |
+      | Prebooked           | 0    |
+      | Estimated available | 1000 |
+      | Reserved            | 0    |
+      | Outgoings           | 0    |
+    And the Centre "one" should show "0" Unexpected "Male" Check-ins
 
-  Scenario: Unreconciled Check In Event shows as Unexpected Incoming and does not affect Availability
+  Scenario: Unreconciled Check In Event shows as Unexpected Incoming and does not affect Estimated available
     Given I submit the following "check in" event:
       | centre      | one    |
       | timestamp   | now    |
@@ -27,16 +26,14 @@ Feature: Unreconciled Events
       | gender      | m      |
       | nationality | abc    |
     Then The Centre "one" should show the following under "Male":
-      | Contractual Capacity   | 1000 |
-      | Occupied               | 0    |
-      | Beds out of commission | 0    |
-      | Contingency            | 0    |
-      | Prebookings            | 0    |
-      | Availability           | 1000 |
-      | Expected incoming      | 0    |
-      | Expected outgoing      | 0    |
-      | Unexpected incoming    | 1    |
-    And the Centre "one" should show the following CIDS under "Male" "Unexpected incoming", which should be clickable:
+      | In use              | 0    |
+      | Out of commission   | 0    |
+      | Contingency         | 0    |
+      | Prebooked           | 0    |
+      | Estimated available | 1000 |
+      | Reserved            | 0    |
+      | Outgoings           | 0    |
+    And the Centre "one" should show the following "1" Unexpected "Male" Check-ins:
       | CID Person ID |
       | 999999        |
 
@@ -48,8 +45,9 @@ Feature: Unreconciled Events
       | person_id   | 12     |
       | gender      | m      |
       | nationality | abc    |
-    Then The Centre "one" should show the following under "Male":
-      | Unexpected incoming | 1 |
+    Then the Centre "one" should show the following "1" Unexpected "Male" Check-ins:
+      | CID Person ID |
+      | 999999        |
     And I submit the following "update individual" event:
       | centre      | one    |
       | timestamp   | now    |
@@ -57,8 +55,7 @@ Feature: Unreconciled Events
       | person_id   | 12     |
       | gender      | f      |
       | nationality | abc    |
-    Then The Centre "one" should show the following under "Male":
-      | Unexpected incoming | 0 |
+    Then the Centre "one" should show "0" Unexpected "Male" Check-ins
 
   Scenario: Only Check ins within the reconciliation window show on the dashboard
     Given I submit the following "check in" event:
@@ -89,5 +86,4 @@ Feature: Unreconciled Events
       | person_id   | 12          |
       | gender      | m           |
       | nationality | abc         |
-    Then The Centre "one" should show the following under "Male":
-      | Unexpected incoming | 3 |
+    Then the Centre "one" should show "3" Unexpected "Male" Check-ins
