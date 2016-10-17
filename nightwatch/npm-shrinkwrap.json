@@ -45,9 +45,9 @@
           "resolved": "https://registry.npmjs.org/npmconf/-/npmconf-2.1.2.tgz",
           "dependencies": {
             "config-chain": {
-              "version": "1.1.10",
+              "version": "1.1.11",
               "from": "config-chain@>=1.1.8 <1.2.0",
-              "resolved": "https://registry.npmjs.org/config-chain/-/config-chain-1.1.10.tgz",
+              "resolved": "https://registry.npmjs.org/config-chain/-/config-chain-1.1.11.tgz",
               "dependencies": {
                 "proto-list": {
                   "version": "1.2.4",
@@ -59,7 +59,7 @@
             "inherits": {
               "version": "2.0.3",
               "from": "inherits@>=2.0.0 <2.1.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+              "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
             },
             "ini": {
               "version": "1.3.4",
@@ -125,9 +125,9 @@
           "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.5.4.tgz",
           "dependencies": {
             "glob": {
-              "version": "7.1.0",
+              "version": "7.1.1",
               "from": "glob@>=7.0.5 <8.0.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/glob/-/glob-7.1.0.tgz",
+              "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.1.tgz",
               "dependencies": {
                 "fs.realpath": {
                   "version": "1.0.0",
@@ -135,9 +135,9 @@
                   "resolved": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
                 },
                 "inflight": {
-                  "version": "1.0.5",
+                  "version": "1.0.6",
                   "from": "inflight@>=1.0.4 <2.0.0",
-                  "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz",
+                  "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz",
                   "dependencies": {
                     "wrappy": {
                       "version": "1.0.2",
@@ -149,7 +149,7 @@
                 "inherits": {
                   "version": "2.0.3",
                   "from": "inherits@>=2.0.0 <3.0.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                  "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                 },
                 "minimatch": {
                   "version": "3.0.3",
@@ -178,7 +178,7 @@
                 "once": {
                   "version": "1.4.0",
                   "from": "once@>=1.3.0 <2.0.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/once/-/once-1.4.0.tgz",
+                  "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
                   "dependencies": {
                     "wrappy": {
                       "version": "1.0.2",
@@ -311,9 +311,9 @@
           "resolved": "https://registry.npmjs.org/gherkin/-/gherkin-2.12.2.tgz"
         },
         "glob": {
-          "version": "7.1.0",
+          "version": "7.1.1",
           "from": "glob@>=7.0.0 <8.0.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/glob/-/glob-7.1.0.tgz",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.1.tgz",
           "dependencies": {
             "fs.realpath": {
               "version": "1.0.0",
@@ -321,9 +321,9 @@
               "resolved": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
             },
             "inflight": {
-              "version": "1.0.5",
+              "version": "1.0.6",
               "from": "inflight@>=1.0.4 <2.0.0",
-              "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz",
+              "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz",
               "dependencies": {
                 "wrappy": {
                   "version": "1.0.2",
@@ -335,7 +335,7 @@
             "inherits": {
               "version": "2.0.3",
               "from": "inherits@>=2.0.0 <3.0.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+              "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
             },
             "minimatch": {
               "version": "3.0.3",
@@ -364,7 +364,7 @@
             "once": {
               "version": "1.4.0",
               "from": "once@>=1.3.0 <2.0.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/once/-/once-1.4.0.tgz",
+              "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
               "dependencies": {
                 "wrappy": {
                   "version": "1.0.2",
@@ -451,7 +451,7 @@
             "inherits": {
               "version": "2.0.3",
               "from": "inherits@>=2.0.1 <2.1.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+              "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
             },
             "typedarray": {
               "version": "0.0.6",
@@ -505,9 +505,9 @@
           }
         },
         "doctrine": {
-          "version": "1.4.0",
+          "version": "1.5.0",
           "from": "doctrine@>=1.2.2 <2.0.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/doctrine/-/doctrine-1.4.0.tgz",
+          "resolved": "https://registry.npmjs.org/doctrine/-/doctrine-1.5.0.tgz",
           "dependencies": {
             "isarray": {
               "version": "1.0.0",
@@ -622,7 +622,7 @@
                 "acorn": {
                   "version": "3.3.0",
                   "from": "acorn@>=3.0.4 <4.0.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/acorn/-/acorn-3.3.0.tgz"
+                  "resolved": "https://registry.npmjs.org/acorn/-/acorn-3.3.0.tgz"
                 }
               }
             }
@@ -743,9 +743,9 @@
           }
         },
         "glob": {
-          "version": "7.1.0",
+          "version": "7.1.1",
           "from": "glob@>=7.0.3 <8.0.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/glob/-/glob-7.1.0.tgz",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.1.tgz",
           "dependencies": {
             "fs.realpath": {
               "version": "1.0.0",
@@ -753,9 +753,9 @@
               "resolved": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
             },
             "inflight": {
-              "version": "1.0.5",
+              "version": "1.0.6",
               "from": "inflight@>=1.0.4 <2.0.0",
-              "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz",
+              "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz",
               "dependencies": {
                 "wrappy": {
                   "version": "1.0.2",
@@ -767,7 +767,7 @@
             "inherits": {
               "version": "2.0.3",
               "from": "inherits@>=2.0.0 <3.0.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+              "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
             },
             "minimatch": {
               "version": "3.0.3",
@@ -796,7 +796,7 @@
             "once": {
               "version": "1.4.0",
               "from": "once@>=1.3.0 <2.0.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/once/-/once-1.4.0.tgz",
+              "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
               "dependencies": {
                 "wrappy": {
                   "version": "1.0.2",
@@ -808,14 +808,14 @@
           }
         },
         "globals": {
-          "version": "9.10.0",
+          "version": "9.12.0",
           "from": "globals@>=9.2.0 <10.0.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/globals/-/globals-9.10.0.tgz"
+          "resolved": "https://registry.npmjs.org/globals/-/globals-9.12.0.tgz"
         },
         "ignore": {
-          "version": "3.1.5",
+          "version": "3.2.0",
           "from": "ignore@>=3.1.2 <4.0.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/ignore/-/ignore-3.1.5.tgz"
+          "resolved": "https://registry.npmjs.org/ignore/-/ignore-3.2.0.tgz"
         },
         "imurmurhash": {
           "version": "0.1.4",
@@ -927,7 +927,7 @@
                 "once": {
                   "version": "1.4.0",
                   "from": "once@>=1.3.0 <2.0.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/once/-/once-1.4.0.tgz",
+                  "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
                   "dependencies": {
                     "wrappy": {
                       "version": "1.0.2",
@@ -1137,7 +1137,7 @@
         "path-is-inside": {
           "version": "1.0.2",
           "from": "path-is-inside@>=1.0.1 <2.0.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/path-is-inside/-/path-is-inside-1.0.2.tgz"
+          "resolved": "https://registry.npmjs.org/path-is-inside/-/path-is-inside-1.0.2.tgz"
         },
         "pluralize": {
           "version": "1.2.1",
@@ -1176,7 +1176,7 @@
         "shelljs": {
           "version": "0.6.1",
           "from": "shelljs@>=0.6.0 <0.7.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/shelljs/-/shelljs-0.6.1.tgz"
+          "resolved": "https://registry.npmjs.org/shelljs/-/shelljs-0.6.1.tgz"
         },
         "strip-json-comments": {
           "version": "1.0.4",
@@ -1186,12 +1186,12 @@
         "table": {
           "version": "3.8.0",
           "from": "table@>=3.7.8 <4.0.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/table/-/table-3.8.0.tgz",
+          "resolved": "https://registry.npmjs.org/table/-/table-3.8.0.tgz",
           "dependencies": {
             "ajv": {
-              "version": "4.7.6",
+              "version": "4.8.0",
               "from": "ajv@>=4.7.0 <5.0.0",
-              "resolved": "https://registry.npmjs.org/ajv/-/ajv-4.7.6.tgz",
+              "resolved": "https://registry.npmjs.org/ajv/-/ajv-4.8.0.tgz",
               "dependencies": {
                 "co": {
                   "version": "4.6.0",
@@ -1287,7 +1287,7 @@
     "eslint-plugin-standard": {
       "version": "1.3.3",
       "from": "eslint-plugin-standard@>=1.3.2 <2.0.0",
-      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/eslint-plugin-standard/-/eslint-plugin-standard-1.3.3.tgz"
+      "resolved": "https://registry.npmjs.org/eslint-plugin-standard/-/eslint-plugin-standard-1.3.3.tgz"
     },
     "json-schema-faker": {
       "version": "0.3.6",
@@ -1336,14 +1336,14 @@
       }
     },
     "lodash": {
-      "version": "4.16.2",
+      "version": "4.16.4",
       "from": "lodash@>=4.13.1 <5.0.0",
-      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.16.2.tgz"
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.16.4.tgz"
     },
     "moment-timezone": {
-      "version": "0.5.5",
+      "version": "0.5.6",
       "from": "moment-timezone@>=0.5.3 <0.6.0",
-      "resolved": "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.5.tgz",
+      "resolved": "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.6.tgz",
       "dependencies": {
         "moment": {
           "version": "2.15.1",
@@ -1476,7 +1476,8 @@
             },
             "sigmund": {
               "version": "1.0.1",
-              "from": "sigmund@>=1.0.0 <1.1.0"
+              "from": "sigmund@>=1.0.0 <1.1.0",
+              "resolved": "https://registry.npmjs.org/sigmund/-/sigmund-1.0.1.tgz"
             }
           }
         },
@@ -1530,7 +1531,7 @@
                 "inherits": {
                   "version": "2.0.3",
                   "from": "inherits@>=2.0.0 <3.0.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                  "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                 }
               }
             },
@@ -1740,7 +1741,7 @@
                             "inherits": {
                               "version": "2.0.3",
                               "from": "inherits@>=2.0.1 <2.1.0",
-                              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                              "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                             }
                           }
                         }
@@ -1768,8 +1769,8 @@
                         },
                         "inherits": {
                           "version": "2.0.3",
-                          "from": "inherits@>=2.0.0 <3.0.0",
-                          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                          "from": "inherits@>=2.0.1 <2.1.0",
+                          "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                         },
                         "isarray": {
                           "version": "1.0.0",
@@ -1938,9 +1939,9 @@
                               "resolved": "https://registry.npmjs.org/glob/-/glob-5.0.15.tgz",
                               "dependencies": {
                                 "inflight": {
-                                  "version": "1.0.5",
+                                  "version": "1.0.6",
                                   "from": "inflight@>=1.0.4 <2.0.0",
-                                  "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz",
+                                  "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz",
                                   "dependencies": {
                                     "wrappy": {
                                       "version": "1.0.2",
@@ -1952,7 +1953,7 @@
                                 "inherits": {
                                   "version": "2.0.3",
                                   "from": "inherits@>=2.0.0 <3.0.0",
-                                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                                  "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                                 },
                                 "minimatch": {
                                   "version": "3.0.3",
@@ -1981,7 +1982,7 @@
                                 "once": {
                                   "version": "1.4.0",
                                   "from": "once@>=1.3.0 <2.0.0",
-                                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/once/-/once-1.4.0.tgz",
+                                  "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
                                   "dependencies": {
                                     "wrappy": {
                                       "version": "1.0.2",
@@ -2029,6 +2030,7 @@
                             "alter": {
                               "version": "0.2.0",
                               "from": "alter@>=0.2.0 <0.3.0",
+                              "resolved": "https://registry.npmjs.org/alter/-/alter-0.2.0.tgz",
                               "dependencies": {
                                 "stable": {
                                   "version": "0.1.5",
@@ -2049,23 +2051,28 @@
                             },
                             "simple-fmt": {
                               "version": "0.1.0",
-                              "from": "simple-fmt@>=0.1.0 <0.2.0"
+                              "from": "simple-fmt@>=0.1.0 <0.2.0",
+                              "resolved": "https://registry.npmjs.org/simple-fmt/-/simple-fmt-0.1.0.tgz"
                             },
                             "simple-is": {
                               "version": "0.2.0",
-                              "from": "simple-is@>=0.2.0 <0.3.0"
+                              "from": "simple-is@>=0.2.0 <0.3.0",
+                              "resolved": "https://registry.npmjs.org/simple-is/-/simple-is-0.2.0.tgz"
                             },
                             "stringmap": {
                               "version": "0.2.2",
-                              "from": "stringmap@>=0.2.2 <0.3.0"
+                              "from": "stringmap@>=0.2.2 <0.3.0",
+                              "resolved": "https://registry.npmjs.org/stringmap/-/stringmap-0.2.2.tgz"
                             },
                             "stringset": {
                               "version": "0.2.1",
-                              "from": "stringset@>=0.2.1 <0.3.0"
+                              "from": "stringset@>=0.2.1 <0.3.0",
+                              "resolved": "https://registry.npmjs.org/stringset/-/stringset-0.2.1.tgz"
                             },
                             "tryor": {
                               "version": "0.1.2",
-                              "from": "tryor@>=0.1.2 <0.2.0"
+                              "from": "tryor@>=0.1.2 <0.2.0",
+                              "resolved": "https://registry.npmjs.org/tryor/-/tryor-0.1.2.tgz"
                             },
                             "yargs": {
                               "version": "3.27.0",
@@ -2308,9 +2315,9 @@
           "resolved": "https://registry.npmjs.org/co/-/co-4.6.0.tgz"
         },
         "glob": {
-          "version": "7.1.0",
+          "version": "7.1.1",
           "from": "glob@>=7.0.0 <8.0.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/glob/-/glob-7.1.0.tgz",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.1.tgz",
           "dependencies": {
             "fs.realpath": {
               "version": "1.0.0",
@@ -2318,9 +2325,9 @@
               "resolved": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
             },
             "inflight": {
-              "version": "1.0.5",
+              "version": "1.0.6",
               "from": "inflight@>=1.0.4 <2.0.0",
-              "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz",
+              "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz",
               "dependencies": {
                 "wrappy": {
                   "version": "1.0.2",
@@ -2332,7 +2339,7 @@
             "inherits": {
               "version": "2.0.3",
               "from": "inherits@>=2.0.0 <3.0.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+              "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
             },
             "minimatch": {
               "version": "3.0.3",
@@ -2361,7 +2368,7 @@
             "once": {
               "version": "1.4.0",
               "from": "once@>=1.3.0 <2.0.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/once/-/once-1.4.0.tgz",
+              "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
               "dependencies": {
                 "wrappy": {
                   "version": "1.0.2",
@@ -2951,8 +2958,8 @@
                 },
                 "inherits": {
                   "version": "2.0.3",
-                  "from": "inherits@>=2.0.0 <3.0.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                  "from": "inherits@>=2.0.1 <2.1.0",
+                  "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                 },
                 "isarray": {
                   "version": "1.0.0",
@@ -2978,7 +2985,7 @@
             },
             "set-immediate-shim": {
               "version": "1.0.1",
-              "from": "set-immediate-shim@>=1.0.1 <2.0.0",
+              "from": "set-immediate-shim@>=1.0.0 <2.0.0",
               "resolved": "https://registry.npmjs.org/set-immediate-shim/-/set-immediate-shim-1.0.1.tgz"
             }
           }
@@ -3078,11 +3085,12 @@
                 "glob": {
                   "version": "4.5.3",
                   "from": "glob@>=4.5.0 <4.6.0",
+                  "resolved": "https://registry.npmjs.org/glob/-/glob-4.5.3.tgz",
                   "dependencies": {
                     "inflight": {
-                      "version": "1.0.5",
+                      "version": "1.0.6",
                       "from": "inflight@>=1.0.4 <2.0.0",
-                      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz",
+                      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz",
                       "dependencies": {
                         "wrappy": {
                           "version": "1.0.2",
@@ -3094,7 +3102,7 @@
                     "inherits": {
                       "version": "2.0.3",
                       "from": "inherits@>=2.0.0 <3.0.0",
-                      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                      "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                     },
                     "minimatch": {
                       "version": "2.0.10",
@@ -3123,7 +3131,7 @@
                     "once": {
                       "version": "1.4.0",
                       "from": "once@>=1.3.0 <2.0.0",
-                      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/once/-/once-1.4.0.tgz",
+                      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
                       "dependencies": {
                         "wrappy": {
                           "version": "1.0.2",
@@ -3257,9 +3265,9 @@
                   "resolved": "https://registry.npmjs.org/glob/-/glob-5.0.15.tgz",
                   "dependencies": {
                     "inflight": {
-                      "version": "1.0.5",
+                      "version": "1.0.6",
                       "from": "inflight@>=1.0.4 <2.0.0",
-                      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz",
+                      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz",
                       "dependencies": {
                         "wrappy": {
                           "version": "1.0.2",
@@ -3271,7 +3279,7 @@
                     "inherits": {
                       "version": "2.0.3",
                       "from": "inherits@>=2.0.0 <3.0.0",
-                      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                      "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                     },
                     "minimatch": {
                       "version": "3.0.3",
@@ -3300,7 +3308,7 @@
                     "once": {
                       "version": "1.4.0",
                       "from": "once@>=1.3.0 <2.0.0",
-                      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/once/-/once-1.4.0.tgz",
+                      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
                       "dependencies": {
                         "wrappy": {
                           "version": "1.0.2",
@@ -3336,7 +3344,7 @@
                     "path-is-inside": {
                       "version": "1.0.2",
                       "from": "path-is-inside@>=1.0.1 <2.0.0",
-                      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/path-is-inside/-/path-is-inside-1.0.2.tgz"
+                      "resolved": "https://registry.npmjs.org/path-is-inside/-/path-is-inside-1.0.2.tgz"
                     }
                   }
                 }
@@ -3353,9 +3361,9 @@
               "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.5.4.tgz",
               "dependencies": {
                 "glob": {
-                  "version": "7.1.0",
+                  "version": "7.1.1",
                   "from": "glob@>=7.0.5 <8.0.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/glob/-/glob-7.1.0.tgz",
+                  "resolved": "https://registry.npmjs.org/glob/-/glob-7.1.1.tgz",
                   "dependencies": {
                     "fs.realpath": {
                       "version": "1.0.0",
@@ -3363,9 +3371,9 @@
                       "resolved": "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
                     },
                     "inflight": {
-                      "version": "1.0.5",
+                      "version": "1.0.6",
                       "from": "inflight@>=1.0.4 <2.0.0",
-                      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.5.tgz",
+                      "resolved": "https://registry.npmjs.org/inflight/-/inflight-1.0.6.tgz",
                       "dependencies": {
                         "wrappy": {
                           "version": "1.0.2",
@@ -3377,7 +3385,7 @@
                     "inherits": {
                       "version": "2.0.3",
                       "from": "inherits@>=2.0.0 <3.0.0",
-                      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                      "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                     },
                     "minimatch": {
                       "version": "3.0.3",
@@ -3406,7 +3414,7 @@
                     "once": {
                       "version": "1.4.0",
                       "from": "once@>=1.3.0 <2.0.0",
-                      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/once/-/once-1.4.0.tgz",
+                      "resolved": "https://registry.npmjs.org/once/-/once-1.4.0.tgz",
                       "dependencies": {
                         "wrappy": {
                           "version": "1.0.2",
@@ -3482,7 +3490,7 @@
         "request": {
           "version": "2.75.0",
           "from": "request@>=2.34.0 <3.0.0",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/request/-/request-2.75.0.tgz",
+          "resolved": "https://registry.npmjs.org/request/-/request-2.75.0.tgz",
           "dependencies": {
             "aws-sign2": {
               "version": "0.6.0",
@@ -3490,9 +3498,9 @@
               "resolved": "https://registry.npmjs.org/aws-sign2/-/aws-sign2-0.6.0.tgz"
             },
             "aws4": {
-              "version": "1.4.1",
+              "version": "1.5.0",
               "from": "aws4@>=1.2.1 <2.0.0",
-              "resolved": "https://registry.npmjs.org/aws4/-/aws4-1.4.1.tgz"
+              "resolved": "https://registry.npmjs.org/aws4/-/aws4-1.5.0.tgz"
             },
             "bl": {
               "version": "1.1.2",
@@ -3512,7 +3520,7 @@
                     "inherits": {
                       "version": "2.0.3",
                       "from": "inherits@>=2.0.1 <2.1.0",
-                      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/inherits/-/inherits-2.0.3.tgz"
+                      "resolved": "https://registry.npmjs.org/inherits/-/inherits-2.0.3.tgz"
                     },
                     "isarray": {
                       "version": "1.0.0",
@@ -3568,12 +3576,12 @@
             "form-data": {
               "version": "2.0.0",
               "from": "form-data@>=2.0.0 <2.1.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/form-data/-/form-data-2.0.0.tgz",
+              "resolved": "https://registry.npmjs.org/form-data/-/form-data-2.0.0.tgz",
               "dependencies": {
                 "asynckit": {
                   "version": "0.4.0",
                   "from": "asynckit@>=0.4.0 <0.5.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/asynckit/-/asynckit-0.4.0.tgz"
+                  "resolved": "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
                 }
               }
             },
@@ -3728,7 +3736,7 @@
                 "jsprim": {
                   "version": "1.3.1",
                   "from": "jsprim@>=1.2.2 <2.0.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/jsprim/-/jsprim-1.3.1.tgz",
+                  "resolved": "https://registry.npmjs.org/jsprim/-/jsprim-1.3.1.tgz",
                   "dependencies": {
                     "extsprintf": {
                       "version": "1.0.2",
@@ -3819,12 +3827,12 @@
             "mime-types": {
               "version": "2.1.12",
               "from": "mime-types@>=2.1.7 <2.2.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/mime-types/-/mime-types-2.1.12.tgz",
+              "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.12.tgz",
               "dependencies": {
                 "mime-db": {
                   "version": "1.24.0",
                   "from": "mime-db@>=1.24.0 <1.25.0",
-                  "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/mime-db/-/mime-db-1.24.0.tgz"
+                  "resolved": "https://registry.npmjs.org/mime-db/-/mime-db-1.24.0.tgz"
                 }
               }
             },
@@ -3841,7 +3849,7 @@
             "qs": {
               "version": "6.2.1",
               "from": "qs@>=6.2.0 <6.3.0",
-              "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/qs/-/qs-6.2.1.tgz"
+              "resolved": "https://registry.npmjs.org/qs/-/qs-6.2.1.tgz"
             },
             "stringstream": {
               "version": "0.0.5",
@@ -3873,9 +3881,9 @@
       "resolved": "https://registry.npmjs.org/selenium-server/-/selenium-server-2.53.1.tgz"
     },
     "socket.io-client": {
-      "version": "1.4.8",
+      "version": "1.5.0",
       "from": "socket.io-client@>=1.4.5 <2.0.0",
-      "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/socket.io-client/-/socket.io-client-1.4.8.tgz",
+      "resolved": "https://registry.npmjs.org/socket.io-client/-/socket.io-client-1.5.0.tgz",
       "dependencies": {
         "debug": {
           "version": "2.2.0",
@@ -3890,45 +3898,24 @@
           }
         },
         "engine.io-client": {
-          "version": "1.6.11",
-          "from": "engine.io-client@1.6.11",
-          "resolved": "https://registry.npmjs.org/engine.io-client/-/engine.io-client-1.6.11.tgz",
+          "version": "1.7.0",
+          "from": "engine.io-client@1.7.0",
+          "resolved": "https://registry.npmjs.org/engine.io-client/-/engine.io-client-1.7.0.tgz",
           "dependencies": {
-            "has-cors": {
-              "version": "1.1.0",
-              "from": "has-cors@1.1.0",
-              "resolved": "https://registry.npmjs.org/has-cors/-/has-cors-1.1.0.tgz"
-            },
-            "ws": {
-              "version": "1.0.1",
-              "from": "ws@1.0.1",
-              "resolved": "https://registry.npmjs.org/ws/-/ws-1.0.1.tgz",
-              "dependencies": {
-                "options": {
-                  "version": "0.0.6",
-                  "from": "options@>=0.0.5"
-                },
-                "ultron": {
-                  "version": "1.0.2",
-                  "from": "ultron@>=1.0.0 <1.1.0",
-                  "resolved": "https://registry.npmjs.org/ultron/-/ultron-1.0.2.tgz"
-                }
-              }
-            },
-            "xmlhttprequest-ssl": {
-              "version": "1.5.1",
-              "from": "xmlhttprequest-ssl@1.5.1",
-              "resolved": "https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.1.tgz"
-            },
             "component-emitter": {
               "version": "1.1.2",
               "from": "component-emitter@1.1.2",
               "resolved": "https://registry.npmjs.org/component-emitter/-/component-emitter-1.1.2.tgz"
             },
+            "component-inherit": {
+              "version": "0.0.3",
+              "from": "component-inherit@0.0.3",
+              "resolved": "https://registry.npmjs.org/component-inherit/-/component-inherit-0.0.3.tgz"
+            },
             "engine.io-parser": {
-              "version": "1.2.4",
-              "from": "engine.io-parser@1.2.4",
-              "resolved": "https://registry.npmjs.org/engine.io-parser/-/engine.io-parser-1.2.4.tgz",
+              "version": "1.3.0",
+              "from": "engine.io-parser@1.3.0",
+              "resolved": "https://registry.npmjs.org/engine.io-parser/-/engine.io-parser-1.3.0.tgz",
               "dependencies": {
                 "after": {
                   "version": "0.8.1",
@@ -3941,9 +3928,9 @@
                   "resolved": "https://registry.npmjs.org/arraybuffer.slice/-/arraybuffer.slice-0.0.6.tgz"
                 },
                 "base64-arraybuffer": {
-                  "version": "0.1.2",
-                  "from": "base64-arraybuffer@0.1.2",
-                  "resolved": "https://registry.npmjs.org/base64-arraybuffer/-/base64-arraybuffer-0.1.2.tgz"
+                  "version": "0.1.5",
+                  "from": "base64-arraybuffer@0.1.5",
+                  "resolved": "https://registry.npmjs.org/base64-arraybuffer/-/base64-arraybuffer-0.1.5.tgz"
                 },
                 "blob": {
                   "version": "0.0.4",
@@ -3962,12 +3949,17 @@
                     }
                   }
                 },
-                "utf8": {
-                  "version": "2.1.0",
-                  "from": "utf8@2.1.0",
-                  "resolved": "https://registry.npmjs.org/utf8/-/utf8-2.1.0.tgz"
+                "wtf-8": {
+                  "version": "1.0.0",
+                  "from": "wtf-8@1.0.0",
+                  "resolved": "https://registry.npmjs.org/wtf-8/-/wtf-8-1.0.0.tgz"
                 }
               }
+            },
+            "has-cors": {
+              "version": "1.1.0",
+              "from": "has-cors@1.1.0",
+              "resolved": "https://registry.npmjs.org/has-cors/-/has-cors-1.1.0.tgz"
             },
             "parsejson": {
               "version": "0.0.1",
@@ -3977,6 +3969,7 @@
                 "better-assert": {
                   "version": "1.0.2",
                   "from": "better-assert@>=1.0.0 <1.1.0",
+                  "resolved": "https://registry.npmjs.org/better-assert/-/better-assert-1.0.2.tgz",
                   "dependencies": {
                     "callsite": {
                       "version": "1.0.0",
@@ -3995,6 +3988,7 @@
                 "better-assert": {
                   "version": "1.0.2",
                   "from": "better-assert@>=1.0.0 <1.1.0",
+                  "resolved": "https://registry.npmjs.org/better-assert/-/better-assert-1.0.2.tgz",
                   "dependencies": {
                     "callsite": {
                       "version": "1.0.0",
@@ -4005,10 +3999,27 @@
                 }
               }
             },
-            "component-inherit": {
-              "version": "0.0.3",
-              "from": "component-inherit@0.0.3",
-              "resolved": "https://registry.npmjs.org/component-inherit/-/component-inherit-0.0.3.tgz"
+            "ws": {
+              "version": "1.1.1",
+              "from": "ws@1.1.1",
+              "resolved": "https://registry.npmjs.org/ws/-/ws-1.1.1.tgz",
+              "dependencies": {
+                "options": {
+                  "version": "0.0.6",
+                  "from": "options@>=0.0.5",
+                  "resolved": "https://registry.npmjs.org/options/-/options-0.0.6.tgz"
+                },
+                "ultron": {
+                  "version": "1.0.2",
+                  "from": "ultron@>=1.0.0 <1.1.0",
+                  "resolved": "https://registry.npmjs.org/ultron/-/ultron-1.0.2.tgz"
+                }
+              }
+            },
+            "xmlhttprequest-ssl": {
+              "version": "1.5.1",
+              "from": "xmlhttprequest-ssl@1.5.1",
+              "resolved": "https://registry.npmjs.org/xmlhttprequest-ssl/-/xmlhttprequest-ssl-1.5.1.tgz"
             },
             "yeast": {
               "version": "0.1.2",
@@ -4079,11 +4090,12 @@
         "parseuri": {
           "version": "0.0.4",
           "from": "parseuri@0.0.4",
-          "resolved": "https://artifactory.digital.homeoffice.gov.uk/artifactory/api/npm/npm-virtual/parseuri/-/parseuri-0.0.4.tgz",
+          "resolved": "https://registry.npmjs.org/parseuri/-/parseuri-0.0.4.tgz",
           "dependencies": {
             "better-assert": {
               "version": "1.0.2",
               "from": "better-assert@>=1.0.0 <1.1.0",
+              "resolved": "https://registry.npmjs.org/better-assert/-/better-assert-1.0.2.tgz",
               "dependencies": {
                 "callsite": {
                   "version": "1.0.0",
