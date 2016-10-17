@@ -31,14 +31,14 @@ module.exports = {
     },
 
     expectCentreUnexpectedCids: function (centreName, gender, i, cid) {
-      const listItem = `${getCentreScope(centreName)}//div[contains(@class, "unexpected ${gender.toLowerCase()}")]//li[${i}]`
+      const listItem = `${getCentreScope(centreName)}//div[contains(@class, "unexpected ${gender}")]//li[${i}]`
       this.api.useXpath()
         .expect.element(listItem).text.to.contain(cid).before(2000)
       this.api.useCss()
     },
 
     expectCentreUnexpectedCount: function (centreName, gender, count) {
-      const list = `${getCentreScope(centreName)}//div[contains(@class, "unexpected ${gender.toLowerCase()}")]`
+      const list = `${getCentreScope(centreName)}//div[contains(@class, "unexpected ${gender}")]`
       if (count === 0) {
         this.api.useXpath()
           .expect.element(list).to.not.be.present.after(2000)
