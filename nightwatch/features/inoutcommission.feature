@@ -60,7 +60,7 @@ Feature: Bed commission state changing events
       | gender                     | m                           |
       | single_occupancy_person_id | 9999                        |
       | reason                     | Single Occupancy - Reserved |
-    Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
+    Then the Centre "one" should show the following Reasons under "Male" "Out of commission":
       | Maintenance - Malicious/Accidental Damage | 1 |
       | Maintenance - Health and Safety Concern   | 1 |
       | Maintenance - Planned works               | 1 |
@@ -69,7 +69,7 @@ Feature: Bed commission state changing events
       | Other                                     | 1 |
       | Single Occupancy                          | 1 |
       | Single Occupancy - Reserved               | 1 |
-    Then the Centre "two" should show the following Reasons under "Male" "Beds out of commission":
+    Then the Centre "two" should show the following Reasons under "Male" "Out of commission":
       | Maintenance - Malicious/Accidental Damage | 0 |
       | Maintenance - Health and Safety Concern   | 0 |
       | Maintenance - Planned works               | 0 |
@@ -85,13 +85,13 @@ Feature: Bed commission state changing events
       | bed_ref   | abc6  |
       | gender    | m     |
       | reason    | Other |
-    Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
+    Then the Centre "one" should show the following Reasons under "Male" "Out of commission":
       | Other | 1 |
     When I submit the following "in commission" event:
       | centre    | one  |
       | timestamp | now  |
       | bed_ref   | abc6 |
-    Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
+    Then the Centre "one" should show the following Reasons under "Male" "Out of commission":
       | Other | 0 |
 
 
@@ -113,6 +113,6 @@ Feature: Bed commission state changing events
       | bed_ref   | abc5  |
       | gender    | m     |
       | reason    | Other |
-    Then the Centre "one" should show the following Reasons under "Male" "Beds out of commission":
+    Then the Centre "one" should show the following Reasons under "Male" "Out of commission":
       | Single Occupancy - Reserved | 0 |
       | Other                       | 1 |
