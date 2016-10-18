@@ -68,3 +68,13 @@ Feature: Movements
       | Estimated available | 999 |
       | Reserved            | 1   |
       | Outgoings           | 1   |
+
+  Scenario: Movements within a centre should not appear
+    When I submit the following movements:
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
+      | In           | oneman   | 111    | now     | Removal | 1433          |
+      | Out          | onebman  | 111    | now     | Removal | 1433          |
+      | Out          | onebman  | 112    | now     | Removal | 1434          |
+    Then The Centre "one" should show the following under "Male":
+      | Reserved  | 0 |
+      | Outgoings | 1 |
