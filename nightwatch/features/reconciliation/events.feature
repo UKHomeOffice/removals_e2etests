@@ -14,7 +14,7 @@ Feature: Reconciled Check In/Out Events
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 1000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
       | Outgoing            | 0    |
     And the Centre "one" should show "0" Unexpected "Male" Check-ins
 
@@ -29,7 +29,7 @@ Feature: Reconciled Check In/Out Events
       | Contingency         | 0   |
       | Prebooked           | 0   |
       | Estimated available | 998 |
-      | Reserved            | 2   |
+      | Incoming            | 2   |
       | Outgoing            | 0   |
     And the Centre "one" should show the following CIDS under "Male" "Reserved":
       | CID Person ID |
@@ -48,7 +48,7 @@ Feature: Reconciled Check In/Out Events
       | Contingency         | 0   |
       | Prebooked           | 0   |
       | Estimated available | 999 |
-      | Reserved            | 1   |
+      | Incoming            | 1   |
       | Outgoing            | 0   |
     And the Centre "one" should show the following CIDS under "Male" "Reserved":
       | CID Person ID |
@@ -73,7 +73,7 @@ Feature: Reconciled Check In/Out Events
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 1000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
       | Outgoing            | 2    |
     And the Centre "one" should show the following CIDS under "Male" "Outgoing":
       | CID Person ID |
@@ -89,7 +89,7 @@ Feature: Reconciled Check In/Out Events
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 1000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
       | Outgoing            | 1    |
     And the Centre "one" should show the following CIDS under "Male" "Outgoing":
       | CID Person ID |
@@ -112,7 +112,7 @@ Feature: Reconciled Check In/Out Events
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 1000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
       | Outgoing            | 0    |
     And the Centre "one" should show "0" Unexpected "Male" Check-ins
     When I submit the following "update individual" event:
@@ -123,7 +123,7 @@ Feature: Reconciled Check In/Out Events
       | gender      | m      |
       | nationality | abc    |
     Then The Centre "one" should show the following under "Male":
-      | Reserved | 1 |
+      | Incoming | 1 |
     And the Centre "one" should show "1" Unexpected "Male" Check-ins
 
   Scenario: Inter Site Transfer (movement first)
@@ -140,7 +140,7 @@ Feature: Reconciled Check In/Out Events
     Then The Centre "one" should show the following under "Male":
       | Outgoing | 1 |
     And The Centre "two" should show the following under "Male":
-      | Reserved | 1 |
+      | Incoming | 1 |
     And the Centre "one" should show "0" Unexpected "Male" Check-ins
     When I submit the following "inter site transfer" event:
       | centre    | one   |
@@ -151,7 +151,7 @@ Feature: Reconciled Check In/Out Events
     Then The Centre "one" should show the following under "Male":
       | Outgoing | 0 |
     And The Centre "two" should show the following under "Male":
-      | Reserved | 0 |
+      | Incoming | 0 |
     And the Centre "two" should show "0" Unexpected "Male" Check-ins
 
   Scenario: Inter Site Transfer (event first)
@@ -169,7 +169,7 @@ Feature: Reconciled Check In/Out Events
       | reason    | Other |
     And the Centre "two" should show "1" Unexpected "Male" Check-ins
     And The Centre "two" should show the following under "Male":
-      | Reserved | 0 |
+      | Incoming | 0 |
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
       | Out          | oneman   | 111    | now     | Removal | 999999        |
@@ -178,7 +178,7 @@ Feature: Reconciled Check In/Out Events
       | Outgoing | 0 |
     And the Centre "two" should show "0" Unexpected "Male" Check-ins
     And The Centre "two" should show the following under "Male":
-      | Reserved | 0 |
+      | Incoming | 0 |
 
   Scenario: Inter Site Transfer (event first, w/o detainee)
     When I submit the following "inter site transfer" event expecting a "422" error:
@@ -201,7 +201,7 @@ Feature: Reconciled Check In/Out Events
       | In           | oneman   | 111    | now     | Removal | 1234          |
     Then The Centre "one" should show the following under "Male":
       | Estimated available | 999 |
-      | Reserved            | 1   |
+      | Incoming            | 1   |
 
   Scenario: Check In event after Movement reconciliation window doesn't reconcile
     When I submit the following "check in" event:

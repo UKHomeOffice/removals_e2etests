@@ -46,14 +46,14 @@ Feature: Prebooking & Contingency
       | In           | oneman   | 992    | now     | Occupancy | 2000          |
     Then The Centre "one" should show the following under "Male":
       | Prebooked           | 2   |
-      | Reserved            | 1   |
+      | Incoming            | 1   |
       | Estimated available | 997 |
     And the Centre "one" should show the following Reasons under "Male" "Prebooked":
       | ops1 | 1 |
       | 3000 | 1 |
     And The Centre "two" should show the following under "Male":
       | Prebooked           | 0    |
-      | Reserved            | 1    |
+      | Incoming            | 1    |
       | Estimated available | 1999 |
 
   Scenario: New valid pre-bookings are ignored if related Movement In Order exists
@@ -62,7 +62,7 @@ Feature: Prebooking & Contingency
       | In           | twoman   | 991    | now     | Occupancy | 1000          |
       | In           | oneman   | 992    | now     | Occupancy | 2000          |
     Then The Centre "one" should show the following under "Male":
-      | Reserved | 1 |
+      | Incoming | 1 |
     When I submit the following prebookings:
       | task_force | location | cid_id | timestamp |
       | ops1       | oneman   |        | today 9am |
@@ -71,14 +71,14 @@ Feature: Prebooking & Contingency
       | ops1       | oneman   | 3000   | today 9am |
     Then The Centre "one" should show the following under "Male":
       | Prebooked           | 2   |
-      | Reserved            | 1   |
+      | Incoming            | 1   |
       | Estimated available | 997 |
     And the Centre "one" should show the following Reasons under "Male" "Prebooked":
       | ops1 | 1 |
       | 3000 | 1 |
     Then The Centre "two" should show the following under "Male":
       | Prebooked           | 0    |
-      | Reserved            | 1    |
+      | Incoming            | 1    |
       | Estimated available | 1999 |
 
   Scenario: New valid Contingency bookings are ignored if they have a cid

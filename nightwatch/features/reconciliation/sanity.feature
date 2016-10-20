@@ -14,7 +14,7 @@ Feature: Sanity Checks
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 1000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
       | Outgoing            | 0    |
     And the Centre "one" should show "0" Unexpected "Female" Check-ins
     And The Centre "one" should show the following under "Female":
@@ -23,7 +23,7 @@ Feature: Sanity Checks
       | Contingency         | 0     |
       | Prebooked           | 0     |
       | Estimated available | 10000 |
-      | Reserved            | 0     |
+      | Incoming            | 0     |
       | Outgoing            | 0     |
     And The Centre "two" should show the following under "Male":
       | In use              | 0    |
@@ -31,7 +31,7 @@ Feature: Sanity Checks
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 2000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
       | Outgoing            | 0    |
     And the Centre "two" should show "0" Unexpected "Male" Check-ins
     And The Centre "two" should show the following under "Female":
@@ -40,7 +40,7 @@ Feature: Sanity Checks
       | Contingency         | 0     |
       | Prebooked           | 0     |
       | Estimated available | 20000 |
-      | Reserved            | 0     |
+      | Incoming            | 0     |
       | Outgoing            | 0     |
     And the Centre "two" should show "0" Unexpected "Female" Check-ins
 
@@ -53,16 +53,16 @@ Feature: Sanity Checks
       | In           | onewoman | 333    | now     | Removal | 5432          |
     Then The Centre "one" should show the following under "Male":
       | Estimated available | 999 |
-      | Reserved            | 1   |
+      | Incoming            | 1   |
     And The Centre "one" should show the following under "Female":
       | Estimated available | 9998 |
-      | Reserved            | 2    |
+      | Incoming            | 2    |
     And The Centre "two" should show the following under "Male":
       | Estimated available | 2000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
     And The Centre "two" should show the following under "Female":
       | Estimated available | 20000 |
-      | Reserved            | 0     |
+      | Incoming            | 0     |
     When I submit the following "check in" event:
       | centre      | one  |
       | timestamp   | now  |
@@ -86,14 +86,14 @@ Feature: Sanity Checks
       | nationality | abc  |
     Then The Centre "one" should show the following under "Male":
       | Estimated available | 1000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
     And The Centre "one" should show the following under "Female":
       | Estimated available | 10000 |
-      | Reserved            | 0     |
+      | Incoming            | 0     |
     And The Centre "two" should show the following under "Male":
       | Estimated available | 2000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
     And The Centre "two" should show the following under "Female":
       | Estimated available | 20000 |
-      | Reserved            | 0     |
+      | Incoming            | 0     |
 
