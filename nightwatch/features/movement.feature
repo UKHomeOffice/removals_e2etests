@@ -30,7 +30,7 @@ Feature: Movements
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 1000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
       | Outgoing            | 1    |
     And the Centre "one" should show the following CIDS under "Male" "Outgoing":
       | CID Person ID |
@@ -51,9 +51,9 @@ Feature: Movements
       | Contingency         | 0   |
       | Prebooked           | 0   |
       | Estimated available | 999 |
-      | Reserved            | 1   |
+      | Incoming            | 1   |
       | Outgoing            | 0   |
-    And the Centre "one" should show the following CIDS under "Male" "Reserved":
+    And the Centre "one" should show the following CIDS under "Male" "Incoming":
       | CID Person ID |
       | 12345555      |
 
@@ -66,7 +66,7 @@ Feature: Movements
       | In           | Big Port | 111    | now     | Non-Occupancy | 12345555      |
     Then The Centre "one" should show the following under "Male":
       | Estimated available | 999 |
-      | Reserved            | 1   |
+      | Incoming            | 1   |
       | Outgoing            | 1   |
 
   Scenario: Movements within a centre should not appear
@@ -76,5 +76,5 @@ Feature: Movements
       | Out          | onebman  | 111    | now     | Removal | 1433          |
       | Out          | onebman  | 112    | now     | Removal | 1434          |
     Then The Centre "one" should show the following under "Male":
-      | Reserved | 0 |
+      | Incoming | 0 |
       | Outgoing | 1 |

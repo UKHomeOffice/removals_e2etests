@@ -13,7 +13,7 @@ Feature: Unreconciled Events
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 1000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
       | Outgoing            | 0    |
     And the Centre "one" should show "0" Unexpected "Male" Check-ins
 
@@ -31,7 +31,7 @@ Feature: Unreconciled Events
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 1000 |
-      | Reserved            | 0    |
+      | Incoming            | 0    |
       | Outgoing            | 0    |
     And the Centre "one" should show the following "1" Unexpected "Male" Check-ins:
       | CID Person ID |
