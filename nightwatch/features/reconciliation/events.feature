@@ -15,7 +15,7 @@ Feature: Reconciled Check In/Out Events
       | Prebooked           | 0    |
       | Estimated available | 1000 |
       | Reserved            | 0    |
-      | Outgoings           | 0    |
+      | Outgoing            | 0    |
     And the Centre "one" should show "0" Unexpected "Male" Check-ins
 
   Scenario: Reconciling a Movement In with a Check In event removes it from the Expected Incoming count and CID ID list, and changes the Availability
@@ -30,7 +30,7 @@ Feature: Reconciled Check In/Out Events
       | Prebooked           | 0   |
       | Estimated available | 998 |
       | Reserved            | 2   |
-      | Outgoings           | 0   |
+      | Outgoing            | 0   |
     And the Centre "one" should show the following CIDS under "Male" "Reserved":
       | CID Person ID |
       | 1234          |
@@ -49,7 +49,7 @@ Feature: Reconciled Check In/Out Events
       | Prebooked           | 0   |
       | Estimated available | 999 |
       | Reserved            | 1   |
-      | Outgoings           | 0   |
+      | Outgoing            | 0   |
     And the Centre "one" should show the following CIDS under "Male" "Reserved":
       | CID Person ID |
       | 1235          |
@@ -74,8 +74,8 @@ Feature: Reconciled Check In/Out Events
       | Prebooked           | 0    |
       | Estimated available | 1000 |
       | Reserved            | 0    |
-      | Outgoings           | 2    |
-    And the Centre "one" should show the following CIDS under "Male" "Outgoings":
+      | Outgoing            | 2    |
+    And the Centre "one" should show the following CIDS under "Male" "Outgoing":
       | CID Person ID |
       | 1234          |
       | 7634          |
@@ -90,7 +90,7 @@ Feature: Reconciled Check In/Out Events
       | Prebooked           | 0    |
       | Estimated available | 1000 |
       | Reserved            | 0    |
-      | Outgoings           | 1    |
+      | Outgoing            | 1    |
     And the Centre "one" should show the following CIDS under "Male" "Outgoing":
       | CID Person ID |
       | 7634          |
@@ -113,7 +113,7 @@ Feature: Reconciled Check In/Out Events
       | Prebooked           | 0    |
       | Estimated available | 1000 |
       | Reserved            | 0    |
-      | Outgoings           | 0    |
+      | Outgoing            | 0    |
     And the Centre "one" should show "0" Unexpected "Male" Check-ins
     When I submit the following "update individual" event:
       | centre      | one    |
@@ -138,7 +138,7 @@ Feature: Reconciled Check In/Out Events
       | Out          | oneman   | 111    | now     | Removal | 999999        |
       | In           | twoman   | 111    | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
-      | Outgoings | 1 |
+      | Outgoing | 1 |
     And The Centre "two" should show the following under "Male":
       | Reserved | 1 |
     And the Centre "one" should show "0" Unexpected "Male" Check-ins
@@ -149,7 +149,7 @@ Feature: Reconciled Check In/Out Events
       | person_id | 12    |
       | reason    | Other |
     Then The Centre "one" should show the following under "Male":
-      | Outgoings | 0 |
+      | Outgoing | 0 |
     And The Centre "two" should show the following under "Male":
       | Reserved | 0 |
     And the Centre "two" should show "0" Unexpected "Male" Check-ins
@@ -175,7 +175,7 @@ Feature: Reconciled Check In/Out Events
       | Out          | oneman   | 111    | now     | Removal | 999999        |
       | In           | twoman   | 111    | now     | Removal | 999999        |
     Then The Centre "one" should show the following under "Male":
-      | Outgoings | 0 |
+      | Outgoing | 0 |
     And the Centre "two" should show "0" Unexpected "Male" Check-ins
     And The Centre "two" should show the following under "Male":
       | Reserved | 0 |
