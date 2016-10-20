@@ -15,7 +15,7 @@ Feature: Sanity Checks
       | Prebooked           | 0    |
       | Estimated available | 1000 |
       | Reserved            | 0    |
-      | Outgoings           | 0    |
+      | Outgoing            | 0    |
     And the Centre "one" should show "0" Unexpected "Female" Check-ins
     And The Centre "one" should show the following under "Female":
       | In use              | 0     |
@@ -24,7 +24,7 @@ Feature: Sanity Checks
       | Prebooked           | 0     |
       | Estimated available | 10000 |
       | Reserved            | 0     |
-      | Outgoings           | 0     |
+      | Outgoing            | 0     |
     And The Centre "two" should show the following under "Male":
       | In use              | 0    |
       | Out of commission   | 0    |
@@ -32,7 +32,7 @@ Feature: Sanity Checks
       | Prebooked           | 0    |
       | Estimated available | 2000 |
       | Reserved            | 0    |
-      | Outgoings           | 0    |
+      | Outgoing            | 0    |
     And the Centre "two" should show "0" Unexpected "Male" Check-ins
     And The Centre "two" should show the following under "Female":
       | In use              | 0     |
@@ -41,7 +41,7 @@ Feature: Sanity Checks
       | Prebooked           | 0     |
       | Estimated available | 20000 |
       | Reserved            | 0     |
-      | Outgoings           | 0     |
+      | Outgoing            | 0     |
     And the Centre "two" should show "0" Unexpected "Female" Check-ins
 
 

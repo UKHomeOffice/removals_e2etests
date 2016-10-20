@@ -14,7 +14,7 @@ Feature: Unreconciled Events
       | Prebooked           | 0    |
       | Estimated available | 1000 |
       | Reserved            | 0    |
-      | Outgoings           | 0    |
+      | Outgoing            | 0    |
     And the Centre "one" should show "0" Unexpected "Male" Check-ins
 
   Scenario: Unreconciled Check In Event shows as Unexpected Incoming and does not affect Estimated available
@@ -32,7 +32,7 @@ Feature: Unreconciled Events
       | Prebooked           | 0    |
       | Estimated available | 1000 |
       | Reserved            | 0    |
-      | Outgoings           | 0    |
+      | Outgoing            | 0    |
     And the Centre "one" should show the following "1" Unexpected "Male" Check-ins:
       | CID Person ID |
       | 999999        |

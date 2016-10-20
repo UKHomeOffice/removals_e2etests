@@ -17,7 +17,7 @@ Feature: Movements
       | Contingency         | 0    |
       | Prebooked           | 0    |
       | Estimated available | 1000 |
-      | Outgoings           | 0    |
+      | Outgoing            | 0    |
 
   Scenario: Unreconciled Out Movement shows as Expected Outgoing and does not affect Availability
     When I submit the following movements:
@@ -31,13 +31,13 @@ Feature: Movements
       | Prebooked           | 0    |
       | Estimated available | 1000 |
       | Reserved            | 0    |
-      | Outgoings           | 1    |
-    And the Centre "one" should show the following CIDS under "Male" "Outgoings":
+      | Outgoing            | 1    |
+    And the Centre "one" should show the following CIDS under "Male" "Outgoing":
       | CID Person ID |
       | 1433          |
     Then The Centre "one" should show the following under "Female":
-      | Outgoings | 1 |
-    And the Centre "one" should show the following CIDS under "Female" "Outgoings":
+      | Outgoing | 1 |
+    And the Centre "one" should show the following CIDS under "Female" "Outgoing":
       | CID Person ID |
       | 1434          |
 
@@ -52,7 +52,7 @@ Feature: Movements
       | Prebooked           | 0   |
       | Estimated available | 999 |
       | Reserved            | 1   |
-      | Outgoings           | 0   |
+      | Outgoing            | 0   |
     And the Centre "one" should show the following CIDS under "Male" "Reserved":
       | CID Person ID |
       | 12345555      |
@@ -67,7 +67,7 @@ Feature: Movements
     Then The Centre "one" should show the following under "Male":
       | Estimated available | 999 |
       | Reserved            | 1   |
-      | Outgoings           | 1   |
+      | Outgoing            | 1   |
 
   Scenario: Movements within a centre should not appear
     When I submit the following movements:
@@ -76,5 +76,5 @@ Feature: Movements
       | Out          | onebman  | 111    | now     | Removal | 1433          |
       | Out          | onebman  | 112    | now     | Removal | 1434          |
     Then The Centre "one" should show the following under "Male":
-      | Reserved  | 0 |
-      | Outgoings | 1 |
+      | Reserved | 0 |
+      | Outgoing | 1 |
