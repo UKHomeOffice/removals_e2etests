@@ -32,7 +32,7 @@ Feature: Movements
       | Estimated available | 1000 |
       | Incoming            | 0    |
       | Outgoing            | 1    |
-    And the Centre "one" should show the following CIDS under "Male" "Outgoings":
+    And the Centre "one" should show the following CIDS under "Male" "Outgoing":
       | CID Person ID |
       | 1433          |
     Then The Centre "one" should show the following under "Female":

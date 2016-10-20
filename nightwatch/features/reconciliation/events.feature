@@ -31,7 +31,7 @@ Feature: Reconciled Check In/Out Events
       | Estimated available | 998 |
       | Incoming            | 2   |
       | Outgoing            | 0   |
-    And the Centre "one" should show the following CIDS under "Male" "Reserved":
+    And the Centre "one" should show the following CIDS under "Male" "Incoming":
       | CID Person ID |
       | 1234          |
       | 1235          |
@@ -50,7 +50,7 @@ Feature: Reconciled Check In/Out Events
       | Estimated available | 999 |
       | Incoming            | 1   |
       | Outgoing            | 0   |
-    And the Centre "one" should show the following CIDS under "Male" "Reserved":
+    And the Centre "one" should show the following CIDS under "Male" "Incoming":
       | CID Person ID |
       | 1235          |
     And the Centre "one" should show "0" Unexpected "Male" Check-ins
