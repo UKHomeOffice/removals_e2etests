@@ -80,11 +80,11 @@ Feature: Bed commission state changing events
 
   Scenario: Bed going out and back in commission
     Given I submit the following "out commission" event:
-      | centre    | one   |
-      | timestamp | now   |
-      | bed_ref   | abc6  |
-      | gender    | m     |
-      | reason    | Other |
+      | centre    | one              |
+      | timestamp | five minutes ago |
+      | bed_ref   | abc6             |
+      | gender    | m                |
+      | reason    | Other            |
     Then the Centre "one" should show the following Reasons under "Male" "Out of commission":
       | Other | 1 |
     When I submit the following "in commission" event:
