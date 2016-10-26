@@ -20,9 +20,9 @@ Feature: Reconciled Check In/Out Events
 
   Scenario: Reconciling a Movement In with a Check In event removes it from the Expected Incoming count and CID ID list, and changes the Availability
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
-      | In           | oneman   | 111    | now     | Removal | 1234          |
-      | In           | oneman   | 211    | now     | Removal | 1235          |
+      | MO In/MO Out | Location | MO Ref | MO Date       | MO Type | CID Person ID |
+      | In           | oneman   | 111    | 5 minutes ago | Removal | 1234          |
+      | In           | oneman   | 211    | now           | Removal | 1235          |
     Then The Centre "one" should show the following under "Male":
       | In use              | 0   |
       | Out of commission   | 0   |
@@ -58,9 +58,9 @@ Feature: Reconciled Check In/Out Events
 
   Scenario: Reconciling a Check out Event with a Movement out removes it from the Expected Outgoing count and CID ID list, but does not change the Availability
     When I submit the following movements:
-      | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
-      | Out          | oneman   | 111    | now     | Removal | 1234          |
-      | Out          | oneman   | 131    | now     | Removal | 7634          |
+      | MO In/MO Out | Location | MO Ref | MO Date       | MO Type | CID Person ID |
+      | Out          | oneman   | 111    | 5 minutes ago | Removal | 1234          |
+      | Out          | oneman   | 131    | now           | Removal | 7634          |
     And The following detainee exists:
       | centre      | one  |
       | cid_id      | 1234 |
