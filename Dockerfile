@@ -1,9 +1,8 @@
-FROM node:4
+FROM quay.io/ukhomeofficedigital/nodejs-base:v6.9.1
 
 WORKDIR /home/app
 
-ADD nightwatch/package.json package.json
-ADD nightwatch/npm-shrinkwrap.json npm-shrinkwrap.json
+ADD nightwatch/package.json nightwatch/npm-shrinkwrap.json ./
 
 RUN npm install
 COPY nightwatch/. .
