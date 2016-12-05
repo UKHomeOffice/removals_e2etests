@@ -69,6 +69,50 @@ Feature: Movements
       | Incoming            | 1   |
       | Outgoing            | 1   |
 
+  Scenario: Non-occupancy Movements that relate to a port should be ignored if there is a matching reinstatement
+    And The following detainee exists:
+      | centre      | one      |
+      | cid_id      | 12345555 |
+      | person_id   | 1234     |
+      | gender      | m        |
+      | nationality | abc      |
+    And I submit the following "reinstatement" event:
+      | centre    | one  |
+      | timestamp | now  |
+      | person_id | 1234 |
+    When I submit the following movements:
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type       | CID Person ID |
+      | Out          | Big Port | 110    | now     | Non-Occupancy | 12345555      |
+      | In           | oneman   | 110    | now     | Non-Occupancy | 12345555      |
+      | Out          | oneman   | 111    | now     | Non-Occupancy | 12345555      |
+      | In           | Big Port | 111    | now     | Non-Occupancy | 12345555      |
+    Then The Centre "one" should show the following under "Male":
+      | Estimated available | 999 |
+      | Incoming            | 1   |
+      | Outgoing            | 1   |
+
+  Scenario: Non-occupancy Movements that relate to a port should not be ignored if the reinstatement is too old
+    When I submit the following movements:
+      | MO In/MO Out | Location | MO Ref | MO Date | MO Type       | CID Person ID |
+      | Out          | Big Port | 110    | now     | Non-Occupancy | 12345555      |
+      | In           | oneman   | 110    | now     | Non-Occupancy | 12345555      |
+      | Out          | oneman   | 111    | now     | Non-Occupancy | 12345555      |
+      | In           | Big Port | 111    | now     | Non-Occupancy | 12345555      |
+    And The following detainee exists:
+      | centre      | one      |
+      | cid_id      | 12345555 |
+      | person_id   | 1234     |
+      | gender      | m        |
+      | nationality | abc      |
+    And I submit the following "reinstatement" event:
+      | centre    | one         |
+      | timestamp | 4 hours ago |
+      | person_id | 1234        |
+    Then The Centre "one" should show the following under "Male":
+      | Estimated available | 999 |
+      | Incoming            | 1   |
+      | Outgoing            | 1   |
+
   Scenario: Movements within a centre should not appear
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref | MO Date | MO Type | CID Person ID |
