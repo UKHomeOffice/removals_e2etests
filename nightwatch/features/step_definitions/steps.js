@@ -3,8 +3,6 @@
 
 require('sugar-date')
 
-const csvparser = require('csv-parse')
-
 module.exports = function () {
   this.Given(/^I am on the wallboard$/, function () {
     this.init()
@@ -48,7 +46,7 @@ module.exports = function () {
     }
   })
 
-  this.Then(/^The "(Summary|Raw)" Occupancy Report for "([^"]*)" should return:$/, function (report, day, table) {
+  this.Then(/^The "([^"]*)" Report for "([^"]*)" should return:$/, function (report, day, table) {
     let fromDate = Date.create(day).beginningOfDay()
     let toDate = Date.create(day).endOfDay()
 
@@ -60,17 +58,15 @@ module.exports = function () {
       .sendKeys('@reports_to', toDate.format('{dd}/{MM}/{yyyy}'))
 
     this.timeoutsAsyncScript(1000)
-
     const assert = this.assert
     this.executeAsync(function (report, done) {
-      angular.element(document.getElementById('getSummary'))
-          .scope()[`$$child${report === 'Summary' ? 'Head' : 'Tail'}`]
-          .buildCSV()
+      angular.element(document.getElementById(`get${report}`))
+          .scope()[`get${report}`]()
           .then(done)
-    }, [report], response =>
-        csvparser(response.value, {columns: true}, (err, parsedcsv) =>
-          _.each(table.hashes(), (row) => assert.ok(_.find(parsedcsv, row), 'Matched csv to row'))
-        )
+    }, [report], response => {
+      let stringedValues = _.toArray(_.mapValues(response.value, row => _.mapValues(row, value => value ? value.toString() : '')))
+      return _.each(table.hashes(), (row) => assert.ok(_.find(stringedValues, row), 'Matched csv to row'))
+    }
     )
   })
 }
