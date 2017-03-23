@@ -3,7 +3,11 @@ module.exports = {
   before: function (done) {
     rp({
       method: 'POST',
-      uri: `${this.backend_url}/oauth/login?username=${process.env.KEYCLOAK_USER}&password=${process.env.KEYCLOAK_PASS}`
+      uri: `${this.backend_url}/oauth/login?`,
+      form: {
+        username: process.env.KEYCLOAK_USER,
+        password: process.env.KEYCLOAK_PASS
+      }
     })
       .then((response) => {
         global.kcaccesscookie = response.access_token
