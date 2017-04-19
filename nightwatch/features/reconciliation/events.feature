@@ -180,13 +180,13 @@ Feature: Reconciled Check In/Out Events
     And The Centre "two" should show the following under "Male":
       | Incoming | 0 |
 
-  Scenario: Inter Site Transfer (event first, w/o detainee)
-    When I submit the following "inter site transfer" event expecting a "422" error:
-      | centre    | one   |
-      | centre_to | two   |
-      | timestamp | now   |
-      | person_id | 12    |
-      | reason    | Other |
+#  Scenario: Inter Site Transfer (event first, w/o detainee)
+#    When I submit the following "inter site transfer" event expecting a "422" error:
+#      | centre    | one   |
+#      | centre_to | two   |
+#      | timestamp | now   |
+#      | person_id | 12    |
+#      | reason    | Other |
 
   Scenario: Check In event before Movement reconciliation window doesn't reconcile
     When I submit the following "check in" event:
