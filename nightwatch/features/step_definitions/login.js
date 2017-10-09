@@ -30,6 +30,6 @@ module.exports = function () {
     }
     this.page.login().dologin(process.env.KEYCLOAK_USER, process.env.KEYCLOAK_PASS)
 
-    this.page.wallboard().expect.element('@title').text.to.equal('IRC Bed Management').before(1000)
+    this.page.wallboard().expect.element('@title').text.to.equal('IRC Capacity Management').before(1000)
   })
 }
