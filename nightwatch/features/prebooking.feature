@@ -21,9 +21,9 @@ Feature: Prebooking & Contingency
       | depmu      | oneman     |        | today 9am |
       | depmu      | oneman     |        | today 9am |
     Then the Centre "one" should show the following Reasons under "Male" "Prebooked":
-      | ops1 | 1 |
+      | OPS1 | 1 |
     Then the Centre "one" should show the following Reasons under "Female" "Prebooked":
-      | ops1 | 1 |
+      | OPS1 | 1 |
     Then The Centre "one" should show the following under "Male":
       | Contingency         | 2   |
       | Prebooked           | 1   |
@@ -49,7 +49,7 @@ Feature: Prebooking & Contingency
       | Incoming            | 1   |
       | Estimated available | 997 |
     And the Centre "one" should show the following Reasons under "Male" "Prebooked":
-      | ops1 | 1 |
+      | OPS1 | 1 |
       | 3000 | 1 |
     And The Centre "two" should show the following under "Male":
       | Prebooked           | 0    |
@@ -74,7 +74,7 @@ Feature: Prebooking & Contingency
       | Incoming            | 1   |
       | Estimated available | 997 |
     And the Centre "one" should show the following Reasons under "Male" "Prebooked":
-      | ops1 | 1 |
+      | OPS1 | 1 |
       | 3000 | 1 |
     Then The Centre "two" should show the following under "Male":
       | Prebooked           | 0    |
@@ -96,10 +96,10 @@ Feature: Prebooking & Contingency
       | Contingency         | 4   |
       | Estimated available | 996 |
     And the Centre "one" should show the following Reasons under "Male" "Contingency":
-      | htu        | 1 |
-      | htu ops1   | 1 |
-      | depmu      | 1 |
-      | depmu ops1 | 1 |
+      | HTU        | 1 |
+      | HTU OPS1   | 1 |
+      | DEPMU      | 1 |
+      | DEPMU OPS1 | 1 |
 
   Scenario: New invalid Pre-bookings are ignored
     Given I submit the following prebookings:
@@ -115,7 +115,7 @@ Feature: Prebooking & Contingency
       | Prebooked           | 1   |
       | Estimated available | 999 |
     And the Centre "one" should show the following Reasons under "Male" "Prebooked":
-      | ops1 | 1 |
+      | OPS1 | 1 |
 
   Scenario: New invalid Contingency bookings are ignored
     Given I submit the following prebookings:
@@ -130,4 +130,4 @@ Feature: Prebooking & Contingency
       | Contingency         | 1   |
       | Estimated available | 999 |
     And the Centre "one" should show the following Reasons under "Male" "Contingency":
-      | depmu | 1 |
+      | DEPMU | 1 |
