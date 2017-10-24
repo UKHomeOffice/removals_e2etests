@@ -1,15 +1,11 @@
+@mvmt
 Feature: Movements
-
   Background:
     Given I am a logged in user
     And There are no existing centres
     And The following centres exist:
       | name | male_capacity | female_capacity | male_cid_name  | female_cid_name |
       | one  | 1000          | 10000           | oneman,onebman | one woman       |
-    And There are no existing ports
-    And The following ports exist:
-      | name     |
-      | Big Port |
     And I am on the wallboard
     Then The Centre "one" should show the following under "Male":
       | In use              | 0    |
@@ -57,7 +53,7 @@ Feature: Movements
       | CID Person ID |
       | 12345555      |
 
-  Scenario: Non-occupancy Movements that relate to a port should be considered like any other
+  Scenario: Non-occupancy Movements that relate to a port should still be ignored
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref | MO Date | MO Type       | CID Person ID |
       | Out          | Big Port | 110    | now     | Non-Occupancy | 12345555      |
@@ -65,9 +61,9 @@ Feature: Movements
       | Out          | oneman   | 111    | now     | Non-Occupancy | 12345555      |
       | In           | Big Port | 111    | now     | Non-Occupancy | 12345555      |
     Then The Centre "one" should show the following under "Male":
-      | Estimated available | 999 |
-      | Incoming            | 1   |
-      | Outgoing            | 1   |
+      | Estimated available | 1000 |
+      | Incoming            | 0    |
+      | Outgoing            | 0    |
 
   Scenario: Non-occupancy Movements that relate to a port should be ignored if there is a matching reinstatement
     And The following detainee exists:
@@ -87,11 +83,11 @@ Feature: Movements
       | Out          | oneman   | 111    | now     | Non-Occupancy | 12345555      |
       | In           | Big Port | 111    | now     | Non-Occupancy | 12345555      |
     Then The Centre "one" should show the following under "Male":
-      | Estimated available | 999 |
-      | Incoming            | 1   |
-      | Outgoing            | 1   |
+      | Estimated available | 1000 |
+      | Incoming            | 0   |
+      | Outgoing            | 0   |
 
-  Scenario: Non-occupancy Movements that relate to a port should not be ignored if the reinstatement is too old
+  Scenario: Non-occupancy Movements that relate to a port should still ignored if the reinstatement is too old
     When I submit the following movements:
       | MO In/MO Out | Location | MO Ref | MO Date | MO Type       | CID Person ID |
       | Out          | Big Port | 110    | now     | Non-Occupancy | 12345555      |
@@ -109,9 +105,9 @@ Feature: Movements
       | timestamp | 4 hours ago |
       | person_id | 1234        |
     Then The Centre "one" should show the following under "Male":
-      | Estimated available | 999 |
-      | Incoming            | 1   |
-      | Outgoing            | 1   |
+      | Estimated available | 1000 |
+      | Incoming            | 0    |
+      | Outgoing            | 0    |
 
   Scenario: Movements within a centre should not appear
     When I submit the following movements:
