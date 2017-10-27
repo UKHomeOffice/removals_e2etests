@@ -32,9 +32,19 @@ docker-compose logs waiter
 
 echo travis_fold:end:DOCKER_COMPOSE_UP
 
+echo travis_fold:start:LINT
+docker-compose run --rm -T test npm run lint $@
+lintcode=$?
+echo travis_fold:end:LINT
+
 docker-compose run --rm -T test nightwatch $@
-exitcode=$?
+nightwatchcode=$?
 
 docker-compose run --rm -T test nightwatch-html-reporter -d reports -t cover -b false
 
-exit $exitcode
+if [ $(($lintcode + $nightwatchcode)) -ne 0 ]; then
+	echo "Lint exit code: $lintcode"
+	echo "Test exit code: $nightwatchcode"
+	echo "Failure."
+	exit 1
+fi
