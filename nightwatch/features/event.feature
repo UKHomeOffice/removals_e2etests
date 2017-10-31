@@ -87,3 +87,27 @@ Feature: Unreconciled Events
       | gender      | m           |
       | nationality | abc         |
     Then the Centre "one" should show "3" Unexpected "Male" Check-ins
+
+  Scenario: Duplicate events should not cause duplicate unexpected errors
+    Given I submit the following "check in" event:
+      | centre        | one         |
+      | timestamp     | today 11:00 |
+      | cid_id        | 999995      |
+      | person_id     | 13          |
+      | gender        | m           |
+      | nationality   | abc         |
+    Given I submit the following "check in" event:
+      | centre        | one         |
+      | timestamp     | today 11:00 |
+      | cid_id        | 999995      |
+      | person_id     | 13          |
+      | gender        | m           |
+      | nationality   | abc         |
+    Given I submit the following "check in" event:
+      | centre        | one         |
+      | timestamp     | today 11:00 |
+      | cid_id        | 999995      |
+      | person_id     | 13          |
+      | gender        | m           |
+      | nationality   | abc         |
+    Then the Centre "one" should show "1" Unexpected "Male" Check-ins
