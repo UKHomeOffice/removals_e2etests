@@ -8,7 +8,7 @@ Feature: Performance
 #  11 heartbeats a minute
 #  1 cid payload of 900 movements every 4 minutes
 #  1 prebooking payload of 100 movements every 4 minutes
-#  25 simultanious users
+#  25 simultaneous users
 
   Background:
     Given I am a logged in user
