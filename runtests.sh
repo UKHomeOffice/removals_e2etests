@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-docker version
-
 if [[ $@ == *"docker"* ]]
 then
     export COMPOSE_FILE=docker-compose.yml:docker-compose.locale2e.yml
@@ -33,7 +31,6 @@ echo "waiting for everything to be up"
 docker-compose logs waiter
 
 docker ps -a
-
 
 echo travis_fold:end:DOCKER_COMPOSE_UP
 
