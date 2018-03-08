@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+docker version
+
 if [[ $@ == *"docker"* ]]
 then
     export COMPOSE_FILE=docker-compose.yml:docker-compose.locale2e.yml
@@ -24,6 +26,8 @@ mkdir -p nightwatch/reports nightwatch/screenshots/default
 
 echo travis_fold:start:DOCKER_COMPOSE_UP
 docker-compose up -d --build --force-recreate
+
+docker ps -a
 
 echo "waiting for everything to be up"
 
