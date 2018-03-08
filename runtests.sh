@@ -8,9 +8,9 @@ else
 fi
 
 
-#if [ ! -e mycredentials ] ; then
-#    touch mycredentials
-#fi
+if [ ! -e mycredentials ] ; then
+    touch mycredentials
+fi
 
 trap tidyup EXIT
 function tidyup {
