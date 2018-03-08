@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function () {
-    console.log(process.env.KEYCLOAK_USER, process.env.KEYCLOAK_PASS)
+    console.log("username" + process.env.KEYCLOAK_USER + "password" + process.env.KEYCLOAK_PASS)
     this.Given(/^I am a logged in user$/, function () {
         if (this.globals.auth_required === false) {
             return true
