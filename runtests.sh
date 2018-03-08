@@ -29,7 +29,7 @@ docker-compose up -d --build --force-recreate
 
 echo "waiting for everything to be up"
 
-docker wait removalse2etests_waiter_1
+docker wait ircbdautomationtests_waiter_1
 docker-compose logs waiter
 
 docker ps -a
