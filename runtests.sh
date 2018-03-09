@@ -9,7 +9,6 @@ fi
 
 
 if [ ! -e mycredentials ] ; then
-    rm mycredentials
     touch mycredentials
     echo "KEYCLOAK_USER=$KEYCLOAK_USER
     KEYCLOAK_PASS=$KEYCLOAK_PASS" > mycredentials
