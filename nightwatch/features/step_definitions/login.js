@@ -2,7 +2,7 @@
 
 module.exports = function () {
   this.Given(/^I am a logged in user$/, function () {
-    console.log(process.env.KEYCLOAK_USER, process.env.KEYCLOAK_PASS)
+    console.log("USR:" + process.env.KEYCLOAK_USER + "PASS: " + process.env.KEYCLOAK_PASS)
     if (this.globals.auth_required === false) {
       return true
     }
