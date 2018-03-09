@@ -10,8 +10,8 @@ fi
 
 if [ ! -e mycredentials ] ; then
     touch mycredentials
-    echo "KEYCLOAK_USER=$KEYCLOAK_USER
-    KEYCLOAK_PASS=$KEYCLOAK_PASS" > mycredentials
+    #echo "KEYCLOAK_USER=$KEYCLOAK_USER
+    #KEYCLOAK_PASS=$KEYCLOAK_PASS" > mycredentials
 fi
 
 trap tidyup EXIT
