@@ -38,11 +38,11 @@ set -x
 
 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
 
-docker exec ircbdautomationtests_selenium_1 /bin/bash -c "sudo apt-get update"
+#docker exec ircbdautomationtests_selenium_1 /bin/bash -c "sudo apt-get update"
 
-docker exec ircbdautomationtests_selenium_1 /bin/bash -c "sudo apt-get -y install curl"
+#docker exec ircbdautomationtests_selenium_1 /bin/bash -c "sudo apt-get -y install curl"
 
-docker exec ircbdautomationtests_selenium_1 /bin/bash -c "curl -v api-ircbd-int.notprod.homeoffice.gov.uk"
+docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -v api-ircbd-int.notprod.homeoffice.gov.uk"
 
 
 
