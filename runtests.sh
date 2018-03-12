@@ -36,7 +36,8 @@ docker ps -a
 
 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
 
-docker exec -it ircbdautomationtests_selenium_1 echo "Hello from container!"
+docker exec ircbdautomationtests_selenium_1 /bin/bash -c "sudo apt-get install curl"
+
 docker exec ircbdautomationtests_selenium_1 /bin/bash -c "curl -v wallboard-ircbd-int.notprod.homeoffice.gov.uk"
 
 
