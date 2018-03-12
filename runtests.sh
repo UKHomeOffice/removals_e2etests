@@ -34,6 +34,10 @@ docker-compose logs waiter
 
 docker ps -a
 
+docker inspect ircbdautomationtests_test_1
+docker inspect ircbdautomationtests_selenium_1
+docker inspect ircbdautomationtests_waiter_1
+
 echo travis_fold:end:DOCKER_COMPOSE_UP
 
 echo travis_fold:start:LINT
