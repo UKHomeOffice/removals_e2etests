@@ -34,9 +34,7 @@ docker-compose logs waiter
 
 docker ps -a
 
-docker inspect ircbdautomationtests_test_1
-docker inspect ircbdautomationtests_selenium_1
-docker inspect ircbdautomationtests_waiter_1
+docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
 
 echo travis_fold:end:DOCKER_COMPOSE_UP
 
