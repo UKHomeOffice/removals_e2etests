@@ -34,6 +34,8 @@ docker-compose logs waiter
 
 docker ps -a
 
+set -x
+
 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
 
 docker exec ircbdautomationtests_selenium_1 /bin/bash -c "sudo apt-get -qq update"
