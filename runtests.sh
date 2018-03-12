@@ -36,6 +36,11 @@ docker ps -a
 
 docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' $(docker ps -aq)
 
+docker exec -it ircbdautomationtests_selenium_1 echo "Hello from container!"
+docker exec ircbdautomationtests_selenium_1 /bin/bash -c "curl -v wallboard-ircbd-int.notprod.homeoffice.gov.uk"
+
+
+
 echo travis_fold:end:DOCKER_COMPOSE_UP
 
 echo travis_fold:start:LINT
