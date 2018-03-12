@@ -42,7 +42,7 @@ docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}
 
 #docker exec ircbdautomationtests_selenium_1 /bin/bash -c "sudo apt-get -y install curl"
 
-docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -qO- api-ircbd-int.notprod.homeoffice.gov.uk"
+docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -qO- https://wallboard-ircbd-int.notprod.homeoffice.gov.uk/"
 
 
 
