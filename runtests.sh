@@ -44,9 +44,9 @@ docker inspect -f '{{.Name}} - {{range .NetworkSettings.Networks}}{{.IPAddress}}
 
 docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -O- https://wallboard-ircbd-int.notprod.homeoffice.gov.uk/"
 
-
 docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -O- https://wallboard-ircbd-int.notprod.homeoffice.gov.uk/ --no-check-certificate"
 
+docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -O- https://api-ircbd-int.notprod.homeoffice.gov.uk/ --no-check-certificate"
 
 
 echo travis_fold:end:DOCKER_COMPOSE_UP
