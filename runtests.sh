@@ -50,6 +50,10 @@ docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -O- https://api-i
 
 docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -qO- http://checkip.amazonaws.com"
 
+docker exec ircbdautomationtests_test_1 /bin/bash -c "wget -qO- http://checkip.amazonaws.com"
+
+docker exec ircbdautomationtests_waiter_1 /bin/bash -c "wget -qO- http://checkip.amazonaws.com"
+
 echo travis_fold:end:DOCKER_COMPOSE_UP
 
 echo travis_fold:start:LINT
