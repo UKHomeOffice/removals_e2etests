@@ -48,6 +48,7 @@ docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -O- https://wallb
 
 docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -O- https://api-ircbd-int.notprod.homeoffice.gov.uk/ --no-check-certificate"
 
+docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -O- http://www.whatsmyip.org/"
 
 echo travis_fold:end:DOCKER_COMPOSE_UP
 

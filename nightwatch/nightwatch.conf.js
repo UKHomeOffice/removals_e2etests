@@ -89,7 +89,7 @@ module.exports = {
         javascriptEnabled: true,
         acceptSslCerts: true,
         chromeOptions: {
-          'args': ['--disable-sandbox','--js-flags=--expose-gc', '--enable-precise-memory-info']
+          'args': ['--disable-sandbox', '--js-flags=--expose-gc', '--enable-precise-memory-info']
         }
       }
     }
