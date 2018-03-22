@@ -34,6 +34,10 @@ docker-compose logs waiter
 
 docker ps -a
 
+echo "---ENV---"
+env
+set
+
 set -x
 
 docker exec ircbdautomationtests_selenium_1 /bin/bash -c "wget -O- https://wallboard-ircbd-dev.notprod.homeoffice.gov.uk/"
