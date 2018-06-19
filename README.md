@@ -4,6 +4,15 @@
 
 There are two ways to run the tests, if you want to just get started quickly then use docker, if you want to integrate this into your IDE for example you might prefer to run the code on your machine.
 
+## IBM Environments
+| env | backend | frontend |
+| --- | ------- | -------- |
+| default | http://localhost:8080 | http://localhost:8000 |
+| docker | http://backend | http://frontend |
+| dev | https://api-dev.notprod.ircbd.homeoffice.gov.uk | https://wallboard-dev.notprod.ircbd.homeoffice.gov.uk |
+| int | https://api-int.notprod.ircbd.homeoffice.gov.uk | https://wallboard-int.notprod.ircbd.homeoffice.gov.uk |
+| uat | https://api-uat.notprod.ircbd.homeoffice.gov.uk | https://wallboard-uat.notprod.ircbd.homeoffice.gov.uk |
+
 ## Running the code on your machine:
 ```shell
 # Install nvm
@@ -82,14 +91,6 @@ KEYCLOAK_PASS=mypassword" > mycredentials
 ### Add a new Node.js Configuration setting for performance testing
 ![Run e2e performance tests against an environment with IntelliJ](./images/intellij_settings_to_run_e2e_performance_tests.png)
 
-## IBM Environments
-| env | backend | frontend |
-| --- | ------- | -------- |
-| default | http://localhost:8080 | http://localhost:8000 |
-| docker | http://backend | http://frontend |
-| dev | https://api-dev.notprod.ircbd.homeoffice.gov.uk | https://wallboard-dev.notprod.ircbd.homeoffice.gov.uk |
-| int | https://api-int.notprod.ircbd.homeoffice.gov.uk | https://wallboard-int.notprod.ircbd.homeoffice.gov.uk |
-| uat | https://api-uat.notprod.ircbd.homeoffice.gov.uk | https://wallboard-uat.notprod.ircbd.homeoffice.gov.uk |
 
 # CI branch testing
 Travis will try and fetch an image matching the same branch name of the `removals_integration` and `removals_wallboard` and test against that
