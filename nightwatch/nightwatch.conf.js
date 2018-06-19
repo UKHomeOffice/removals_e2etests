@@ -46,23 +46,23 @@ module.exports = {
       }
     },
     dev: {
-      launch_url: 'https://wallboard-ircbd-dev.notprod.homeoffice.gov.uk',
+      launch_url: 'https://wallboard-dev.notprod.ircbd.homeoffice.gov.uk',
       globals: {
-        backend_url: 'https://api-ircbd-dev.notprod.homeoffice.gov.uk',
+        backend_url: 'https://api-dev.notprod.ircbd.homeoffice.gov.uk',
         auth_required: true
       }
     },
     int: {
-      launch_url: 'https://wallboard-ircbd-int.notprod.homeoffice.gov.uk',
+      launch_url: 'https://wallboard-int.notprod.ircbd.homeoffice.gov.uk',
       globals: {
-        backend_url: 'https://api-ircbd-int.notprod.homeoffice.gov.uk',
+        backend_url: 'https://api-int.notprod.ircbd.homeoffice.gov.uk',
         auth_required: true
       }
     },
     uat: {
-      launch_url: 'https://wallboard-ircbd-uat.notprod.homeoffice.gov.uk',
+      launch_url: 'https://wallboard-uat.notprod.ircbd.homeoffice.gov.uk',
       globals: {
-        backend_url: 'https://api-ircbd-uat.notprod.homeoffice.gov.uk',
+        backend_url: 'https://api-uat.notprod.ircbd.homeoffice.gov.uk',
         auth_required: true
       }
     },

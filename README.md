@@ -87,9 +87,9 @@ KEYCLOAK_PASS=mypassword" > mycredentials
 | --- | ------- | -------- |
 | default | http://localhost:8080 | http://localhost:8000 |
 | docker | http://backend | http://frontend |
-| dev | https://api-ircbd-dev.notprod.homeoffice.gov.uk | https://wallboard-ircbd-dev.notprod.homeoffice.gov.uk |
-| int | https://api-ircbd-int.notprod.homeoffice.gov.uk | https://wallboard-ircbd-int.notprod.homeoffice.gov.uk |
-| uat | https://api-ircbd-uat.notprod.homeoffice.gov.uk | https://wallboard-ircbd-uat.notprod.homeoffice.gov.uk |
+| dev | https://api-dev.notprod.ircbd.homeoffice.gov.uk | https://wallboard-dev.notprod.ircbd.homeoffice.gov.uk |
+| int | https://api-int.notprod.ircbd.homeoffice.gov.uk | https://wallboard-int.notprod.ircbd.homeoffice.gov.uk |
+| uat | https://api-uat.notprod.ircbd.homeoffice.gov.uk | https://wallboard-uat.notprod.ircbd.homeoffice.gov.uk |
 
 # CI branch testing
 Travis will try and fetch an image matching the same branch name of the `removals_integration` and `removals_wallboard` and test against that
